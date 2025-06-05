@@ -112,6 +112,10 @@
     cursor: not-allowed;
 }
 
+.invisible {
+    display: none;
+}
+
 .exhaustion-less {
     transform: rotate(180deg);
 }

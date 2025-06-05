@@ -114,7 +114,7 @@ export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) 
 		}/>
 		<Sticker width={0.25} header='Доп. способности и умения' onClick={handleClickAdditional} scrollable hasAddButton eyesRight={true} bodyContent={player.info.text.prof} />
 		<div className={styles['small-stickers']}>
-			<div className={cn(styles['small-sticker-wrapper'], styles['exhaustion-sticker'], 'big-shadow')}>
+			<div className={cn(styles['small-sticker-wrapper'], styles['exhaustion-sticker'], styles['invisible'], 'big-shadow')}>
 				<div 
 					className={
 						cn(
