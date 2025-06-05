@@ -350,29 +350,31 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		});
 
 	return <div className={styles['card']}>
-		<div className={styles['header-area']}>
-			{segmentsData.map(segment =>(
-				<HeadSegment 
-					onClick={handleClickSegment}
-					key={segment.segmentId} 
-					active={segment.segmentId === chosenSegment}
-					{...segment}/>
-			))}
-		</div>
-		<div className={cn(styles['content'], styles[chosenSegmentName])}>
-			{chosenSegment === '0' && 
-			<>
-				<Info player={character} onChangeChar={onChangeChar}/>
-				{alignmentClicked && 
-					<EditAlignment character={character} onChangeChar={onChangeChar} setAlignmentClicked={setAlignmentClicked}/>
+		<div className={styles['char-card']}>
+			<div className={styles['header-area']}>
+				{segmentsData.map(segment =>(
+					<HeadSegment 
+						onClick={handleClickSegment}
+						key={segment.segmentId} 
+						active={segment.segmentId === chosenSegment}
+						{...segment}/>
+				))}
+			</div>
+			<div className={cn(styles['content'], styles[chosenSegmentName])}>
+				{chosenSegment === '0' && 
+				<>
+					<Info player={character} onChangeChar={onChangeChar}/>
+					{alignmentClicked && 
+						<EditAlignment character={character} onChangeChar={onChangeChar} setAlignmentClicked={setAlignmentClicked}/>
+					}
+				</>
 				}
-			</>
-			}
-			{chosenSegment === '1' && <Characteristics player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
-			{chosenSegment === '2' && <Loot player={character} onChangeChar={onChangeChar}/>}
-			{chosenSegment === '3' && <Attacks player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
-			{chosenSegment === '4' && <Notes player={character} onChangeChar={onChangeChar}/>}
-			{chosenSegment === '5' && <Spells player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
+				{chosenSegment === '1' && <Characteristics player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
+				{chosenSegment === '2' && <Loot player={character} onChangeChar={onChangeChar}/>}
+				{chosenSegment === '3' && <Attacks player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
+				{chosenSegment === '4' && <Notes player={character} onChangeChar={onChangeChar}/>}
+				{chosenSegment === '5' && <Spells player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
+			</div>
 		</div>
 	</div>;
 }
