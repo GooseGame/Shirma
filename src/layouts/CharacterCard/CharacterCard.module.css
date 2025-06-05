@@ -301,7 +301,7 @@
 
 .content {
     min-width: 1000px;
-    height: calc(100vh - 260px);
+    height: calc(100vh - 220px);
     border-radius: 0 15px 15px 15px;
     padding: 5px;
     box-sizing: border-box;
