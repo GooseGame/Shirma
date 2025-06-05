@@ -50,6 +50,7 @@
 
 .full-height {
     height: calc(100% - 10px);
+    max-width: 570px;
 }
 
 .add-btn {
