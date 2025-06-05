@@ -17,7 +17,7 @@
 }
 
 .stat-text {
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .stat-wrap {
@@ -26,6 +26,7 @@
     flex-wrap: nowrap;
     width: calc(50% - 20px);
     border-bottom: 1px solid var(--text-color);
+    margin-bottom: 5px;
 }
 
 .stats-wrapper {
