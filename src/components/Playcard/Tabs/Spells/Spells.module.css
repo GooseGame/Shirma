@@ -414,6 +414,7 @@
 
 .edit-spell-popup-wrapper {
 	width: 70%;
+	max-width: 700px;
 	max-height: 100%;
 	overflow-y: scroll;
 }
