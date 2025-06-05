@@ -15,6 +15,7 @@
 
 .full-width {
     width: calc(100% - 10px);
+    max-width: 570px;
 }
 
 .half {
