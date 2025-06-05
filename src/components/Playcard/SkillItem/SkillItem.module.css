@@ -1,5 +1,5 @@
 .skill-wrapper {
-    height: 25px;
+    height: 20px;
     border-radius: 10px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -10,7 +10,7 @@
     flex-wrap: nowrap;
     justify-content: left;
     align-items: center;
-    margin: 2px;
+    margin: 4px;
 }
 
 .full-width {
@@ -24,7 +24,7 @@
 .radio-wrap {
     border-radius: 10px;
     width: 20px;
-    height: 25px;
+    height: 20px;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
