@@ -1,0 +1,98 @@
+.half {
+    width: calc(50% - 20px);
+}
+
+.half-half {
+    width: calc(25% - 20px);
+}
+
+.one-of-three {
+    width: calc(33% - 20px);
+}
+
+.sticker.box {
+    background-color: var(--darker-brown);
+    border: 10px solid var(--primary-brown);
+    padding: 15px;
+    gap: 5px;
+    -webkit-box-shadow: inset 0px 10px 0px 10px #281d14;
+    -moz-box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-sizing: border-box;
+}
+
+.sticker.metal {
+    background-color: var(--primary-blue);
+}
+
+.metal .header {
+    color: var(--text-light-color);
+}
+
+.box .header {
+    color: var(--text-light-color);
+}
+
+.sticker {
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: nowrap;
+    padding: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.sticker:hover {
+    z-index: 3;
+}
+
+.full-height {
+    height: calc(100% - 10px);
+}
+
+.add-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.header {
+    font-size: 40px;
+    font-weight: normal;
+    margin: 5px;
+    color: var(--text-color);
+}
+
+.dynamic-height {
+    height: auto;
+    max-height: calc(50% - 20px);
+}
+
+.header-area {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.scrollable {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-red); 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--darker-red); 
+}

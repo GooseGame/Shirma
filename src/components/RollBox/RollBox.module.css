@@ -1,0 +1,270 @@
+.box-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 5px;    
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.box-wrapper.open {
+    overflow: visible;
+}
+
+.right.hide-right {
+    display: none;
+}
+
+.right.show-right {
+    display: flex;
+}
+
+.left-buttons {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.hide-right.left-buttons {
+    -webkit-animation: slide-right 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: slide-right 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+.show-right.left-buttons {
+    -webkit-animation: slide-left 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: slide-left 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+.hide-right.right {
+    -webkit-animation: slide-right 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: slide-right 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    display: flex;
+}
+
+.show-right.right {
+    -webkit-animation: slide-left 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation: slide-left 0.4s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+@-webkit-keyframes slide-left {
+    0% {
+        -webkit-transform: translateX(420px);
+                transform: translateX(420px);
+    }
+    100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+            display: flex;
+    }
+}
+@keyframes slide-left {
+    0% {
+      -webkit-transform: translateX(420px);
+              transform: translateX(420px);
+    }
+    100% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+              display: flex;
+    }
+}
+
+@-webkit-keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(420px);
+              transform: translateX(420px);
+              display: none;
+    }
+}
+@keyframes slide-right {
+    0% {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    100% {
+      -webkit-transform: translateX(420px);
+              transform: translateX(420px);
+              display: none;
+    }
+}
+
+.open-button {
+    border-radius: 15px 0 0 15px;
+}
+
+.right {
+    display: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.open-button {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Beryozki';
+    font-size: 40px;
+    color: var(--text-light-color);
+}
+
+.brown {
+    background-color: var(--darker-brown);
+}
+
+.open-close {
+    width: 50px;
+    height: 50px;
+}
+
+.dices-to-add {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 5px;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+
+    border: 10px solid #725035;
+    background-color: var(--darker-brown);
+
+    -webkit-box-shadow: inset 0px 10px 0px 10px #281d14;
+    -moz-box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-shadow: inset 0px 10px 0px 10px #281d14;
+}
+
+
+.dice-add {
+    width: 60px;
+    height: 60px;
+}
+
+.dice-add.bigger-dice {
+    width: 70px;
+    height: 70px;
+}
+
+.dice-add.smaller-dice {
+    width: 50px;
+    height: 50px;
+}
+
+.box {
+    background-color: var(--darker-brown);
+    border: 10px solid #725035;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    padding: 15px;
+
+    -webkit-box-shadow: inset 0px 10px 0px 10px #281d14;
+    -moz-box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-shadow: inset 0px 10px 0px 10px #281d14;
+}
+
+.size3x1 {
+    width: 420px;
+    height: 110px;
+}
+
+.size3x3 {
+    width: 420px;
+    height: 290px;
+}
+
+.size4x4 {
+    width: 420px;
+    height: 380px;
+}
+
+.size5x5 {
+    width: 450px;
+    height: 470px;
+}
+
+.size6x6 {
+    width: 540px;
+    height: 560px;
+}
+
+.size7x7 {
+    width: 630px;
+    height: 650px;
+}
+
+.size8x8 {
+    width: 720px;
+    height: 740px;
+}
+
+.size9x9 {
+    width: 810px;
+    height: 830px;
+}
+
+.box.animate {
+    -webkit-animation: slide-top 0.65s cubic-bezier(0.215, 0.610, 0.355, 1.000) backwards;
+    animation: slide-top 1.2s cubic-bezier(0.215, 0.610, 0.355, 1.000) backwards;
+}
+
+@-webkit-keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    100% {
+      -webkit-transform: translateY(-30px);
+              transform: translateY(-30px);
+    }
+}
+@keyframes slide-top {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    100% {
+      -webkit-transform: translateY(-30px);
+              transform: translateY(-30px);
+    }
+}
+
+@-webkit-keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY(-90px);
+                transform: translateY(-90px);
+    }
+}
+@keyframes slide-bottom {
+    0% {
+      -webkit-transform: translateY(0);
+              transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY(-90px);
+                transform: translateY(-90px);
+    }
+}
+
+.dice-roll.animate {
+    -webkit-animation: slide-bottom 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.2s backwards;
+    animation: slide-bottom 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) 0.2s backwards;
+}
+

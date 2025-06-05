@@ -1,0 +1,42 @@
+.attribute {
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.attribute.small {
+    padding: 3px;
+}
+
+.text {
+    font-size: 40px;
+    text-align: center;
+    padding-left: 2px;
+    line-height: 36px;
+}
+
+.text.small {
+    font-size: 32px;
+}
+
+.wrap {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap.small {
+    width: 30px;
+    height: 30px;
+}
+
+.img.small {
+    width: 30px;
+    height: 30px;
+}
+

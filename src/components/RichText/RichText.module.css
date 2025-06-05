@@ -1,0 +1,43 @@
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.overline {
+    text-decoration: overline;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.default-img {
+    width: 100%;
+}
+
+.img {
+    border-radius: 10px;
+}
+
+.text {
+    text-decoration: none;
+}
+
+.normal {
+    font-weight: unset;
+}
+
+.text-content {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+}

@@ -1,0 +1,150 @@
+.scrollable-mid {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 5px;
+	padding: 5px 10px;
+	justify-content: space-between;
+}
+
+.distance-info {
+	margin-left: auto;
+}
+
+.line {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 10px;
+	width: calc(50% - 10px);
+	border-radius: 10px;
+	background-color: var(--text-color);	
+	position: relative;
+}
+
+.name {
+	font-size: 36px;
+	padding-top: 5px;
+	text-align: center;
+	color: var(--text-light-color);
+	width: 100%;
+}
+
+.name-distance {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin: 5px;
+}
+
+.btn {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 5px;
+	align-items: center;
+	border-radius: 10px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.btn.prof {
+	background-color: var(--darker-brown);
+}
+
+.btn.non-prof {
+	background-color: var(--text-light-color);
+}
+
+.text.prof {
+	color: var(--text-light-color);
+}
+
+.text {
+	font-size: 40px;
+	text-align: center;
+	line-height: 36px;
+	font-family: 'Beryozki';
+}
+
+.metal.btn {
+	background-color: var(--primary-blue);
+}
+
+.aim-img {
+	width: 36px;
+	height: 36px;
+}
+
+.text.non-prof {
+	color: var(--darker-brown);
+}
+
+.bottom {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 5px;
+	justify-content: space-between;
+	margin: 5px;
+	margin-top: auto;
+	background-color: #222;
+    border-radius: 10px;
+}
+
+.mid-info-text {
+	font-size: 30px;
+	margin-top: 5px;
+}
+
+.mid-info-wrapper {
+	background-color: #222;
+	color: var(--text-light-color);
+}
+
+.mid-info-wrapper.attributes-wrapper {
+	background-color: #222;
+}
+
+.attr-image {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.img {
+	width: calc(70% - 20px);
+}
+
+.roll {
+	background-color: var(--darker-brown);
+}
+
+.name-distance:hover .delete-btn {
+	display: flex;
+}
+
+.delete-btn {
+	display: none;
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	background-color: var(--primary-red);
+	width: 30px;
+	height: 30px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	z-index: 1000;
+}
+
+.confirm-delete {
+	transform: rotate(90deg);
+	width: 20px;
+	height: 20px;
+}
+
+.delete-btn:hover {
+	background-color: var(--darker-red);
+}

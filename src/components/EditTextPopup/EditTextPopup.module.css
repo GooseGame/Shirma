@@ -1,0 +1,225 @@
+.wrapper {
+	position: relative;
+    z-index: 1000;
+    width: 602px;
+    max-height: 600px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--text-color);
+}
+
+.scrollable {
+    overflow-y: scroll;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.overline {
+    text-decoration: overline;
+}
+
+.textarea {
+    width: calc(100% - 15px);
+    height: 450px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    resize: none;
+    font-size: 18px;
+}
+
+.textarea:focus-visible {
+    outline: var(--primary-green) auto 1px;
+}
+
+.buttons-line {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn {
+    border-radius: 0;
+    border: 0;
+    background-color: var(--text-color);
+    color: var(--text-light-color);
+    min-width: 25px;
+    height: 25px;
+}
+
+.btn:not(:disabled):hover {
+    border: 1px solid var(--text-light-color);
+}
+
+.save-btn {
+    background-color: var(--primary-green);
+    color: var(--text-light-color);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.green .save-btn {
+    background-color: var(--primary-brown);
+}
+
+.green .save-btn:hover {
+    background-color: var(--darker-brown);
+}
+
+.delete-btn {
+    background-color: var(--primary-red);
+    color: var(--text-light-color);
+    border: none;
+    border-radius: 5px;
+    min-width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 40px;
+    font-family: 'Beryozki';
+}
+
+.delete-img {
+    width: 25px;
+    height: 25px;
+}
+
+.save-img {
+    transform: rotate(90deg);
+    width: 25px;
+    height: 25px;
+}
+
+.interactive:hover {
+    width: 30px;
+    height: 30px;
+}
+
+.save-btn:hover {
+    background-color: var(--darker-green);
+    box-shadow: none;
+}
+
+.delete-btn:hover {
+    background-color: var(--darker-red);
+    box-shadow: none;
+}
+
+.lines {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.editableHeader {
+    text-decoration: underline;
+}
+
+.btn-text {
+    border-radius: 5px 0 0 5px;
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 25px;
+    padding-right: 5px;
+    color: var(--text-light-color);
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.green {
+    background-color: var(--primary-green);
+}
+
+.red {
+    background-color: var(--primary-red);
+}
+
+.yellow {
+    background-color: var(--primary-yellow);
+}
+
+.darker-brown {
+    background-color: var(--darker-brown);
+}
+
+.brown {
+    background-color: var(--primary-brown);
+}
+
+.blue {
+    background-color: var(--secondary-blue);
+}
+.spells-blue {
+    background-color: var(--primary-blue);
+}
+
+.header {
+    font-size: 48px;
+    text-align: center;
+    color: var(--text-light-color);
+}
+
+.header-input {
+    font-size: 48px;
+    text-align: center;
+    color: var(--text-color);
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    border-radius: 10px;
+    font-family: 'Beryozki';
+    margin-bottom: 5px;
+}
+
+.btn:disabled {
+    background-color: var(--text-unable-color);
+    text-decoration: line-through;
+}
+
+.hidden-tag {
+    display: none;
+}

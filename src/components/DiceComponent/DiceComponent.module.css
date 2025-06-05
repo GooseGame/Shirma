@@ -1,0 +1,62 @@
+.dice-img {
+    width: 100%;
+    height: 100%;
+}
+
+.d6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d6 .dice-img {
+    width: 80%;
+    height: 80%;
+}
+
+.d4 .dice-img {
+    width: 80%;
+    height: 80%;
+}
+
+.dice-wrapper {
+    position: relative;
+    user-select: none;
+}
+
+.dice-value {
+    position: absolute;
+    font-size: 28px;
+    text-align: center;
+    width: 100%;
+    top: calc(50% - 14px);
+    left: 0;
+}
+
+.d12 .dice-value {
+    top: calc(50% - 11px);
+}
+
+.d4 .dice-value {
+    top: calc(50% - 5px);
+    transform: rotateX(350deg) rotateY(345deg);
+}
+
+.d6 .dice-value {
+    top: calc(50% - 10px);
+    left: 4px;
+}
+
+.animate {
+    width: 120%;
+    height: 120%;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+}

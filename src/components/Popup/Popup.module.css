@@ -1,0 +1,25 @@
+.content {
+	width: 300px;	
+	background-color: var(--lighter-brown);
+	padding: 10px;
+	border-radius: 15px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.exit {
+	background-color: var(--darker-brown);
+	border: none;
+	border-radius: 10px;
+}
+
+.text {
+	font-size: 40px;
+}
+
+.header {
+	font-size: 40px;
+	margin: 0;
+}

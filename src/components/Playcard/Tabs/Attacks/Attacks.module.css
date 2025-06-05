@@ -1,0 +1,395 @@
+.content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 10px;
+	justify-content: start;
+}
+
+.add-new {
+	width: calc(50% - 10px);
+	min-height: 190px;
+	border-radius: 10px;
+	background-color: #1b3541;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #112027;
+    -moz-box-shadow: inset 0px 0px 3px 2px #112027;
+    box-shadow: inset 0px 0px 3px 2px #112027;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.add-new:hover {
+	box-shadow: inset 0px 0px 10px 2px #112027;
+}
+
+.add-new-text {
+	font-size: 32px;
+	color: var(--text-light-color);
+}
+
+.edit-weapon-wrapper {
+	width: 70%;
+}
+
+.presets-opened {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 10px;
+	overflow-y: scroll;
+	max-height: 500px;
+}
+
+.preset-wrapper {
+	width: calc(33% - 5px);
+	border-radius: 10px;
+	background-color: var(--darker-blue);
+	padding: 5px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	position: relative;
+}
+
+.top-preset {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.preset-name {
+	color: var(--text-light-color);
+	font-size: 32px;
+	text-align: center;
+}
+
+.preset-line {
+	width: 100%;
+	display: flex;
+	gap: 5px;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.preset-label {
+	font-size: 28px;
+	color: var(--text-light-color);
+}
+
+.right-preset {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	flex-wrap: wrap;
+}
+
+.bottom-presets {
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	gap: 5px;
+	align-items: center;
+	margin-top: auto;
+	flex-wrap: wrap;
+}
+
+.preset-tag {
+	font-size: 32px;
+	color: var(--text-light-color);
+	background-color: var(--primary-blue);
+	padding: 5px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+}
+
+.show-presets-btn {
+	width: 100%;
+	margin-bottom: 5px;
+	border-radius: 10px;
+	border: none;
+	background-color: var(--gray);
+	height: 30px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	font-family: 'Beryozki';
+	font-size: 28px;
+}
+
+.show-presets-btn:hover {
+	background-color: #b5b8bb;
+}
+
+.attrs-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.damages-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.add-dmg {
+	border-radius: 10px;
+	border: none;
+	background-color: var(--darker-blue);
+}
+
+.add-dmg:hover {
+	background-color: #182e39;
+}
+
+.add-btn {
+	width: 25px;
+	height: 25px;
+}
+
+.weapon-attrs {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.attr-checkbox {
+	position: relative;
+}
+
+.checked-attr {
+	transform: rotate(90deg);
+	height: 100%;
+}
+
+.checked-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.weapon-content {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 10px;
+}
+
+.weapon-input.big-input {
+	font-size: 40px;
+	text-align: center;
+	max-width: unset;
+	background: none;
+	border-radius: 0;
+	border-bottom: 1px solid var(--text-color);
+	margin: 0;
+	color: var(--text-light-color);
+}
+
+.weapon-input {
+	margin: 5px 5px 5px 0;
+	border-radius: 10px;
+	background-color: var(--text-light-color);
+	padding: 5px;
+	border: none;
+	font-family: 'Beryozki';
+	font-size: 24px;
+	color: var(--text-color);
+	max-width: 150px;
+}
+
+.list-stats-input {
+	border-radius: 15px;
+	background-color: var(--text-light-color);
+	color: var(--text-color);
+	border: none;
+	padding: 10px 5px;
+}
+
+.weapon-input:focus-visible {
+	outline: none;
+	border-bottom: 1px solid var(--text-light-color);
+}
+
+.weapon-input::placeholder {
+	color: var(--text-light-color);
+}
+
+.weapon-info-line {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.weapon-info-right {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+}
+
+.weapon-label {
+	font-size: 16px;
+	font-family: sans-serif;
+	color: var(--text-light-color);
+}
+
+.input-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+}
+
+.background-wrapper {
+	background-color: var(--darker-blue);
+	padding-left: 5px;
+	border-radius: 15px;
+}
+
+.number-input {
+	width: 50px;
+}
+
+.number-input[type=number] {
+	text-align: center;
+}
+
+.dice-count {
+	background-color: var(--gray);
+	border: none;
+	border-radius: 10px 0 0 10px;
+	width: 40px;
+	height: 35px;
+	font-family: 'Beryozki';
+	font-size: 28px;
+	text-align: center;
+	padding: 0;
+}
+
+.dice-count:focus-visible {
+	outline: none;
+}
+
+.dice-k {
+	font-family: 'Beryozki';
+	font-size: 32px;
+	color: var(--text-light-color);
+}
+
+.dice-value {
+	background-color: var(--gray);
+	border: none;
+	border-radius: 0 10px 10px 0;
+	width: 40px;
+	height: 35px;
+	font-family: 'Beryozki';
+	font-size: 28px;
+	text-align: center;
+}
+
+.dice-value:focus-visible {
+	outline: none;
+}
+
+.damage-value {
+	background-color: var(--darker-blue);
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	padding: 5px;
+	border-radius: 15px;
+}
+
+.dmg-type {
+	border-radius: 15px;
+	border: none;
+	padding: 5px;
+	font-size: 28px;
+	font-family: 'Beryozki';
+}
+
+.dmg-type>option {
+	background-color: var(--gray);
+	color: var(--text-color);
+}
+
+.dmg-type>option:checked {
+	background-color: var(--primary-blue);
+	color: var(--text-light-color);
+}
+
+.dmg-type.focus-visible {
+	outline: none;
+}
+
+.damage {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.remove-dmg {
+	margin-left: auto;
+	background: none;
+	border: none;
+	width: 30px;
+}
+
+.remove-icon {
+	width: 14px;
+}
+
+.remove-dmg:hover .remove-icon {
+	width: 16px;
+}
+
+.save-img {
+    transform: rotate(90deg);
+    width: 25px;
+    height: 25px;
+}
+
+.save-btn:hover {
+    background-color: var(--darker-blue);
+    box-shadow: none;
+}
+
+.save-btn {
+    background-color: var(--primary-blue);
+    color: var(--text-light-color);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

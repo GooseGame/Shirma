@@ -1,0 +1,13 @@
+<svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 18C3.44772 18 3 17.5523 3 17L3 11C3 10.4477 3.44772 10 4 10H7C9.76142 10 12 12.2386 12 15V15C12 16.6569 10.6569 18 9 18H4Z" fill="#E3B593"/>
+<path d="M6 10C5.44772 10 5 10.4477 5 11V11C5 11.5523 5.44772 12 6 12H9.25C9.66421 12 10 11.6642 10 11.25V11.25C10 10.5596 9.44036 10 8.75 10H6Z" fill="#E3B593"/>
+<path d="M6 18C4.89543 18 4 17.1046 4 16V12C4 10.8954 4.89543 10 6 10H7C9.76142 10 12 12.2386 12 15V15C12 16.6569 10.6569 18 9 18H6Z" fill="#CF9265"/>
+<circle cx="3" cy="17" r="1" transform="rotate(-90 3 17)" fill="#E3B593"/>
+<circle cx="3" cy="15" r="1" transform="rotate(-90 3 15)" fill="#E3B593"/>
+<circle cx="3" cy="13" r="1" transform="rotate(-90 3 13)" fill="#E3B593"/>
+<circle cx="3" cy="11" r="1" transform="rotate(-90 3 11)" fill="#E3B593"/>
+<rect y="8" width="11" height="2" fill="#A34C50"/>
+<rect x="2" width="7" height="8" fill="#BBD0E4"/>
+<rect x="5" width="1" height="8" fill="#BCC0C3"/>
+<rect x="4" y="18" width="3" height="2" fill="#A34C50"/>
+</svg>

@@ -1,0 +1,103 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.left {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    min-width: 40%;
+    margin-right: 10px;
+}
+
+.name {
+    font-family: 'Beryozki';
+    font-size: 32px;
+}
+
+.name.small {
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0;
+    align-items: center;
+    margin-left: auto;
+}
+
+.counter {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    align-items: center;
+}
+
+.control {
+    width: 25px;
+    height: 25px;
+    background-color: unset;
+    border: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3px;
+}
+
+.control.small {
+    width: 15px;
+    height: 15px;
+}
+
+.control-img {
+    width: 20px;
+    height: 20px;
+}
+
+.control-img.small {
+    width: 15px;
+    height: 15px;
+}
+
+.right-text {
+    font-size: 32px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.control:hover {
+    background-color: none;
+}
+
+.weight {
+    min-width:30px;
+    line-height: 24px;
+}
+
+.weight-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-right: 5px;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #281d14;
+    padding: 3px 3px 0 3px;
+}
+
+.control:hover .control-img {
+    width: 25px;
+    height: 25px;
+}
+
+.control.small:hover .control-img {
+    width: 18px;
+    height: 18px;
+}

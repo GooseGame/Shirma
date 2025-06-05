@@ -1,0 +1,406 @@
+.button-content {
+	font-family: 'Beryozki';
+	font-size: 30px;
+}
+
+.calc .gold {
+	background-color: #FFEE51;
+	color: var(--text-color);
+	border: 2px dashed rgba(0, 0, 0, 0.25);
+}
+
+.calc .silver {
+	background-color: #9A9999;
+	color: var(--text-color);
+	border: 2px dashed rgba(0, 0, 0, 0.25);
+	font-size: 20px;
+}
+
+.calc .copper {
+	background-color: #CD7C4F;
+	color: var(--text-color);
+	border: 2px dashed rgba(0, 0, 0, 0.25);
+}
+
+.special-coins {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	padding-right: 2px;
+}
+
+.special-coins {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.top-info {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	width: 100%;
+}
+
+.top-info-calc {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	flex: auto;
+}
+
+.stab-wrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 5px;
+	padding: 5px;
+	align-items: center;
+	background-color: var(--darker-red);
+	border-radius: 10px;
+}
+
+.roll-btn img {
+	width: 40px;
+	height: 40px;
+}
+
+.roll-btn {
+	padding: 5px;
+	border-radius: 10px;
+	max-height: 50px;
+	background-color: var(--darker-brown);
+}
+
+.button-stab {
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+}
+
+.dead {
+	background-color: var(--text-color);
+	color: var(--text-light-color);
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.dead-text {
+	font-size: 30px;
+}
+
+.stab-plus.inactive {
+	border: 5px solid var(--primary-green);
+	background-color: var(--darker-green);
+}
+.stab-plus.active {
+	background-color: var(--primary-green);
+}
+
+.stab-minus.inactive {
+	border: 5px solid var(--primary-red);
+	background-color: var(--darker-red);
+}
+.stab-minus.active {
+	background-color: var(--primary-red);
+}
+
+.button-lvl-up {
+	background-color: var(--primary-green) !important;
+	transform: rotate(-90deg);
+}
+
+.button-lvl-down {
+	background-color: var(--darker-red) !important;
+	transform: rotate(90deg);
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.button-extended {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	background-color: var(--darker-green);
+	border-radius: 10px;
+}
+
+.button-label {
+	color: var(--text-light-color);
+	font-size: 30px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.select-coin {
+	border-radius: 10px 0 0 10px;
+	padding-left: 5px;
+	border: none;
+	background-color: var(--background-color);
+	color: var(--text-color);
+}
+
+.exp-bar {
+	height: 5px;
+    background-color: var(--primary-brown);
+    border-radius: 5px;
+}
+
+.exp-bar.heal {
+	background-color: var(--background-color);
+}
+
+.exp-bar.right-no-radius {
+	border-radius: 5px 0 0 5px;
+}
+
+.temp-exp-bar.right-no-radius {
+	border-radius: 0;
+}
+
+.temp-exp-bar {
+	height: 5px;
+    background-color: var(--primary-yellow);
+    border-radius: 0 5px 5px 0;
+}
+
+.temp-exp-bar.heal {
+	background-color: var(--primary-green);
+}
+
+.exp-bar-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.exp-to-next {
+	font-size: 26px;
+}
+
+.current {
+	font-size: 26px;
+}
+
+.current.extra {
+	padding-inline: 5px;
+	background-color: var(--primary-yellow);
+	border-radius: 5px;
+	color: var(--text-color);
+}
+.current.remove {
+	padding-inline: 5px;
+	background-color: var(--darker-red);
+	border-radius: 5px;
+}
+.current.heal {
+	padding-inline: 5px;
+	background-color: var(--primary-green);
+	border-radius: 5px;
+}
+
+
+.exp-bar-info {
+	width: 100%;
+	margin-bottom: 5px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--text-light-color);
+
+}
+
+.current-exp-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+	align-items: center;
+	padding-inline: 5px;
+
+}
+
+.progress-bar.heal {
+	background-color: var(--darker-brown);
+}
+
+.progress-bar {
+	display: flex;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	background-color: var(--darker-green);
+	border-radius: 5px;
+}
+
+.temp-exp-bar.temp-red {
+	background-color: var(--darker-red);
+}
+
+.special-info {
+	font-size: 24px;
+	color: var(--text-light-color);
+	width: 50px;
+	height: 50px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	text-align: center;
+}
+
+.calc .operator-button {
+	background-color: var(--darker-blue);
+}
+
+.calc .disabled {
+	text-decoration: line-through;
+	cursor: not-allowed;
+}
+
+.calc .button-remove {
+	background-color: var(--darker-red);
+}
+
+.calc .button-extra {
+	background-color: var(--primary-yellow);
+}
+
+.calc .button-heal {
+	background-color: var(--primary-green);
+}
+
+.icon {
+	height: 40px;
+	width: 40px;
+}
+
+.icon-smaller {
+	height: 30px;
+	width: 30px;
+}
+
+.calc .button-settings {
+	margin-left: auto;
+	margin-right: 2px;
+	background-color: var(--text-color);
+}
+
+.calc .button-settings.opened {
+	background-color: var(--gray);
+}
+
+.icon-smaller img {
+	width: 30px;
+	height: 30px;
+}
+
+.icon img {
+	height: 100%;
+	width: 100%;
+}
+
+.apply-icon {
+	transform: rotate(90deg);
+}
+
+.apply-hp {
+	background-color: var(--primary-green);
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button-input {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	align-items: center;
+	width: 100%;
+}
+
+.hp-input {
+	width: 80px;
+	height: 40px;
+	font-size: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+	border: none;
+}
+
+.to-right {
+	margin-left: auto;
+}
+
+.button-content {
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+	align-items: center;
+}
+
+.button-operator {
+	width: 25px;
+	height: 25px;
+}
+
+.calc {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 5px;
+	padding: 2px;
+}
+
+.calc.exp {
+	background-color: var(--text-color);
+    border-radius: 10px;
+}
+
+.coins-wrapper {
+	border: 10px solid var(--primary-brown);
+    padding: 15px;
+    gap: 5px;
+    -webkit-box-shadow: inset 0px 10px 0px 10px #281d14;
+    -moz-box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-sizing: border-box;
+	border-radius: 0;
+}
+
+.exp-wrapper {
+    padding-inline: 25px;
+    gap: 5px;
+    box-sizing: border-box;
+}
+
+.result-text {
+	position: absolute;
+	right: 0;
+	height: 100%;
+	font-size: 30px;
+	padding-right: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.calculator-wrapper {
+	display: flex;
+	gap: 10px;
+	flex-direction: column;
+}
+
+.coins-button {
+	background-color: #281d14 !important; 
+}

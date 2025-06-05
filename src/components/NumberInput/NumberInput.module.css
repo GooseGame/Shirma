@@ -1,0 +1,23 @@
+.confirm {
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.img {
+	transform: rotate(90deg);
+	height: 60%;
+	width: 60%;
+}
+
+.wrapper {
+	position: relative;
+}
+
+.input:focus-visible {
+    outline: none;
+}
