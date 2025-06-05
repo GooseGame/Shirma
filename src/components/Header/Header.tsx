@@ -20,7 +20,7 @@ export const Header: FC = ({...props }) => {
 	return <div className={styles['header-area']}>
 		<h1 className={styles['header-logo']} {...props}>Ширма</h1>
 		<div className={styles['page-container']}>
-			<a href='/characters' className={styles['page-header']}>Персонажи</a>
+			<a href='/characters' className={styles['page-header']}>Персонажи (вау)</a>
 			<div className={styles['add-icon-wrapper']}>
 				<RoundButton isRed={true} onClick={onClickNewCharacter}>
 					<Icon src="/plus.svg" alt='add' classNames={'plus-icon'}/>
