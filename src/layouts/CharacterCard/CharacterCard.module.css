@@ -4,15 +4,18 @@
     flex-direction: column;
     flex-wrap: nowrap;
     padding: 0 10px;
+    align-items: center;
+    min-width: 1400px;
 }
 
 .header-area {
-    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: flex-end;
     justify-content: flex-start;
+    min-width: 1000px;
+    max-width: 1300px;
 }
 
 .segment:hover {
@@ -299,9 +302,14 @@
     width: 100%;
 }
 
+.char-card {
+    width: auto;
+}
+
 .content {
-    min-width: 1000px;
-    max-width: 1200px;
+    width: 100%;
+    min-width: 1400px;
+    max-width: 1500px;
     height: calc(100vh - 220px);
     border-radius: 0 15px 15px 15px;
     padding: 5px;
