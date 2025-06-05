@@ -18,6 +18,11 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Debug SSH Key content (safe)
+      run: echo "$SSH_KEY" | head -n 5
+      env:
+      SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+
     - name: Test SSH connection
       run: |
         echo "$SSH_KEY" > key.pem
