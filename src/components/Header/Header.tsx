@@ -27,7 +27,7 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Справочник</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
 				<RoundButton isRed={true} classNames={styles['unable-btn']}>
@@ -35,7 +35,7 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Монстры</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
 				<RoundButton isRed={true} classNames={styles['unable-btn']}>
@@ -43,10 +43,10 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Сгенерируй имя</h2>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Бой</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
 				<RoundButton isRed={true} classNames={styles['unable-btn']}>
@@ -54,7 +54,7 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Лут</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
 				<RoundButton isRed={true}  classNames={styles['unable-btn']}>
@@ -62,7 +62,7 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'https://youtu.be/1n37g7fNQ0o'}>
+		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Комнаты</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
 				<RoundButton isRed={true} classNames={styles['unable-btn']}>
