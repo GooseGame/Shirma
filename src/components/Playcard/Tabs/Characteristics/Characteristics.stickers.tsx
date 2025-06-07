@@ -143,9 +143,9 @@ export function getPassivesTSX(stat: Stat[]) {
 	const passiveAnalysisCheck = getPassiveCheck('Интелект', 'Анализ', stat);
 
 	return <div className={styles['stats-wrapper']}>
-		{passivePerceptionCheck && <SkillItem width={1} skill={passivePerceptionCheck} showAsModifier={false} useProfRadio={false}/>}
-		{passiveInsightCheck && <SkillItem width={1} skill={passiveInsightCheck} showAsModifier={false} useProfRadio={false}/>}
-		{passiveAnalysisCheck && <SkillItem width={1} skill={passiveAnalysisCheck} showAsModifier={false} useProfRadio={false}/>}
+		{passivePerceptionCheck && <SkillItem hint='10 + Внимание персонажа' width={1} skill={passivePerceptionCheck} showAsModifier={false} useProfRadio={false}/>}
+		{passiveInsightCheck && <SkillItem hint='10 + Проницательность персонажа' width={1} skill={passiveInsightCheck} showAsModifier={false} useProfRadio={false}/>}
+		{passiveAnalysisCheck && <SkillItem hint='10 + Анализ персонажа' width={1} skill={passiveAnalysisCheck} showAsModifier={false} useProfRadio={false}/>}
 	    </div>;
 }
 

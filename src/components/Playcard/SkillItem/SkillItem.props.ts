@@ -8,5 +8,6 @@ export interface SkillItemProps extends HTMLAttributes<HTMLDivElement> {
     showAsModifier?:boolean,
     handleSkillCheckClick?: (modifier: number) => void,
     handleClickRadio?: ()=>void,
-    handleClickText?: ()=>void
+    handleClickText?: ()=>void,
+    hint?: string
 }

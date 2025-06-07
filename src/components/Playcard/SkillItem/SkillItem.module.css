@@ -86,3 +86,7 @@
     font-size: 28px;
     cursor: pointer;
 }
+
+.skill-mod.unclickable {
+    cursor: default;
+}
