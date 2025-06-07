@@ -81,7 +81,7 @@ export function Info({player, onChangeChar}: TabsProps) {
 	
 	return <>
 		<Sticker width={0.25} header='Предыстория:' fullHeight={true} afterHeaderEl={afterHeaderElBackground} onClick={handleClickBackground} scrollable={true} bodyContent={player.info.text.background} stickerCN='big-shadow'/>
-		<Sticker width={0.25} header='Габариты' bodyContent={getMeasurementsAsTSX(player, onChangeChar, dispatch)}/>
+		<Sticker width={0.25} header='Габариты' bodyContent={getMeasurementsAsTSX(player, onChangeChar, dispatch)} scrollable/>
 		<Sticker width={0.25} header='Черты характера' bodyContent={player.info.text.traits} onClick={handleClickTraits} scrollable />
 		<Sticker width={0.25} header='Идеалы' bodyContent={player.info.text.ideals} onClick={handleClickIdeals} scrollable />
 		<Sticker width={0.25} header='Привязанности' bodyContent={player.info.text.affections} onClick={handleClickAffections} scrollable />

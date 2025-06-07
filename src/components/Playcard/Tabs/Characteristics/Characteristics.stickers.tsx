@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import { splitStatsBalanced } from '../../../../helpers/stats';
 import { Skill, Stat, Status } from '../../../../interfaces/Character.interface';
 import { RoundButton } from '../../../Button/Button';
 import { Eye } from '../../../Eye/Eye';
@@ -23,52 +24,102 @@ export function getCharacteristicsTableTSX({stats, handleSkillCheckClick, onSave
 		if (level === 2) return 0;
 		return 2;
 	};
+	const [statsBalanced1, statsBalanced2] = splitStatsBalanced(stats);
 	return <div className={styles['stats-wrapper']}>
-		{stats.map(stat => (
-			<div key={stat.name} className={styles['stat-wrap']}>
-				<div className={styles['stat-head']} onClick={()=>onClickStat(stat)}>
-					<span className={styles['stat-text']}>{stat.name}</span>
-					<span className={styles['stat-text']}>{stat.score}</span>
-				</div>
-				<div className={styles['stat-checks']}>
-					<SkillItem 
-						skill={{
-							name: 'Проверка',
-							profLevel: stat.saveProf,
-							modifier: stat.modifier
-						}}
-						width={0.5}
-						useProfRadio={false}
-						handleSkillCheckClick={handleSkillCheckClick}
-						handleClickText={()=>onClickStat(stat)}
-					/>
-					<SkillItem 
-						skill={{
-							name: 'Спасбросок',
-							profLevel: stat.saveProf,
-							modifier: (stat.modifier + (proficiency * stat.saveProf) + (stat.saveBonus ? stat.saveBonus : 0) )
-						}}
-						useProfRadio
-						width={0.5}
-						handleSkillCheckClick={handleSkillCheckClick}
-						handleClickText={()=>onClickStat(stat)}
-						handleClickRadio={()=>onSaveProf(incLevel(stat.saveProf), stat)}
-					/>
-				</div>
-				<div className={styles['skills']}>
-					{stat.skills.map(skill => (
+		<div className={styles['stat-column']}>
+			{statsBalanced1.map(stat => (
+				<div key={stat.name} className={styles['stat-wrap']}>
+					<div className={styles['stat-head']} onClick={()=>onClickStat(stat)}>
+						<span className={styles['stat-text']}>{stat.name}</span>
+						<span className={styles['stat-text']}>{stat.score}</span>
+					</div>
+					<div className={styles['stat-checks']}>
 						<SkillItem 
-							key={skill.name} 
-							skill={skill} 
-							useProfRadio 
+							skill={{
+								name: 'Проверка',
+								profLevel: stat.saveProf,
+								modifier: stat.modifier
+							}}
+							width={0.5}
+							useProfRadio={false}
 							handleSkillCheckClick={handleSkillCheckClick}
-							handleClickRadio={()=>onSaveSkillProf(incLevel(skill.profLevel), stat.modifier, stat.name, skill)}
-							handleClickText={()=>onClickSkill(stat, skill)}
+							handleClickText={()=>onClickStat(stat)}
 						/>
-					))}
+						<SkillItem 
+							skill={{
+								name: 'Спасбросок',
+								profLevel: stat.saveProf,
+								modifier: (stat.modifier + (proficiency * stat.saveProf) + (stat.saveBonus ? stat.saveBonus : 0) )
+							}}
+							useProfRadio
+							width={0.5}
+							handleSkillCheckClick={handleSkillCheckClick}
+							handleClickText={()=>onClickStat(stat)}
+							handleClickRadio={()=>onSaveProf(incLevel(stat.saveProf), stat)}
+						/>
+					</div>
+					<div className={styles['skills']}>
+						{stat.skills.map(skill => (
+							<SkillItem 
+								key={skill.name} 
+								skill={skill} 
+								useProfRadio 
+								handleSkillCheckClick={handleSkillCheckClick}
+								handleClickRadio={()=>onSaveSkillProf(incLevel(skill.profLevel), stat.modifier, stat.name, skill)}
+								handleClickText={()=>onClickSkill(stat, skill)}
+							/>
+						))}
+					</div>
 				</div>
-			</div>
-		))}
+			))}
+		</div>
+		<div className={styles['stat-column']}>
+			{statsBalanced2.map(stat => (
+				<div key={stat.name} className={styles['stat-wrap']}>
+					<div className={styles['stat-head']} onClick={()=>onClickStat(stat)}>
+						<span className={styles['stat-text']}>{stat.name}</span>
+						<span className={styles['stat-text']}>{stat.score}</span>
+					</div>
+					<div className={styles['stat-checks']}>
+						<SkillItem 
+							skill={{
+								name: 'Проверка',
+								profLevel: stat.saveProf,
+								modifier: stat.modifier
+							}}
+							width={0.5}
+							useProfRadio={false}
+							handleSkillCheckClick={handleSkillCheckClick}
+							handleClickText={()=>onClickStat(stat)}
+						/>
+						<SkillItem 
+							skill={{
+								name: 'Спасбросок',
+								profLevel: stat.saveProf,
+								modifier: (stat.modifier + (proficiency * stat.saveProf) + (stat.saveBonus ? stat.saveBonus : 0) )
+							}}
+							useProfRadio
+							width={0.5}
+							handleSkillCheckClick={handleSkillCheckClick}
+							handleClickText={()=>onClickStat(stat)}
+							handleClickRadio={()=>onSaveProf(incLevel(stat.saveProf), stat)}
+						/>
+					</div>
+					<div className={styles['skills']}>
+						{stat.skills.map(skill => (
+							<SkillItem 
+								key={skill.name} 
+								skill={skill} 
+								useProfRadio 
+								handleSkillCheckClick={handleSkillCheckClick}
+								handleClickRadio={()=>onSaveSkillProf(incLevel(skill.profLevel), stat.modifier, stat.name, skill)}
+								handleClickText={()=>onClickSkill(stat, skill)}
+							/>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
 	</div>;
 }
 
