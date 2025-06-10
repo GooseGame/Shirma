@@ -60,7 +60,6 @@ export function EditPossession({ player, onChangeChar, reset }: EditPossessionPr
 	const handleClickAddCategory = () => {
 		setSavedPoss([...savedPoss, { categoryId: uuidv4(), category: 'Новая категория', items: [] }]);
 		confirm();
-		reset();
 	};
 
 	const handleClickAddToCategory = (categoryId: string) => {

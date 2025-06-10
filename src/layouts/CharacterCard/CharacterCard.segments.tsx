@@ -161,7 +161,6 @@ export const getSegments = (
 								<img 
 									src={avaHandler.avaUrl} 
 									alt='тут должна появиться аватарка' 
-									onError={()=>avaHandler.setAvaUrl('/dead.svg')}
 									title='(это временно)'
 									className={styles['ava']}/>
 								<input 

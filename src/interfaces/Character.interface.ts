@@ -154,3 +154,17 @@ export interface Character {
     condition:      Condition,
     spells:         CharacterSpells 
 }
+
+export interface PresetCharacter {
+    presetId:   string,
+    character:  Character,
+    shortDesc:  string,
+    bestFor:    string,
+    keywordIds:   number[]
+}
+
+export interface Keyword {
+    id: number,
+    name: string,
+    hint: string
+}

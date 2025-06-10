@@ -8,6 +8,14 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      VITE_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+      VITE_FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+      VITE_FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+      VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+      VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+      VITE_FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -20,19 +28,6 @@ jobs:
 
     - name: List build directory
       run: ls -la dist
-
-    - name: Debug SSH Key content (safe)
-      run: echo "$SSH_KEY" | head -n 5
-      env:
-        SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
-
-    - name: Test SSH connection
-      run: |
-        echo "$SSH_KEY" > key.pem
-        chmod 600 key.pem
-        ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "echo ✅ Connected to server!"
-      env:
-        SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
 
     - name: Deploy via SCP
       uses: appleboy/scp-action@v0.1.4

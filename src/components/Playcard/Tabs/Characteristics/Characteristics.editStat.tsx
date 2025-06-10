@@ -76,8 +76,12 @@ export function EditStat({onChangeChar, id, proficiency, statClicked, onCancel}:
 	};
 
 	const handleSaveStat = () => {
-		const bonus = (Number.isNaN(savedBonus) || savedBonus === 0) ? undefined : savedBonus;
-		if ((savedStatScore && savedStatScore > 0) && savedStatName && savedMod && savedSkills) {
+		let bonus = (Number.isNaN(savedBonus)) ? undefined : savedBonus;
+		if (!bonus) {
+			bonus = 0;
+		}
+
+		if ((savedStatScore && savedStatScore > 0) && savedStatName && (savedMod!==undefined) && savedSkills) {
 			onSaveStat({
 				name: savedStatName,
 				score: savedStatScore,

@@ -55,9 +55,9 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		if (url !== '') {
 			if (isValidHttpUrl(url)) {
 				dispatch(charActions.editAvatar({id: character.id, name:url}));
-				setShowAvaPopup(false);
 			}
 		}
+		setShowAvaPopup(false);
 	};
 
 	const onSaveRaceClassSubclass = (race: string, className: string, subclass?: string) => {

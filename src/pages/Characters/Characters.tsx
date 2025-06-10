@@ -6,13 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import { CHAR_KEY, charActions, CharState } from '../../store/slices/Characters.slice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store/store';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Character } from '../../interfaces/Character.interface';
 import { randomHash } from '../../helpers/random';
 import { createCharacter } from '../../helpers/createCharacter';
 import cn from 'classnames';
+import { getAllPresets } from '../../store/importPresets';
 
 export function Characters() {
+	useEffect(() => {
+		getAllPresets().then((data) => {
+			console.log('🎉 Пресеты:', data);
+		});
+	}, []);
+
 	const navigate = useNavigate();
 	const [characters, setCharacters] = useState(loadState<CharState>(CHAR_KEY));
 	const dispatch = useDispatch<AppDispatch>();

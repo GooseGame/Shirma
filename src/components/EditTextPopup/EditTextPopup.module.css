@@ -33,11 +33,11 @@
     font-style: italic;
 }
 
-.underline {
-    text-decoration: underline;
+.text.underline {
+    text-decoration: underline !important;
 }
 
-.overline {
+.text.overline {
     text-decoration: overline;
 }
 
