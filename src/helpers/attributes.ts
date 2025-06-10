@@ -507,3 +507,7 @@ export const keywords: Keyword[] = [
 		hint: 'Действует по сердцу, живо реагирует.'
 	}
 ];
+
+export const getKeywordById = (id: number) => {
+	return keywords.find(kw=> kw.id === id);
+};

@@ -15,6 +15,10 @@
     z-index: 999;
 }
 
+.small {
+    max-width: 150px;
+}
+
 .hidden-text-icon {
     margin-left: 5px;
 }

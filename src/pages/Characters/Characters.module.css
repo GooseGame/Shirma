@@ -1,11 +1,18 @@
 .content {
-    padding: 10px;
+    padding: 25px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 10px;
-    height: calc(100vh - 120px);
-    justify-content: space-around;
+    gap: 15px;
+    height: calc(100vh - 60px);
+
+    justify-content: flex-start;
+    border: 10px solid var(--primary-brown);
+    -webkit-box-shadow: inset 0px 10px 0px 10px #281d14;
+    -moz-box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-shadow: inset 0px 10px 0px 10px #281d14;
+    box-sizing: border-box;
+    background-color: var(--darker-brown);
 }
 
 .scrollable {
@@ -21,7 +28,6 @@
     align-items: center;
     justify-content: center;
     background-color: #9e9078;
-    border-radius: 15px;
     -webkit-box-shadow: inset 0px 0px 3px 2px #281d14;
     -moz-box-shadow: inset 0px 0px 3px 2px #281d14;
     box-shadow: inset 0px 0px 3px 2px #281d14;

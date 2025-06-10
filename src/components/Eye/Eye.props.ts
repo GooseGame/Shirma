@@ -7,5 +7,6 @@ export interface EyeProps extends HTMLAttributes<HTMLDivElement> {
     white?: boolean,
     ElementIstead?: ReactNode,
     offsetHint?: number,
-    classNames?: string
+    classNames?: string,
+    hintCN?: string
 }

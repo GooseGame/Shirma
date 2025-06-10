@@ -163,6 +163,11 @@ export interface PresetCharacter {
     keywordIds:   number[]
 }
 
+export interface FBPreset {
+    id: string,
+    preset: PresetCharacter
+}
+
 export interface Keyword {
     id: number,
     name: string,

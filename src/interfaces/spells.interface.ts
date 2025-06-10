@@ -5,35 +5,35 @@ import { Text } from './Text.interface';
 export const MAX_CELL_LEVEL = 8;
 export const spellCellsDefault = [
 	{
-		count: 4,
-		availible: 5
-	},
-	{
-		count: 3,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 3,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 3,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 3,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 2,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 2,
+		count: 0,
 		availible: 0
 	},
 	{
-		count: 1,
+		count: 0,
+		availible: 0
+	},
+	{
+		count: 0,
 		availible: 0
 	}
 ];

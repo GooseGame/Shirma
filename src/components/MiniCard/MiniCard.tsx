@@ -7,7 +7,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getClassByClassname } from '../../helpers/createCharacter';
 
-export function MiniCard({creature, deleteAction, cloneAction}: MiniCardProps) {
+export function MiniCard({creature, deleteAction, cloneAction, onClickAction}: MiniCardProps) {
 	const getRarity = () => {
 		if (creature.info.level < 5) return 'common';
 		if (creature.info.level < 10) return 'uncommon';
@@ -29,6 +29,9 @@ export function MiniCard({creature, deleteAction, cloneAction}: MiniCardProps) {
 	const creatureClass = getClassByClassname(creature.info.class.name);
 
 	const handleClickMiniCard = () => {
+		if (onClickAction) {
+			onClickAction(creature);
+		}
 		navigate(`/character/${creature.id}`);
 	};
 
@@ -50,7 +53,7 @@ export function MiniCard({creature, deleteAction, cloneAction}: MiniCardProps) {
 
 	const handleConfirmTrue = () => {
 		if (isConfirmDelete) {
-			deleteAction(creature.id);
+			if (deleteAction)deleteAction(creature.id);
 		}
 	};
 
@@ -102,7 +105,7 @@ export function MiniCard({creature, deleteAction, cloneAction}: MiniCardProps) {
 		return clientCoordinate > centerCoordinate ? angle : 360 - angle;
 	};
 
-	return <div className={cn(styles['mini-card-wrapper'])}>
+	return <div className={cn(styles['mini-card-wrapper'], (!deleteAction && !cloneAction)?styles['small-wrapper']:'')}>
 		<div onClick={handleClickMiniCard} className={cn(styles['playcard-wrapper'], styles[rarity], styles[creatureClass])} onMouseLeave={resetBalatro}>
 			<div className={styles['playcard-mini']} onMouseEnter={handleBalatro}>
 				{rarity === 'uncommon' && <div className={cn(styles['unc-wrap'], styles[`unc-${creatureClass}`])}></div>}
@@ -156,16 +159,18 @@ export function MiniCard({creature, deleteAction, cloneAction}: MiniCardProps) {
 				</div>}
 			</div>
 		</div>
-		<div className={styles['bottom-controls']} onMouseLeave={onMouseLeaveDelete}>
-			<div onClick={()=>cloneAction(creature)} className={cn(styles['bottom-btn'], styles['bottom-clone'], 'small-shadow')}>
-				Клонировать
-				<img src='/clone.svg' className={styles['bottom-img']} alt='clone'/>
+		{cloneAction && deleteAction &&
+			<div className={styles['bottom-controls']} onMouseLeave={onMouseLeaveDelete}>
+				<div onClick={()=>{if (cloneAction)cloneAction(creature);}} className={cn(styles['bottom-btn'], styles['bottom-clone'], 'small-shadow')}>
+					Клонировать
+					<img src='/clone.svg' className={styles['bottom-img']} alt='clone'/>
+				</div>
+				<div className={cn(styles['bottom-btn'], styles['bottom-delete'], 'small-shadow')} onClick={handleClickDelete}>
+					{isConfirmDelete ? 'Точно?' : 'Удалить'}
+					<img src='/x.svg' className={cn(isConfirmDelete?styles['bottom-interactive']:'', styles['bottom-img'])} alt='delete' onClick={handleConfirmFalse}/>
+					{isConfirmDelete && <img onClick={handleConfirmTrue} src='/more-white.svg' className={cn(isConfirmDelete?styles['bottom-interactive']:'', styles['confirm-delete'], styles['bottom-img'])} alt='confirm'/> }
+				</div>
 			</div>
-			<div className={cn(styles['bottom-btn'], styles['bottom-delete'], 'small-shadow')} onClick={handleClickDelete}>
-				{isConfirmDelete ? 'Точно?' : 'Удалить'}
-				<img src='/x.svg' className={cn(isConfirmDelete?styles['bottom-interactive']:'', styles['bottom-img'])} alt='delete' onClick={handleConfirmFalse}/>
-				{isConfirmDelete && <img onClick={handleConfirmTrue} src='/more-white.svg' className={cn(isConfirmDelete?styles['bottom-interactive']:'', styles['confirm-delete'], styles['bottom-img'])} alt='confirm'/> }
-			</div>
-		</div>
+		}
 	</div>;
 }

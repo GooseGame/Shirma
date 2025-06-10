@@ -1039,10 +1039,13 @@
     height: 430px;
     padding: 10px;
     background-color: #9e9078;
-    border-radius: 15px;
     -webkit-box-shadow: inset 0px 0px 3px 2px #281d14;
     -moz-box-shadow: inset 0px 0px 3px 2px #281d14;
     box-shadow: inset 0px 0px 3px 2px #281d14;
+}
+
+.mini-card-wrapper.small-wrapper {
+    height: 370px;
 }
 
 .bottom-btn {

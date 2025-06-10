@@ -7,6 +7,7 @@ import { Characters } from './pages/Characters/Characters.tsx';
 import { CharacterPage } from './pages/CharacterPage/CharacterPage.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
+import { Presets } from './pages/Presets/Presets.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'new',
-				element: <CharacterPage/>
+				element: <Presets/>
 			}
 		]
 	},

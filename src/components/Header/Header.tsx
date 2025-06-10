@@ -4,18 +4,13 @@ import { RoundButton } from '../Button/Button';
 import { Icon } from '../Icons/Icon';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { charActions } from '../../store/slices/Characters.slice';
-import { createCharacter } from '../../helpers/createCharacter';
 
 export const Header: FC = ({...props }) => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const onClickNewCharacter = () => {
-		const character = createCharacter();
-		dispatch(charActions.add(character));
-		navigate('/character/'+character.id);
+		navigate('/character/new');
 	};
+	
 
 	return <div className={styles['header-area']}>
 		<h1 className={styles['header-logo']} {...props}>Ширма</h1>

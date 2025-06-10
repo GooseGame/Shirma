@@ -9,7 +9,6 @@ import { AppDispatch } from '../../store/store';
 import { useState } from 'react';
 import { Character } from '../../interfaces/Character.interface';
 import { randomHash } from '../../helpers/random';
-import { createCharacter } from '../../helpers/createCharacter';
 import cn from 'classnames';
 
 export function Characters() {
@@ -19,9 +18,7 @@ export function Characters() {
 	const dispatch = useDispatch<AppDispatch>();
 
 	const handleCreateNewButton = () => {
-		const character = createCharacter();
-		dispatch(charActions.add(character));
-		navigate('/character/'+character.id);
+		navigate('/character/new');
 	};
 
 	const getCharacters = () => {
