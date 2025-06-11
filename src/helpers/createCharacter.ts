@@ -59,7 +59,7 @@ export const getClassByClassname = (className: string) => {
 };
 
 const tmpName = 'Новый персонаж';
-const noImage = 'https://lss-s3-files.s3.eu-north-1.amazonaws.com/avatar/63ca52ca66f793d3361e13f9.jpeg?mod=1725048119529';
+const noImage = 'https://cdn.jsdelivr.net/gh/GooseGame/shirma-storage@main/preset-avatars/empty-preset.png';
 const initialCharacter: Character = {
 	id: randomHash(),
 	avatar: noImage,
@@ -67,17 +67,17 @@ const initialCharacter: Character = {
 		name: tmpName,
 		level: 1,
 		exp: 0,
-		class: {name: 'Монах'},
+		class: {name: 'Жрец'},
 		alignment: {
-			name: 'Хаотично-Нейтральный',
+			name: 'Нейтральный',
 			coordinates: {
-				x: 75,
+				x: 50,
 				y: 50
 			}
 		},
-		alignmentShort: 'Х-Н',
-		backgroundTitle: 'Преступник',
-		race: 'Табакси',
+		alignmentShort: 'Н-Н',
+		backgroundTitle: 'Выбери предысторию',
+		race: 'Чейнджлинг',
 		text: {
 			background: {
 				type: 'text',
@@ -137,11 +137,11 @@ const initialCharacter: Character = {
 		},
 		measurements: {
 			age: '16',
-			eyes: 'Карие',
-			hair: 'Рыжеватые',
-			skin: 'Под шерстью',
+			eyes: 'Белые',
+			hair: 'Белые',
+			skin: 'Бледная',
 			height: '180',
-			weight: '80'
+			weight: '70'
 		}
 	},
 	stats: [
