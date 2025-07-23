@@ -33,6 +33,12 @@
     max-width: 100px;
 }
 
+@media screen and (min-width: 1701px) {
+    .left-content {
+        max-width: unset;
+    }
+}
+
 .segment:hover .left-content {
     max-width: 140px;
 }
@@ -189,7 +195,7 @@
     }
 }
 
-@media screen and (min-width: 400px) and (max-width: 1200px) {
+@media screen and (min-width: 360px) and (max-width: 1200px) {
     .segment {
         border-radius: 15px;
         display: flex;

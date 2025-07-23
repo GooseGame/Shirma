@@ -216,6 +216,11 @@ export function EditTextPopup({editValue, header, onSave, onCancel, color, onSav
 							<button className={cn(styles['btn'], styles['overline'])} onClick={() => insertTemplate('|word(word=текст&style=overline)|')}>O</button>
 						</div>
 						<button className={cn(styles['main-btn'], styles['btn'])} onClick={() => insertTemplate('|img(src=ссылка&alt=описание)|')}>Изображение</button>
+					</div>
+					<div className={styles['buttons-line']}>
+						<button className={styles['cancel-btn']} onClick={onCancel}>
+							Назад
+						</button>
 						<button className={cn(styles['save-btn'])}
 							onClick={() => {
 								const parsedText = parseText(text);

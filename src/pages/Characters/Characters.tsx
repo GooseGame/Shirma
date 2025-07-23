@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { Character } from '../../interfaces/Character.interface';
 import { randomHash } from '../../helpers/random';
 import cn from 'classnames';
+import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
+import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 
 export function Characters() {
 
@@ -36,7 +38,7 @@ export function Characters() {
 	};
 
 	return <>
-		<Header/>
+		<Header />
 		<div className={cn(styles['content'], styles['scrollable'])}>
 			{getCharacters().map(character => (
 				<MiniCard key={character.id} deleteAction={handleDeleteAction} cloneAction={handleCloneAction} creature={character}/>
@@ -47,5 +49,7 @@ export function Characters() {
 				</div>
 			</div>
 		</div>
+		<MenuMobile/>
+		<BanSmallScreens/>
 	</>;
 }

@@ -1,6 +1,6 @@
 .content {
 	width: 300px;	
-	background-color: var(--lighter-brown);
+	background-color: var(--background-color);
 	padding: 10px;
 	border-radius: 15px;
 	box-sizing: border-box;

@@ -10,6 +10,27 @@
 	gap: 10px;
 }
 
+@media screen and (min-width: 1000px) and (max-width: 1200px) {
+    .content-new {
+        height: calc(100vh - 240px);
+		margin: 0;
+    }
+	.head-area {
+		height: 170px;
+		margin-top: 5px;
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.head-area {
+		min-height: 190px;
+		height: auto;
+	}
+	.content-new {
+		height: auto;
+	}
+}
+
 .keywords-wrap {
 	display: flex;
 	flex-direction: column;

@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import styles from './Presets.module.css';
 import { getKeywordById, keywords } from '../../helpers/attributes';
 import { Eye } from '../../components/Eye/Eye';
+import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
+import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 
 export function Presets() {
 	const [presets, setPresets] = useState(loadState<PresetState>(PRESETS_KEY));
@@ -118,5 +120,7 @@ export function Presets() {
 				</div>;}
 			)}
 		</div>
+		<MenuMobile/>
+		<BanSmallScreens/>
 	</>;
 }

@@ -20,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: 'new',
 				element: <Presets/>
+			},
+			{
+				path: ':id/edit',
+				element: <Presets/>
 			}
 		]
 	},

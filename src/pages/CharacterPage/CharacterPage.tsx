@@ -12,6 +12,8 @@ import { AppDispatch } from '../../store/store';
 import { createCharacter, getCharacterFromLocalStorage } from '../../helpers/createCharacter';
 import { charActions } from '../../store/slices/Characters.slice';
 import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
+import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
+import styles from './CharacterPage.module.css';
 
 export function CharacterPage() {
 	const navigate = useNavigate();
@@ -58,10 +60,13 @@ export function CharacterPage() {
 	return (
 		<>
 			<Header/>
-			{character && <CharacterCard setPopup={addPopup} character={character} setDiceRoll={setRollboxProps} onChangeChar={onChangeChar}/>}
-			<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
-			<RollBox dicesSent={rollBoxProps} setPopup={addPopup}/>
+			<div className={styles['container']}>
+				<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
+				{character && <CharacterCard setPopup={addPopup} character={character} setDiceRoll={setRollboxProps} onChangeChar={onChangeChar}/>}
+			</div>
 			<MenuMobile/>
+			<RollBox dicesSent={rollBoxProps} setPopup={addPopup}/>
+			<BanSmallScreens/>
 		</>
 	);
 }

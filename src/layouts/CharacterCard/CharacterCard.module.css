@@ -184,7 +184,7 @@
         width: 100%;
     }
 }
-@media screen and (min-width: 401px) and (max-width: 1700px) {
+@media screen and (min-width: 360px) and (max-width: 1700px) {
     .segment:hover {
         height: 140px;
         border-radius: 25px 25px 0 0;
@@ -395,7 +395,17 @@
     overflow-x: scroll;
 }
 
-@media screen and (min-width: 400px) and (max-width: 1200px) {
+@media screen and (max-width: 360px) {
+    .content {
+        display: none !important;
+    }
+
+    .header-area {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 360px) and (max-width: 1200px) {
     .header-area {
         max-width: 1200px;
         overflow: scroll;

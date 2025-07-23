@@ -8,6 +8,7 @@ import { Dice } from '../../interfaces/Character.interface';
 import { RoundButton } from '../Button/Button';
 import { randomDiceValue, randomHash, splitDiceValueToDices } from '../../helpers/random';
 import { associativeDamage, damageTypes, getDamageById } from '../../helpers/attributes';
+import useScreenWidth from '../../helpers/hooks/useScreenWidth';
 
 interface DicesInABox {
     id: number,
@@ -18,6 +19,7 @@ interface DicesInABox {
 }
 
 const MAX_DICES_COUNT = 63;
+const MAX_DICES_MOBILE = 25;
 export const SLIDE_ANIMATION_TIME = 400;
 export const ROLL_ANIMATION_TIME = 1200;
 export const IDLE_TIME = 300;
@@ -70,6 +72,7 @@ export function RollBox({dicesSent = [], setPopup}: RollBoxProps) {
 	const [hideRight, setHideRight] = useState<'hide-right'|'show-right'|'START'>(!isAutoMode ? 'START' : 'show-right');
 	let allDicesValue = 0;
 	const associativeDamage: associativeDamage = [];
+	const screenWidth = useScreenWidth();
 
 	//автомод
 	useEffect(()=> {
@@ -120,8 +123,13 @@ export function RollBox({dicesSent = [], setPopup}: RollBoxProps) {
 		}
 	}, [animate]);
 
+	const isMobile = () => {
+		return screenWidth < 600;
+	};
+
 	const addDiceToBox = (dice: Dice) => {
 		if (dicesInABox.length === MAX_DICES_COUNT) return; 
+		if (isMobile() && dicesInABox.length === MAX_DICES_MOBILE) return;
 		const newDice = {
 			id: dicesInABox.length,
 			dice: dice,
