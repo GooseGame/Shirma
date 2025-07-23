@@ -19,6 +19,12 @@
     width: 500px;
 }
 
+@media screen and (max-width: 550px) {
+    .edit-poss-wrapper {
+        width: calc(100% - 30px);
+    }
+}
+
 .add-cat {
     height: 30px;
     width: 100%;
@@ -187,6 +193,17 @@
     border-radius: 25px;
     z-index: 1;
     padding: 5px;
+}
+
+@media screen and (max-width: 1300px) {
+    .weight-wrap {
+        width: calc(33% - 20px);
+    }
+}
+@media screen and (max-width: 1300px) {
+    .weight-wrap {
+        width: calc(100% - 20px);
+    }
 }
 
 .weight-img {

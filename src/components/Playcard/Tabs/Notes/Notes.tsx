@@ -65,7 +65,7 @@ export function Notes({player, onChangeChar}: TabsProps) {
 			</div>
 		}}/>		
 		{player.info.text.notes.map((note) => (
-			<Sticker onClick={() => handleClickNote(note)} key={`note-${note.id}`} width={0.25} scrollable hasAddButton header={note.name} stickerCN='big-shadow' bodyContent={note.text} />				
+			<Sticker onClick={() => handleClickNote(note)} key={`note-${note.id}`} width={0.25} scrollable header={note.name} stickerCN='big-shadow' bodyContent={note.text} />				
 		))}
 		{editHeader && <EditTextPopup header={editHeader} onSaveWithHeader={onSaveWithHeader} onCancel={onCancel} onDelete={onDelete} editValue={editText} color='brown'/>}		
 	</div>;

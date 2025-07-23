@@ -152,7 +152,7 @@ export function EditTextPopup({editValue, header, onSave, onCancel, color, onSav
 						<div className={cn(styles['header'], styles['editableHeader'], isEditHeader ? styles['hidden-tag'] : '')} onClick={handleClickHeader}>
 							{changedHeader}
 						</div>
-						<input type='text' className={cn(styles['header-input'], !isEditHeader ? styles['hidden-tag'] : '')} placeholder={header} onChange={(e)=>setChangedHeader(e.target.value)}/>
+						<input type='text' id='changeHeaderInput' className={cn(styles['header-input'], !isEditHeader ? styles['hidden-tag'] : '')} placeholder={header} onChange={(e)=>setChangedHeader(e.target.value)}/>
 					</>}
 					{!onSaveWithHeader && 
 						<div className={cn(styles['header'])}>

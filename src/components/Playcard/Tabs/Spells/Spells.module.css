@@ -120,6 +120,20 @@
 	margin-right: auto;
 }
 
+@media screen and (max-width: 600px) {
+	.edit-cells-cells {
+		flex-wrap: wrap;
+	}
+}
+
+.cells-control-wrapper {
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: nowrap;
+	gap: 5px;
+	margin-left: auto;
+}
+
 .edit-cells-cells {
 	display: flex;
 	flex-direction: row-reverse;
@@ -197,6 +211,12 @@
 	padding: 2px;
 }
 
+@media screen and (min-width: 800px) {
+	.scrollable {
+		overflow-x: scroll;
+	}
+}
+
 .scrollable {
 	width: calc(66%);
 	height: 100%;
@@ -206,7 +226,6 @@
 	justify-content: flex-start;
 	align-content: flex-start;
 	gap: 10px;
-	overflow-x: scroll;
 }
 
 .add-spell-sticker {
@@ -417,6 +436,12 @@
 	max-width: 700px;
 	max-height: 100%;
 	overflow-y: scroll;
+}
+
+@media screen and (max-width: 1000px) {
+	.big-cells-sticker {
+		max-width: 70% !important;
+	}
 }
 
 .spell-dmg-wrapper {

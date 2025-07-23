@@ -29,6 +29,19 @@
 	padding-right: 2px;
 }
 
+@media screen and (max-width: 600px) {
+	.special-coins {
+		flex-wrap: wrap;
+	}
+	.calc {
+		justify-content: space-between;
+	}
+	.button-extended {
+		width: 100%;
+		justify-content: space-between;
+	}
+}
+
 .special-coins {
 	display: flex;
 	flex-direction: row;

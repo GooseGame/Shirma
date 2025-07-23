@@ -8,5 +8,6 @@ export interface HeadSegmentProps extends HTMLAttributes<HTMLDivElement> {
     bottomChildren?: ReactNode,
     classNames?: string,
     active?:    boolean,
+    groupable?: boolean,
     onChangeHeader?: (text: string)=>void
 }

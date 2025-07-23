@@ -21,6 +21,12 @@
 	align-items: center;
 }
 
+@media screen and (max-width: 600px) {
+	.add-new {
+		width: calc(100% - 10px);
+	}
+}
+
 .add-new:hover {
 	box-shadow: inset 0px 0px 10px 2px #112027;
 }

@@ -22,6 +22,12 @@
 	position: relative;
 }
 
+@media screen and (max-width: 600px) {
+	.line {
+		width: calc(100% - 10px);
+	}
+}
+
 .name {
 	font-size: 36px;
 	padding-top: 5px;

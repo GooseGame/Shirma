@@ -1,6 +1,7 @@
 :root {
   --font: 'Beryozki', sans-serif;
   --background-color: #CEC2AE;
+  --dark-background: #CEC2AE;
   --primary-blue: #264C5E;
   --primary-red: #A34C50;
   --primary-green: #265E2F;
@@ -17,6 +18,7 @@
   --gray: #BCC0C3;
   --secondary-blue: #445B6B;
   --spells-blue: #254370;
+  --spells-darker-blue: #1c3254;
   --darker-blue: #1E3D4C;
 }
 
@@ -25,6 +27,12 @@ body {
   width: 100%;
   margin: 0;
   background-color: var(--background-color);
+}
+
+@media screen and (max-width: 1200px) {
+  body {
+    background-color: var(--dark-background);
+  }
 }
 
 .big-shadow {

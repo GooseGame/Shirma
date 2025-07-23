@@ -19,6 +19,7 @@ import { EditAlignment } from './CharacterCard.alignment';
 import { randomDiceValue, randomHash } from '../../helpers/random';
 import { DiceCheck } from '../../interfaces/Equipment.interface';
 import { isValidHttpUrl } from '../../helpers/parser';
+import { HeadSegmentProps } from '../../components/Playcard/HeadSegment/HeadSegment.props';
 
 export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: CharacterCardProps) {
 	const defaultChosenSegmentName = 'info';
@@ -320,6 +321,13 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		if (![2,4,6,8,10,12,20].includes(value)) return;
 		dispatch(charActions.editHPDice({id: character.id, value: {count: 1, edge: value}}));
 	};
+
+	const getGroupableSegments = (segments: HeadSegmentProps[]) => {
+		const group = segments.filter(segment => segment.groupable);
+		const active = group.find(s => s.segmentId === chosenSegment);
+		if (!active) return group;
+		return [...group.filter(g => g.segmentId !== chosenSegment), active];
+	};
 	
 	const healthHandler = {
 		isShowHealthPopup,
@@ -351,16 +359,27 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 
 	return <div className={styles['card']}>
 		<div className={styles['char-card']}>
-			<div className={styles['header-area']}>
-				{segmentsData.map(segment =>(
-					<HeadSegment 
+			<div className={cn(styles['header-area'], styles[chosenSegmentName+'-header'])}>
+				{segmentsData.map(segment =>{
+					if (segment.groupable) return;
+					return <HeadSegment 
 						onClick={handleClickSegment}
 						key={segment.segmentId} 
 						active={segment.segmentId === chosenSegment}
-						{...segment}/>
-				))}
+						{...segment}/>;
+				})}
+				<div className={styles['group']}>
+					{getGroupableSegments(segmentsData).map(groupable => (
+						<HeadSegment 
+							onClick={handleClickSegment}
+							key={groupable.segmentId} 
+							active={groupable.segmentId === chosenSegment}
+							classNames={styles['groupable']}
+							{...groupable}/>
+					))}
+				</div>
 			</div>
-			<div className={cn(styles['content'], styles[chosenSegmentName])}>
+			<div className={cn(styles['content'], styles[chosenSegmentName], styles['scrollable'])}>
 				{chosenSegment === '0' && 
 				<>
 					<Info player={character} onChangeChar={onChangeChar}/>

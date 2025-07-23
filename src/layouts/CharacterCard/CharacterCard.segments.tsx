@@ -297,11 +297,11 @@ export const getSegments = (
 						{!isDead &&
 						<RoundButton classNames={cn(styles['button-brown'], styles['expandable-round-button'])} onClick={()=>{healthHandler.setShowHealthPopup(true);}}>
 							<div className={styles['button-info']} title={'Здоровье: '+character.condition.health.current+' из '+character.condition.health.max+(character.condition.health.extra>0 ? ' (+ '+character.condition.health.extra+' дополнительных) ':'')}>
-								{!isMaxHP && <span className={cn(styles['small-button-text'], styles['red-text'])}>
+								<span className={cn(styles['small-button-text'], isMaxHP ? styles['current-hp-text'] : styles['red-text'])}>
 									{character.condition.health.current}
-								</span>}
+								</span>
 								<span className={styles['big-button-text']}>
-									{!isMaxHP?'/':''}{character.condition.health.max}
+									/{character.condition.health.max}
 								</span>
 								{character.condition.health.extra > 0 && <span className={cn(styles['small-button-text'], styles['yellow-text'])}>
 									{'('+character.condition.health.extra+')'}
@@ -410,9 +410,9 @@ export const getSegments = (
 						<RoundButton onClick={()=>iniciativeHandler.setIsShowIniPopup(true)} classNames={cn(styles['button-brown'], styles['expandable-round-button'])}>
 							<div className={styles['button-info']}>
 								<span className={styles['big-button-text']}>
-									{character.condition.initiative}
+									{character.condition.initiative > 0 ? '+' : character.condition.initiative === 0 ? '' : '-'}{character.condition.initiative}
 								</span>
-								<span className={styles['small-button-text']}>
+								<span className={cn(styles['small-button-text'], styles['ini-text'])}>
 									{' инициатива'}
 								</span>
 							</div>
@@ -431,13 +431,15 @@ export const getSegments = (
 			segmentId: '4',
 			segmentName: 'notes',
 			header: 'Заметки',
-			classNames: styles['segment']
+			groupable: true,
+			classNames: cn(styles['segment'], styles['group-segment'])
 		},
 		{
 			segmentId: '5',
 			segmentName: 'spells',
 			header: 'Заклинания',
-			classNames: styles['segment']
+			groupable: true,
+			classNames: cn(styles['segment'], styles['group-segment'])
 		}
 	];
 };

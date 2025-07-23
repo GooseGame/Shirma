@@ -103,10 +103,16 @@ export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) 
 		<Sticker width={0.5} fullHeight bodyContent={
 			{
 				type: 'list',
-				children: getCharacteristicsTableTSX({stats: player.stats, handleSkillCheckClick, onSaveSkillProf, onClickStat, onClickSkill, onSaveProf, proficiency: player.proficiency})
+				children: <div>
+					{getCharacteristicsTableTSX({stats: player.stats, handleSkillCheckClick, onSaveSkillProf, onClickStat, onClickSkill, onSaveProf, proficiency: player.proficiency})}
+					<div className={styles['passive-wrapper']}>
+						<h2 className={styles['passive-header-mobile']}>Пассивные чувства</h2>
+						{getPassivesTSX(player.stats)}
+					</div>
+				</div>
 			}
-		} stickerCN={cn('big-shadow', styles['gapless'])}/>
-		<Sticker width={0.25} header='Пассивные чувства' scrollable bodyContent={
+		} stickerCN={cn('big-shadow', styles['gapless'], styles['scrollable-mobile'])}/>
+		<Sticker width={0.25} stickerCN={styles['hide-tall']} header='Пассивные чувства' scrollable bodyContent={
 			{
 				type: 'list',
 				children: getPassivesTSX(player.stats)

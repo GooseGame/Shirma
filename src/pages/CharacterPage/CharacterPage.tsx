@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store/store';
 import { createCharacter, getCharacterFromLocalStorage } from '../../helpers/createCharacter';
 import { charActions } from '../../store/slices/Characters.slice';
+import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 
 export function CharacterPage() {
 	const navigate = useNavigate();
@@ -60,6 +61,7 @@ export function CharacterPage() {
 			{character && <CharacterCard setPopup={addPopup} character={character} setDiceRoll={setRollboxProps} onChangeChar={onChangeChar}/>}
 			<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
 			<RollBox dicesSent={rollBoxProps} setPopup={addPopup}/>
+			<MenuMobile/>
 		</>
 	);
 }

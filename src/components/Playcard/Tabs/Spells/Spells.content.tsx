@@ -22,7 +22,7 @@ export function getCellsSticker(player: Character, onClickAvailibleExtraCell: (k
 		width={0.33}
 		fullHeight
 		scrollable
-		stickerCN={styles['cells-sticker']}
+		stickerCN={cn(styles['cells-sticker'], styles['big-cells-sticker'])}
 		bodyContent={
 			{
 				type: 'list',

@@ -244,53 +244,55 @@ export function Spells({player, setDiceRoll, onChangeChar}: TabsProps) {
 						Изменить количество ячеек
 					</div>
 					{chosenMulticlass && associativeCharCells && associativeCharCells[chosenMulticlass]?.cells &&
-						<div className={cn(styles['edit-cells-cells'])}>
+						<div className={cn(styles['cells-control-wrapper'])}>
 							{associativeCharCells[chosenMulticlass].cells[clickedLine]?.count > 0 && 
-								<img src='/cell-remove.svg'
+								<div className={styles['cell-control']}><img src='/cell-remove.svg'
 									alt='cell' 
 									key={'cell-remove'}
 									className={styles['cell']}
 									onClick={() => {
 										onClickAddCell(clickedLine, associativeCharCells[chosenMulticlass].cells[clickedLine].count-1, true);
 									}}
-								/>}
-							{getCellLine(associativeCharCells[chosenMulticlass].cells[clickedLine],clickedLine,true, undefined,undefined,undefined,undefined,chosenMulticlass?'/'+chosenMulticlass:undefined)}
-					
-							{associativeCharCells[chosenMulticlass].cells[clickedLine].count && getShadowCells(9-associativeCharCells[chosenMulticlass].cells[clickedLine].count)}
+								/></div>}
+							<div className={cn(styles['edit-cells-cells'])}>
+								{getCellLine(associativeCharCells[chosenMulticlass].cells[clickedLine],clickedLine,true, undefined,undefined,undefined,undefined,chosenMulticlass?'/'+chosenMulticlass:undefined)}
+								{associativeCharCells[chosenMulticlass].cells[clickedLine].count && getShadowCells(9-associativeCharCells[chosenMulticlass].cells[clickedLine].count)}
+							</div>
 							{associativeCharCells[chosenMulticlass].cells[clickedLine].count &&
-								<img src='/cell-add.svg'
+								<div className={styles['cell-control']}><img src='/cell-add.svg'
 									alt='cell' 
 									key={'cell-add'}
 									className={cn(styles['cell'], styles['cell-add'])}
 									onClick={() => {
 										onClickAddCell(clickedLine, associativeCharCells[chosenMulticlass].cells[clickedLine].count+1, true);
 									}}
-								/>}
+								/></div>}
 						</div>
 					}
 					{!chosenMulticlass && 
-						<div className={cn(styles['edit-cells-cells'])}>
+						<div className={cn(styles['cells-control-wrapper'])}>
 							{player.spells.cells[clickedLine].count > 0 &&
-								<img src='/cell-remove.svg'
+								<div className={styles['cell-control']}><img src='/cell-remove.svg'
 									alt='cell' 
 									key={'cell-remove'}
 									className={styles['cell']}
 									onClick={() => {
 										onClickAddCell(clickedLine, player.spells.cells[clickedLine].count-1, true);
 									}}
-								/>}
-							{getCellLine(player.spells.cells[clickedLine],clickedLine,true, undefined,undefined,undefined,undefined,chosenMulticlass?'/'+chosenMulticlass:undefined)}
-					
-							{player.spells.cells[clickedLine].count < 9 && getShadowCells(9-player.spells.cells[clickedLine].count)}
+								/></div>}
+							<div className={cn(styles['edit-cells-cells'])}>
+								{getCellLine(player.spells.cells[clickedLine],clickedLine,true, undefined,undefined,undefined,undefined,chosenMulticlass?'/'+chosenMulticlass:undefined)}
+								{player.spells.cells[clickedLine].count < 9 && getShadowCells(9-player.spells.cells[clickedLine].count)}
+							</div>
 							{player.spells.cells[clickedLine].count < 9 &&
-								<img src='/cell-add.svg'
+								<div className={styles['cell-control']}><img src='/cell-add.svg'
 									alt='cell' 
 									key={'cell-add'}
 									className={cn(styles['cell'], styles['cell-add'])}
 									onClick={() => {
 										onClickAddCell(clickedLine, player.spells.cells[clickedLine].count+1, true);
 									}}
-								/>}
+								/></div>}
 						</div>
 					}						
 				</div>

@@ -4,8 +4,8 @@ import cn from 'classnames';
 import { FC } from 'react';
 import { TextInput } from '../../TextInput/TextInput';
 
-export const HeadSegment: FC<HeadSegmentProps> = ({header, segmentId, segmentName, classNames, leftChildren, bottomChildren, active, onChangeHeader, ...props}) => {
-	return <div id={segmentId} className={cn(styles['segment'], styles[segmentName], classNames)} data-active={active} {...props}>
+export const HeadSegment: FC<HeadSegmentProps> = ({header, segmentId, segmentName, classNames, leftChildren, bottomChildren, active, groupable, onChangeHeader, ...props}) => {
+	return <div id={segmentId} className={cn(styles['segment'], styles[segmentName], groupable? styles['groupable']:'', classNames)} data-active={active} {...props}>
 		<div className={styles['left-content']}>
 			{leftChildren}
 		</div>

@@ -8,6 +8,13 @@
 	font-size: 40px;
 }
 
+@media screen and (max-width: 1000px) {
+	.new {
+		height: unset;
+		min-height: 100px;
+	}
+}
+
 .add-btn {
 	width: 14px;
     height: 20px;
