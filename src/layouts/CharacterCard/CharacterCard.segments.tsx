@@ -415,7 +415,7 @@ export const getSegments = (
 						<RoundButton onClick={()=>iniciativeHandler.setIsShowIniPopup(true)} classNames={cn(styles['button-brown'], styles['expandable-round-button'])}>
 							<div className={styles['button-info']}>
 								<span className={styles['big-button-text']}>
-									{character.condition.initiative > 0 ? '+' : character.condition.initiative === 0 ? '' : '-'}{character.condition.initiative}
+									{character.condition.initiative > 0 ? '+' : character.condition.initiative === 0 ? '' : ''}{character.condition.initiative}
 								</span>
 								<span className={cn(styles['small-button-text'], styles['ini-text'])}>
 									{' инициатива'}
