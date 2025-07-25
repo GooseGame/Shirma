@@ -138,7 +138,7 @@ export function EditStat({onChangeChar, id, proficiency, statClicked, onCancel}:
 	} else {
 		return <EditCustomPopup 
 			wrapperCN={styles['edit-stat-wrapper']} 
-			onCancel={onCancelEditStat} color='red' 
+			onCancel={onCancelEditStat} color='darker-red' 
 			header={`${savedStatName} ${(savedMod && savedMod>0)?'+':''}${savedMod}`}
 		>
 			{getEditStatChildren()}

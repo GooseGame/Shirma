@@ -92,7 +92,7 @@ export function EditSkill({onChangeChar, id, proficiency, skillClicked, onCancel
 	} else {
 		return <EditCustomPopup 
 			wrapperCN={styles['edit-stat-wrapper']} 
-			onCancel={onCancelSkillEdit} color='red' 
+			onCancel={onCancelSkillEdit} color='darker-red' 
 			header={savedSkillName?savedSkillName:'Это че'}
 		>
 			{getEditSkillChildren()}
