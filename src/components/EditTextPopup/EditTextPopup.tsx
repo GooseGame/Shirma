@@ -3,6 +3,7 @@ import styles from './EditTextPopup.module.css';
 import { EditTextPopupProps } from './EditTextPopup.props';
 import { parseReverse, parseText } from './EditTextPopup.parser';
 import cn from 'classnames';
+import useScreenWidth from '../../helpers/hooks/useScreenWidth';
 
 
 export function EditTextPopup({editValue, header, onSave, onCancel, color, onSaveWithHeader, onDelete, wrapperCN, children, textareaCN}: EditTextPopupProps) {
@@ -13,6 +14,7 @@ export function EditTextPopup({editValue, header, onSave, onCancel, color, onSav
 	const [changedHeader, setChangedHeader] = useState(header);
 	const [isEditHeader, setIsEditHeader] = useState(false);
 	const [isConfirmDelete, setConfirmDelete] = useState(false);
+	const screenWidth = useScreenWidth();
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 
 	const linkTemplate = 			'|url(to=ссылка&word=#text#';
@@ -105,6 +107,10 @@ export function EditTextPopup({editValue, header, onSave, onCancel, color, onSav
 	};
 
 	const handleClickOutside = () => {
+		if (screenWidth < 600) {
+			console.log('should ban');
+			return;
+		}
 		if (!textareaRef) onCancel();
 		if (!isHovering) onCancel();
 	};

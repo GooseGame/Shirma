@@ -3,10 +3,12 @@ import styles from './EditCustomPopup.module.css';
 import popupStyles from '../EditTextPopup/EditTextPopup.module.css';
 import cn from 'classnames';
 import { useState } from 'react';
+import useScreenWidth from '../../helpers/hooks/useScreenWidth';
 
 export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete, color, float = 'center', scrollable}: EditCustomPopupProps) {
 	const [isHovering, setIsHovering] = useState<boolean>(false);
 	const [isConfirmDelete, setConfirmDelete] = useState(false);
+	const screenWidth = useScreenWidth();
 
 	const handleClickDelete = () => {
 		if (!isConfirmDelete) {
@@ -37,6 +39,10 @@ export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete
 		setIsHovering(false);
 	};
 	const handleClickOutside = () => {
+		if (screenWidth < 600) {
+			console.log('should ban');
+			return;
+		}
 		if (!isHovering) onCancel();
 	};
 
