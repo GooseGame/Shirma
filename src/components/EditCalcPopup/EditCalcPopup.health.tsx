@@ -124,6 +124,7 @@ export function EditCalcPopupHealth({header, onCancel, setPopup, color, changeHe
 		header={header} 
 		onCancel={onCancel} 
 		color={color} 
+		fakeSaveBtn={true}
 		wrapperCN={styles['exp-wrapper']}>
 		<div className={styles['calculator-wrapper']}>
 			<div className={styles['top-info']}>
@@ -414,8 +415,5 @@ export function EditCalcPopupHealth({header, onCancel, setPopup, color, changeHe
 				}
 			</div>
 		</div>
-		<button className={cn(styles['save-btn'], styles['fake-save'])}
-			onClick={onCancel}
-		><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 	</EditCustomPopup>;
 }

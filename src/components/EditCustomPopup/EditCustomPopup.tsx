@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useState } from 'react';
 import useScreenWidth from '../../helpers/hooks/useScreenWidth';
 
-export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete, color, float = 'center', scrollable}: EditCustomPopupProps) {
+export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete, color, float = 'center', scrollable, fakeSaveBtn, onSave}: EditCustomPopupProps) {
 	const [isHovering, setIsHovering] = useState<boolean>(false);
 	const [isConfirmDelete, setConfirmDelete] = useState(false);
 	const screenWidth = useScreenWidth();
@@ -65,6 +65,10 @@ export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete
 				<button className={popupStyles['cancel-btn']} onClick={onCancel}>
 					Назад
 				</button>
+				{(fakeSaveBtn || onSave) &&
+				<button className={cn(popupStyles['save-btn'])}
+					onClick={onSave ? onSave : onCancel}
+				><img src='/more-white.svg' alt='save' className={popupStyles['save-img']}/></button>}
 			</div>
 		</div>
 	</div>;

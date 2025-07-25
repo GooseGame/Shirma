@@ -154,6 +154,7 @@ export function EditPossession({ player, onChangeChar, reset }: EditPossessionPr
 			scrollable
 			wrapperCN={styles['edit-poss-wrapper']}
 			color="yellow"
+			onSave={onSave}
 			onCancel={onCancel}
 		>
 			<div className={styles['eq-inputs']}>
@@ -225,9 +226,6 @@ export function EditPossession({ player, onChangeChar, reset }: EditPossessionPr
 						</div>
 					</div>
 				))}
-			</div>
-			<div className={styles['save-btn']} onClick={onSave}>
-				<img src="/more-white.svg" alt="confirm" className={styles['save-img']} />
 			</div>
 		</EditCustomPopup>
 	);

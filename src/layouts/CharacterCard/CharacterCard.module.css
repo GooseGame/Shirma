@@ -710,6 +710,17 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width: 500px) {
+    .alignment {
+        width: 100px;
+        height: 100px;
+    }
+    .coordinates {
+        width: 300px;
+        height: 300px;
+    }
+}
+
 .al-text {
     font-size: 40px;
     font-family: 'Beryozki';
@@ -818,10 +829,6 @@
     padding-inline: 10px;
 }
 
-.class-race-wrapper {
-    width: 350px !important;
-}
-
 .red {
     background-color: var(--primary-red);
 }
@@ -914,6 +921,9 @@
     .green.small-popup {
         width: 320px;
     }
+    .class-race-wrapper {
+        width: 350px !important;
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -924,6 +934,9 @@
         width: 100%;
     }
     .green.small-popup {
+        width: 100%;
+    }
+    .class-race-wrapper {
         width: 100%;
     }
 }

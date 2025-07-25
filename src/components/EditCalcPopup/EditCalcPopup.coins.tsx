@@ -29,6 +29,7 @@ export function EditCalcPopupCoins({header, onCancel, color, onSaveCoins}: EditC
 		header={header} 
 		onCancel={onCancel} 
 		color={color} 
+		fakeSaveBtn={true}
 		wrapperCN={styles['coins-wrapper']}>
 		<div className={styles['calculator-wrapper']}>
 			<CalcField
@@ -137,8 +138,5 @@ export function EditCalcPopupCoins({header, onCancel, color, onSaveCoins}: EditC
 				</div>
 			</div>
 		</div>
-		<button className={cn(styles['save-btn'])}
-			onClick={onCancel}
-		><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 	</EditCustomPopup>;
 }

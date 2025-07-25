@@ -269,7 +269,7 @@ export const getSegments = (
 						<EditCustomPopup 
 							wrapperCN={styles['class-race-wrapper']} 
 							onCancel={savedRaceClassObj.onCancelEditRaceClass} 
-							color={'red'} 
+							color={'darker-red'} 
 							header='Раса, класс, подкласс'>
 							{getEditRaceClassInputs({...savedRaceClassObj})}
 						</EditCustomPopup>

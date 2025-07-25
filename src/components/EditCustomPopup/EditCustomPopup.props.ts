@@ -8,5 +8,7 @@ export interface EditCustomPopupProps extends HTMLAttributes<HTMLDivElement> {
 	color?:		string,
 	wrapperCN?: string,
 	scrollable?:boolean,
+	fakeSaveBtn?: boolean,
+	onSave?:	()=>void,
 	float?: 'left'|'center'|'right'
 }

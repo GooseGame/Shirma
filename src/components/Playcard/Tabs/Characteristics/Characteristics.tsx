@@ -154,7 +154,7 @@ export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) 
 			</div>
 		</div>
 		{/* <Sticker width={0.25} header='Действия' bodyContent={{type: 'list', children: getActionsTSX()}} /> */}
-		<EditTextPopup header={editHeader} onCancel={onCancel} onSave={onSave} color='red' editValue={editText}/>
+		<EditTextPopup header={editHeader} onCancel={onCancel} onSave={onSave} color='darker-red' editValue={editText}/>
 		{(onChangeChar && statClicked) && <EditStat onCancel={onCancelStat} onChangeChar={onChangeChar} id={player.id} proficiency={player.proficiency} statClicked={statClicked}/>}
 		{(onChangeChar && skillClicked && statOfSkill) && <EditSkill statMod={statOfSkill.modifier} statName={statOfSkill.name} onCancel={onCancelSkill} onChangeChar={onChangeChar} id={player.id} proficiency={player.proficiency} skillClicked={skillClicked}/>}
 	</>;
