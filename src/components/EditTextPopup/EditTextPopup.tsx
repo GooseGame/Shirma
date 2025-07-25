@@ -217,17 +217,17 @@ export function EditTextPopup({editValue, header, onSave, onCancel, color, onSav
 						</div>
 						<button className={cn(styles['main-btn'], styles['btn'])} onClick={() => insertTemplate('|img(src=ссылка&alt=описание)|')}>Изображение</button>
 					</div>
-					<div className={styles['buttons-line']}>
-						<button className={styles['cancel-btn']} onClick={onCancel}>
-							Назад
-						</button>
-						<button className={cn(styles['save-btn'])}
-							onClick={() => {
-								const parsedText = parseText(text);
-								onSave ? onSave(parsedText) : onSaveWithHeader ? onSaveWithHeader(parsedText, changedHeader) : '';
-							}}
-						><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
-					</div>
+				</div>
+				<div className={cn(styles['buttons-line'], styles['controls'])}>
+					<button className={styles['cancel-btn']} onClick={onCancel}>
+						Назад
+					</button>
+					<button className={cn(styles['save-btn'])}
+						onClick={() => {
+							const parsedText = parseText(text);
+							onSave ? onSave(parsedText) : onSaveWithHeader ? onSaveWithHeader(parsedText, changedHeader) : '';
+						}}
+					><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 				</div>
 			</div>
 		</div>

@@ -14,7 +14,7 @@ import { WeaponAttributes } from '../../WeaponAttributes/WeaponAttributes';
 import cn from 'classnames';
 
 interface WeaponPopupProps {
-	onChangeChar: () => void, 
+	onChangeChar: (popupText?: string, popupHeader?: string) => void, 
 	player: Character,
 	reset: ()=>void,
 	editWeapon?: Weapon
@@ -60,7 +60,7 @@ export function WeaponPopup({onChangeChar, player, reset, editWeapon}: WeaponPop
 		} else {
 			dispatch(charActions.addWeapon({id: player.id, value: weaponObj}));
 		}
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(editWeapon ? savedWName : savedWName, editWeapon ? 'Изменено оружие:' : 'Добавлено оружие:');
 		reset();
 	};
 
@@ -236,6 +236,7 @@ export function WeaponPopup({onChangeChar, player, reset, editWeapon}: WeaponPop
 				type='text' 
 				className={cn(styles['weapon-input'], styles['big-input'])} 
 				value={savedWName} 
+				id='change-name'
 				placeholder='Название' 
 				onChange={(e)=>setSavedWName(e.target.value)}/>
 
@@ -243,6 +244,7 @@ export function WeaponPopup({onChangeChar, player, reset, editWeapon}: WeaponPop
 				<div className={styles['weapon-list']}>
 					<input 
 						list='stats' 
+						name='change-stat'
 						className={styles['list-stats-input']} 
 						value={savedWScaleStat} 
 						onChange={(e)=>setSavedWScaleStat(e.target.value)} 

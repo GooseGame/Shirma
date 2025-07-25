@@ -32,7 +32,7 @@ export function Attacks({player, setDiceRoll, onChangeChar}: TabsProps) {
 
 	const onClickDelete = (item: Weapon) => {
 		dispatch(charActions.deleteWeapon({id: player.id, value: item.id}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(item.name,'Удалено оружие');
 	};
 
 	return <>

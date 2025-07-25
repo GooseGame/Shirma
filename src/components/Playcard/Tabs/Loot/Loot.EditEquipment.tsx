@@ -12,7 +12,7 @@ import { Equipment } from '../../Equipment/Equipment';
 
 interface EditEquipmentElemProps {
 	player: Character,
-	onChangeChar: (()=>void) | undefined,
+	onChangeChar: ((popupText?: string, popupHeader?: string)=>void) | undefined,
 	type: 'equipment'|'treasure'|'quest',
 	onClickAddEdit: (
 		item: EquipmentItem, 
@@ -35,7 +35,7 @@ export function EditEquipmentElem({player, onChangeChar, type, onClickAddEdit}:E
 
 	const handleClickDelete = (el: EquipmentItem, type: 'equipment'|'treasure'|'quest') => {
 		dispatch(charActions.deleteEquipmentItem({id: player.id, name: el.name, type}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(el.name,'Удалена экипировка:');
 	};
 
 	const newElem: EquipmentItem = {
@@ -66,7 +66,7 @@ export function EditEquipmentElem({player, onChangeChar, type, onClickAddEdit}:E
 
 interface EditEquipmentPopupProps {
 	player: Character,
-	onChangeChar: (()=>void) | undefined,
+	onChangeChar: ((popupText?: string, popupHeader?: string)=>void) | undefined,
 	type: 'equipment'|'treasure'|'quest',
 	equipment: EquipmentItem,
 	action: 'addEquipmentItem'|'editEquipmentItem',
@@ -92,7 +92,7 @@ export function EditEquipmentPopup({player, onChangeChar, type, equipment, actio
 			oldName: equipment.name,
 			type
 		}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(savedEqName === '' ? equipment.name : savedEqName,'Добавлена экипировка:');
 		reset();
 	};
 	

@@ -7,6 +7,6 @@ export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
     character: Character;
     setDiceRoll?: React.Dispatch<React.SetStateAction<Damage[]| DiceCheck[]>>;
     setEditText?: React.Dispatch<React.SetStateAction<Text|undefined>>;
-    onChangeChar?: ()=>void;
+    onChangeChar?: (popupText?: string, popupHeader?: string)=>void;
     setPopup?: ((popup: PopupProps) => void) | undefined;
 }

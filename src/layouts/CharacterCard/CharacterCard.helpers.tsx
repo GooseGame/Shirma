@@ -144,7 +144,7 @@ interface AlignmentEditProps {
 	coordinates:			{x: number, y: number}
 }
 export function getAlignmentEditChildren({coordinateRectRef, setIsHovering, onClickCoordinateRect, onSaveAlignment, coordinates}: AlignmentEditProps) {
-	return <>
+	return <div className={styles['content-alignment']}>
 		<div className={styles['coordinates']} ref={coordinateRectRef} onClick={onClickCoordinateRect} onMouseEnter={()=>setIsHovering(true)} onMouseLeave={()=>setIsHovering(false)}>
 			{alignments.map(al => (
 				<div className={styles['alignment']} key={al.shortName}><div className={styles['al-text']}>{al.name}</div></div>
@@ -154,7 +154,7 @@ export function getAlignmentEditChildren({coordinateRectRef, setIsHovering, onCl
 		<div className={styles['save-btn']} onClick={onSaveAlignment}>
 			<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
 		</div>
-	</>;
+	</div>;
 }
 
 interface RaceClassEditProps {

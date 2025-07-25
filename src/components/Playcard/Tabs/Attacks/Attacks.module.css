@@ -40,6 +40,13 @@
 	width: 70%;
 }
 
+@media screen and (max-width: 650px) {
+	.edit-weapon-wrapper {
+		width: 100%;
+	}
+	
+}
+
 .presets-opened {
 	display: flex;
 	flex-direction: row;
@@ -246,6 +253,21 @@
 	align-items: center;
 }
 
+@media screen and (max-width: 650px) {
+	.weapon-info-line {
+		flex-wrap: wrap;
+	}
+	.damage {
+		flex-wrap: wrap;
+	}
+	.preset-wrapper {
+		width: 100%;
+	}
+	.presets-opened {
+		max-height: calc(100vh - 100px);
+	}
+}
+
 .weapon-info-right {
 	display: flex;
 	flex-direction: row;
@@ -396,6 +418,6 @@
     align-items: center;
 
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
 }

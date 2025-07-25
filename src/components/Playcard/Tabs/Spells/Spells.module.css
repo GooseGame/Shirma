@@ -438,6 +438,45 @@
 	overflow-y: scroll;
 }
 
+.save-btn {
+    background-color: var(--primary-green);
+    color: var(--text-light-color);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.save-btn:hover {
+    background-color: var(--darker-green);
+    box-shadow: none;
+}
+
+.save-img {
+    transform: rotate(90deg);
+    width: 25px;
+    height: 25px;
+}
+
+@media screen and (max-width: 650px) {
+	.edit-spell-popup-wrapper {
+		width: 100%;
+	}
+	.edit-spell-line {
+		flex-wrap: wrap;
+	}
+}
+
 @media screen and (max-width: 1000px) {
 	.big-cells-sticker {
 		max-width: 70% !important;

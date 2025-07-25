@@ -24,7 +24,7 @@ export interface EditSpellPopupProps extends HTMLAttributes<HTMLDivElement> {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>, 
 	spell?: Spell, 
 	chosenLevel?: number,
-	onChangeChar?: (() => void)
+	onChangeChar?: ((popupText?: string, popupHeader?: string) => void)
 }
 
 export function EditSpellPopup({character, setIsOpen, spell, chosenLevel, onChangeChar}: EditSpellPopupProps) {
@@ -72,7 +72,7 @@ export function EditSpellPopup({character, setIsOpen, spell, chosenLevel, onChan
 		if (spell) {
 			dispatch(charActions.deleteSpell({id: character.id, value: id}));
 			setIsOpen(false);
-			if (onChangeChar) onChangeChar();
+			if (onChangeChar) onChangeChar(spell.name,'Удалено заклинание:');
 		}
 	};
 
@@ -103,7 +103,7 @@ export function EditSpellPopup({character, setIsOpen, spell, chosenLevel, onChan
 			dispatch(charActions.addSpell({id: character.id, value: spellObj}));
 		}
 		setIsOpen(false);
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(spell ? spell.name : spellObj.name, spell ? 'Изменено заклинание:' : 'Добавлено заклинание:');
 	};
 
 	const getDmgPreset = () => { 

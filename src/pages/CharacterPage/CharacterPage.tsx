@@ -14,6 +14,7 @@ import { charActions } from '../../store/slices/Characters.slice';
 import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 import styles from './CharacterPage.module.css';
+import { randomHash } from '../../helpers/random';
 
 export function CharacterPage() {
 	const navigate = useNavigate();
@@ -23,11 +24,6 @@ export function CharacterPage() {
 	const [popups, setPopups] = useState<PopupProps[]>([]);
 	const [changedCharacterCounter, setChangedCharacterCounter] = useState(0);
 	const dispatch = useDispatch<AppDispatch>();
-
-	const onChangeChar = (()=>{
-		console.log(changedCharacterCounter);
-		setChangedCharacterCounter(changedCharacterCounter+1);
-	});
 
 	useEffect(()=>{
 		if (!character) {
@@ -47,6 +43,18 @@ export function CharacterPage() {
 	const clearPopups = () => {
 		setPopups([]);
 	};
+
+	const onChangeChar = ((popupText?: string, popupHeader?: string)=>{
+		setChangedCharacterCounter(changedCharacterCounter+1);
+		if (popupText && popupHeader) {
+			addPopup({
+				popupid: randomHash(),
+				header: popupHeader,
+				text: popupText,
+				isShow: true
+			});
+		}
+	});
 
 	const [rollBoxProps, setRollboxProps] = useState<Damage[]|DiceCheck[]>([]);
 	useEffect(()=>{

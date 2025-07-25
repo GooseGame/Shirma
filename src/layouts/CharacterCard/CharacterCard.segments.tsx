@@ -33,6 +33,7 @@ export const getSegmentName = (key: string) => {
 
 interface GetSegmentsProps {
 	character: Character,
+	setPopupByStrings: (text: string, header: string)=>void,
 	savedRaceClassObj: {
 		savedRace: string,
 		setSavedRace: React.Dispatch<React.SetStateAction<string>>,
@@ -107,6 +108,7 @@ interface GetSegmentsProps {
 export const getSegments = (
 	{
 		character, 
+		setPopupByStrings,
 		savedRaceClassObj, 
 		onSaveCharName, 
 		handleClickAlignment, 
@@ -178,9 +180,10 @@ export const getSegments = (
 							<EditCalcPopupExp 
 								header={character.info.name + ', ' + character.info.level + ' уровень'}
 								onCancel={expHandler.onCancelExpPopup}
+								setPopup={setPopupByStrings}
 								onSave={expHandler.handleSaveExp}
 								onLVLUp={expHandler.handleSaveLvl}
-								color='green'
+								color='darker-green'
 								currExpInfo={{level: character.info.level, exp: character.info.exp}}
 								setLvl={expHandler.setLvl}
 								mode='exp'>
@@ -277,7 +280,8 @@ export const getSegments = (
 							changeMaxHP={healthHandler.changeMaxHP}
 							changeHPDice={healthHandler.changeHPDice}
 							onCancel={()=>healthHandler.setShowHealthPopup(false)}
-							color='red'
+							setPopup={setPopupByStrings}
+							color='darker-red'
 							changeHealth={healthHandler.changeHealth}
 							onClickStabilize={healthHandler.onClickStabilize}
 							setDiceRoll={setDiceRoll}
@@ -349,6 +353,7 @@ export const getSegments = (
 					<EditCalcPopupCoins 
 						header='Посчитать мелочь'
 						onCancel={coinsHandler.onCancelCoinsPopup}
+						setPopup={setPopupByStrings}
 						onSaveCoins={coinsHandler.handleSaveCoins}
 						color='darker-brown'
 						mode='coins'>

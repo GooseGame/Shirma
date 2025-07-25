@@ -42,6 +42,35 @@
 	}
 }
 
+.save-btn {
+    background-color: var(--primary-green);
+    color: var(--text-light-color);
+    border: none;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.save-btn.darker-green {
+	background-color: var(--darker-green);
+}
+
+.save-img {
+    transform: rotate(90deg);
+    width: 25px;
+    height: 25px;
+}
+
 .special-coins {
 	display: flex;
 	flex-direction: row;
@@ -395,6 +424,18 @@
     padding-inline: 25px;
     gap: 5px;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 650px) {
+	.exp-wrapper {
+		padding-inline: 10px;
+	}
+}
+
+@media screen and (min-width: 651px) {
+	.fake-save {
+		right: 25px;
+	}
 }
 
 .result-text {

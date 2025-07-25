@@ -8,7 +8,7 @@ import cn from 'classnames';
 import { EditCustomPopup } from '../../../EditCustomPopup/EditCustomPopup';
 
 interface EditStatProps {
-	onChangeChar: () => void, 
+	onChangeChar: (popupText?: string, popupHeader?: string) => void, 
 	id: string, 
 	proficiency: number, 
 	statClicked?: Stat,
@@ -51,7 +51,7 @@ export function EditStat({onChangeChar, id, proficiency, statClicked, onCancel}:
 
 	const onSaveStat = (stat: Stat) => {
 		dispatch(charActions.editStat({id, value: stat}));
-		onChangeChar();
+		onChangeChar(`(${stat.name})`,'Изменена характеристика:');
 	};
 
 	const onChangeStatScore = (score: number) => {

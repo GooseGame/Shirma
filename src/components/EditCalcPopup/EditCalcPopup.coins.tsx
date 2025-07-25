@@ -137,5 +137,8 @@ export function EditCalcPopupCoins({header, onCancel, color, onSaveCoins}: EditC
 				</div>
 			</div>
 		</div>
+		<button className={cn(styles['save-btn'])}
+			onClick={onCancel}
+		><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 	</EditCustomPopup>;
 }

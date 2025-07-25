@@ -346,6 +346,9 @@ export function Spells({player, setDiceRoll, onChangeChar}: TabsProps) {
 						/>}
 					</div>}
 				</div>}
+				<div className={cn(styles['save-btn'])} onClick={onCancelChangeExtraCells}>
+					<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
+				</div>
 			</EditCustomPopup>}
 		<div className={styles['scrollable']}>
 			{getSpellInfoSticker(

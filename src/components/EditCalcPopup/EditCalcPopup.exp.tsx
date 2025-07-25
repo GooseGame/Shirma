@@ -18,7 +18,7 @@ interface EditCalcPopupCoinsProps extends EditCalcPopupProps {
 	setLvl: (level: number) => void
 }
 
-export function EditCalcPopupExp({header, onCancel, color, currExpInfo, onSave, onLVLUp}: EditCalcPopupCoinsProps) {
+export function EditCalcPopupExp({header, onCancel, setPopup, color, currExpInfo, onSave, onLVLUp}: EditCalcPopupCoinsProps) {
 	const [inputValue, setInputValue] = useState('');
 	const [tempResult, setTempResult] = useState(0);
 
@@ -28,6 +28,13 @@ export function EditCalcPopupExp({header, onCancel, color, currExpInfo, onSave, 
 		} else {
 			return (xpToNextLVL && currExpInfo.exp + tempResult > 0) ? Math.round((currExpInfo.exp + tempResult) / xpToNextLVL * 100) : 0;
 		}
+	};
+
+	const onLVLUpAction = (isLVLUp: boolean) => {
+		if (isLVLUp && currExpInfo.level+1 > 20) return;
+		if (!isLVLUp && currExpInfo.level-1 > 0) return;
+		setPopup(currExpInfo.level + ' -> ' + (isLVLUp ? currExpInfo.level+1 : currExpInfo.level - 1), isLVLUp ? 'Повышение уровня:' : 'Понижение уровня:');
+		onLVLUp(isLVLUp);
 	};
 	
 	const xpToNextLVL = thatLevelLowBorder(currExpInfo.level+1);
@@ -150,19 +157,22 @@ export function EditCalcPopupExp({header, onCancel, color, currExpInfo, onSave, 
 				<div className={styles['button-extended']}>
 					<CalcButton 
 						buttonCN={styles['button-lvl-up']}
-						onClickAction={()=>onLVLUp(true)} 
+						onClickAction={()=>onLVLUpAction(true)} 
 						width={1}>
 						<div className={cn(styles['button-content'], currExpInfo.level === 20 ? styles['invisible'] : '')}>{'>>'}</div>
 					</CalcButton>
 					<div className={styles['button-label']}>LVL</div>
 					<CalcButton 
 						buttonCN={styles['button-lvl-down']}
-						onClickAction={()=>onLVLUp(false)} 
+						onClickAction={()=>onLVLUpAction(false)} 
 						width={1}>
 						<div className={cn(styles['button-content'], currExpInfo.level === 1 ? styles['invisible'] : '')}>{'>>'}</div>
 					</CalcButton>
 				</div>
 			</div>
 		</div>
+		<button className={cn(styles['save-btn'], styles['fake-save'])}
+			onClick={onCancel}
+		><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 	</EditCustomPopup>;
 }

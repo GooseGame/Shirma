@@ -32,7 +32,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	}
 	const onSaveCharName = (text: string) => {
 		dispatch(charActions.editName({id: character.id, name: text}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(text,'Изменено имя персонажа:');
 	};
 	const navigate = useNavigate();
 	const addQueryParam = (key: string, value: string) => {
@@ -61,6 +61,14 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		setShowAvaPopup(false);
 	};
 
+	const setPopupByStrings = (text: string, header: string) => {
+		if (setPopup) setPopup({
+			popupid: randomHash(),
+			header,
+			text,
+			isShow: true
+		});
+	};
 	const onSaveRaceClassSubclass = (race: string, className: string, subclass?: string) => {
 		const changes = [];
 		if (character.info.race !== race) changes.push(`Раса: ${character.info.race} - ${race}`);
@@ -218,7 +226,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	const handleSaveIniPopup = () => {
 		if (savedIni > -99 && savedIni < 99) {
 			dispatch(charActions.changeIniciative({id: character.id, value: savedIni}));
-			if (onChangeChar) onChangeChar();
+			if (onChangeChar) onChangeChar('новое значение - '+savedIni,'Изменена инциатива:');
 			setIsShowIniPopup(false);
 		}
 	};
@@ -240,7 +248,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		} else {
 			dispatch(charActions.addCoins({id: character.id, coinType, value}));
 		}
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(value > 0 ? value+' '+coinType : -1*value+' '+coinType,value > 0 ? 'Заработал денег:' : 'Потратил деньги:');
 	};
 	const onCancelCoinsPopup = () => {
 		setShowCoinsPopup(false);
@@ -342,6 +350,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	const segmentsData = getSegments(
 		{
 			character, 
+			setPopupByStrings,
 			savedRaceClassObj, 
 			onSaveCharName, 
 			handleClickAlignment, 

@@ -7,7 +7,7 @@ import { AppDispatch } from '../../../../store/store';
 import { EditCustomPopup } from '../../../EditCustomPopup/EditCustomPopup';
 
 interface EditSkillProps {
-	onChangeChar: () => void, 
+	onChangeChar: (popupText?: string, popupHeader?: string) => void, 
 	id: string, 
 	proficiency: number, 
 	skillClicked?: Skill,
@@ -46,7 +46,7 @@ export function EditSkill({onChangeChar, id, proficiency, skillClicked, onCancel
 			statName,
 			skill
 		}}));
-		onChangeChar();
+		onChangeChar(`(${skill.name})`,'Изменён навык:');
 	};
 
 	const onChangeBonus = (bonus: number) => {
@@ -55,7 +55,7 @@ export function EditSkill({onChangeChar, id, proficiency, skillClicked, onCancel
 
 	const handleSaveSkill = () => {
 		const bonus = (Number.isNaN(savedSkillBonus) || savedSkillBonus === 0) ? undefined : savedSkillBonus;
-		if (skillClicked && savedSkillName && savedSkillProf) {
+		if (skillClicked && savedSkillName && savedSkillProf !== undefined) {
 			onSaveSkill({
 				name: savedSkillName,
 				modifier: statMod+Math.round(proficiency*skillClicked.profLevel)+(savedSkillBonus?savedSkillBonus:0),

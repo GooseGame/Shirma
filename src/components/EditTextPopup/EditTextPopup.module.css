@@ -2,7 +2,7 @@
 	position: relative;
     z-index: 1000;
     width: 602px;
-    max-height: 600px;
+    gap: 10px;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -31,7 +31,7 @@
     }
 
     .wrapper .textarea {
-        min-height: 60%;
+        height: 100%
     }
     .wrapper .lines {
         flex-wrap: wrap;
@@ -40,6 +40,13 @@
     .save-btn {
         margin-left: auto;
     }
+    .content-wrapper {
+        height: 100%;
+    }
+}
+
+.controls {
+    width: 100%;
 }
 
 .scrollable {
@@ -113,6 +120,7 @@
     -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+    margin-left: auto;
 }
 
 .cancel-btn {
@@ -229,6 +237,14 @@
 
 .red {
     background-color: var(--primary-red);
+}
+
+.darker-red {
+    background-color: var(--darker-red);
+}
+
+.darker-green {
+    background-color: var(--darker-green);
 }
 
 .yellow {

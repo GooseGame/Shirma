@@ -30,7 +30,7 @@ interface EditCalcPopupHealthProps extends EditCalcPopupProps {
 	changeHPDice: (value: number) => void,
 }
 
-export function EditCalcPopupHealth({header, onCancel, color, changeHealth, onClickStabilize, currHealthInfo, setDiceRoll, changeMaxHP, changeHPDice}: EditCalcPopupHealthProps) {
+export function EditCalcPopupHealth({header, onCancel, setPopup, color, changeHealth, onClickStabilize, currHealthInfo, setDiceRoll, changeMaxHP, changeHPDice}: EditCalcPopupHealthProps) {
 	const [inputValue, setInputValue] = useState('');
 	const [tempResult, setTempResult] = useState(0);
 	const [isSettingsOpened, setSettingsOpened] = useState(false);
@@ -108,12 +108,16 @@ export function EditCalcPopupHealth({header, onCancel, color, changeHealth, onCl
 		const intVal = parseInt(value);
 		if (intVal > 0 && intVal < 999) {
 			setMaxHp(intVal);
+			if (Math.abs(intVal - currHealthInfo.max) !== 1) {
+				setPopup(currHealthInfo.max + ' -> '+intVal,'Изменено максимальное здоровье:');
+			}
 		}
 	};
 
 	const onChangeHPDice = (value: string) => {
 		const intVal = parseInt(value);
 		setHpDiceEdge(intVal);
+		setPopup(currHealthInfo.hpDiceEdge + ' -> '+intVal,'Изменена кость хитов:');
 	};
 
 	return <EditCustomPopup 
@@ -410,5 +414,8 @@ export function EditCalcPopupHealth({header, onCancel, color, changeHealth, onCl
 				}
 			</div>
 		</div>
+		<button className={cn(styles['save-btn'], styles['fake-save'])}
+			onClick={onCancel}
+		><img src='/more-white.svg' alt='save' className={styles['save-img']}/></button>
 	</EditCustomPopup>;
 }

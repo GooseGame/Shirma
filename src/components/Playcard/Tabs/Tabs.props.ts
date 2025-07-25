@@ -5,5 +5,5 @@ import { Damage, DiceCheck } from '../../../interfaces/Equipment.interface';
 export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
     player: Character;
     setDiceRoll?: React.Dispatch<React.SetStateAction<Damage[]| DiceCheck[]>>;
-    onChangeChar?: () => void;
+    onChangeChar?: (popupText?: string, popupHeader?: string) => void;
 }

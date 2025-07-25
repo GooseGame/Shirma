@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 interface EditPossessionProps {
   player: Character;
-  onChangeChar: (() => void) | undefined;
+  onChangeChar: ((popupText?: string, popupHeader?: string) => void) | undefined;
   reset: () => void;
 }
 

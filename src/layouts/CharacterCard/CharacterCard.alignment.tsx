@@ -11,7 +11,7 @@ import cn from 'classnames';
 
 interface EditAlignmentProps {
 	character: Character,
-	onChangeChar: (() => void) | undefined,
+	onChangeChar: ((popupText?: string, popupHeader?: string) => void) | undefined,
 	setAlignmentClicked: React.Dispatch<React.SetStateAction<boolean>>
 }
 export function EditAlignment({character, onChangeChar, setAlignmentClicked}: EditAlignmentProps) {
@@ -58,7 +58,7 @@ export function EditAlignment({character, onChangeChar, setAlignmentClicked}: Ed
 				y: savedY
 			}
 		}}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(`${alignment} (x:${savedX}, y:${savedY})`,'Изменено мировоззрение:');
 		setAlignmentClicked(false);
 	};
 

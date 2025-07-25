@@ -52,8 +52,13 @@ export function EditCustomPopup({children, header, wrapperCN, onCancel, onDelete
 				<img src='/x.svg' alt='delete' className={cn(styles['delete-img'], isConfirmDelete?styles['interactive']:'')} onClick={handleConfirmFalse}/>
 				{isConfirmDelete && <img onClick={handleConfirmTrue} src='/more-white.svg' className={cn(isConfirmDelete?styles['interactive']:'', styles['save-img'])} alt='confirm'/> }
 			</button>}
-			<div className={styles['content-wrapper']}>
+			<div className={popupStyles['content-wrapper']}>
 				{children}
+			</div>
+			<div className={cn(popupStyles['buttons-line'], popupStyles['controls'])}>
+				<button className={popupStyles['cancel-btn']} onClick={onCancel}>
+					Назад
+				</button>
 			</div>
 		</div>
 	</div>;
