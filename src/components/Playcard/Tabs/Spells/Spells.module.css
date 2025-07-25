@@ -475,6 +475,9 @@
 	.edit-spell-line {
 		flex-wrap: wrap;
 	}
+	.scrollable {
+		width: unset;
+	}
 }
 
 @media screen and (max-width: 1000px) {
