@@ -19,9 +19,9 @@
     width: 500px;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 600px) {
     .edit-poss-wrapper {
-        width: calc(100% - 30px);
+        width: 100%;
     }
 }
 
