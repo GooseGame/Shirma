@@ -20,6 +20,7 @@
   --spells-blue: #254370;
   --spells-darker-blue: #1c3254;
   --darker-blue: #1E3D4C;
+  --toastify-toast-width: 400px;
 }
 
 body {
@@ -45,4 +46,47 @@ body {
   -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--default {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--warning {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid var(--primary-yellow);
+}
+
+.Toastify__toast--error {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid var(--primary-red);
+}
+
+.Toastify__toast-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.Toastify__toast-icon img {
+  width: 100%;
+}
+
+.Toastify__toast--default .Toastify__progress-bar {
+  background: var(--darker-brown);
+}
+
+.Toastify__toast--default .Toastify__progress-bar--bg {
+    background: var(--darker-brown);
 }

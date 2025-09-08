@@ -6,4 +6,5 @@ export interface MiniCardProps extends HTMLAttributes<HTMLDivElement> {
     deleteAction?: (id: string)=>void;
     cloneAction?: (char: Character) => void;
     onClickAction?: (char: Character) => void;
+    usaved?: boolean;
 }

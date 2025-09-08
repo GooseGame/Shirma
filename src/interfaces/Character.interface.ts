@@ -139,17 +139,18 @@ export interface CellsByLevel {
 }
 
 export interface Character {
-    id:             string,
-    avatar:         string,
-    info:           Info,
-    stats:          Stat[],
-    proficiency:    number,
+    id:                     string,
+    lastUpdatedTimestamp?:  number;
+    avatar:                 string,
+    info:                   Info,
+    stats:                  Stat[],
+    proficiency:            number,
     backpack: {
-        equipment:  EquipmentItem[],
-        treasure:   EquipmentItem[],
-        quest:      EquipmentItem[],
-        coins:      Coins,
-        weapons:    Weapon[],
+        equipment:          EquipmentItem[],
+        treasure:           EquipmentItem[],
+        quest:              EquipmentItem[],
+        coins:              Coins,
+        weapons:            Weapon[],
     },
     condition:      Condition,
     spells:         CharacterSpells 
@@ -172,4 +173,21 @@ export interface Keyword {
     id: number,
     name: string,
     hint: string
+}
+
+export interface CharactersResponse {
+    characters: Character[],
+    lastUpdateTimestamp?: number
+}
+
+export interface CountResponse {
+    count: number
+}
+
+export interface PresetsResponse {
+    presets: PresetCharacter[]
+}
+
+export interface TimestampResponse {
+    lastUpdated: number;
 }

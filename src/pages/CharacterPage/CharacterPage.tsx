@@ -15,6 +15,13 @@ import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 import styles from './CharacterPage.module.css';
 import { randomHash } from '../../helpers/random';
+import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
+import { ToastNotifications } from '../../components/ToastNotifications/ToastNotifications';
+import { toast } from 'react-toastify';
+import { defaultToast, errorToast, warningToast } from '../../helpers/toastOptions';
+import { DefaultToast } from '../../components/ToastNotificationItem/DefaultToast/DefaultToast';
+import { WarningToast } from '../../components/ToastNotificationItem/WarningToast/WarningToast';
+import { ErrorToast } from '../../components/ToastNotificationItem/ErrorToast/ErrorToast';
 
 export function CharacterPage() {
 	const navigate = useNavigate();
@@ -36,6 +43,25 @@ export function CharacterPage() {
 	
 	const addPopup = (popup: PopupProps) => {
 		setPopups([...popups, popup]);
+		// toast(<DefaultToast header={popup.header} text={popup.text}/>, defaultToast);
+		// toast(
+		// 	<WarningToast 
+		// 		header={popup.header} 
+		// 		text={popup.text} 
+		// 		onClickButton={
+		// 			<button onClick={()=>console.log('click')}>Понятно</button>
+		// 		}
+		// 	/>, warningToast
+		// );
+		// toast(
+		// 	<ErrorToast 
+		// 		header={popup.header} 
+		// 		text={popup.text} 
+		// 		onClickButton={
+		// 			<button onClick={()=>console.log('click')}>Понятно</button>
+		// 		}
+		// 	/>, errorToast
+		// );
 	};
 	const removePopup = (id: string) => {
 		setPopups(popups.filter(el => el.popupid !== id));
@@ -46,13 +72,17 @@ export function CharacterPage() {
 
 	const onChangeChar = ((popupText?: string, popupHeader?: string)=>{
 		setChangedCharacterCounter(changedCharacterCounter+1);
+		// if (popupText && popupHeader) {
+		// 	addPopup({
+		// 		popupid: randomHash(),
+		// 		header: popupHeader,
+		// 		text: popupText,
+		// 		isShow: true
+		// 	});
+		// }
 		if (popupText && popupHeader) {
-			addPopup({
-				popupid: randomHash(),
-				header: popupHeader,
-				text: popupText,
-				isShow: true
-			});
+			console.log('toast');
+			
 		}
 	});
 
@@ -66,15 +96,16 @@ export function CharacterPage() {
 	},[rollBoxProps]);
 
 	return (
-		<>
+		<RequireAuth>
 			<Header/>
 			<div className={styles['container']}>
+				<ToastNotifications/>
 				<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
 				{character && <CharacterCard setPopup={addPopup} character={character} setDiceRoll={setRollboxProps} onChangeChar={onChangeChar}/>}
 			</div>
 			<MenuMobile/>
 			<RollBox dicesSent={rollBoxProps} setPopup={addPopup}/>
 			<BanSmallScreens/>
-		</>
+		</RequireAuth>
 	);
 }

@@ -18,6 +18,7 @@ import { getKeywordById, keywords } from '../../helpers/attributes';
 import { Eye } from '../../components/Eye/Eye';
 import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
+import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
 
 export function Presets() {
 	const [presets, setPresets] = useState(loadState<PresetState>(PRESETS_KEY));
@@ -72,7 +73,7 @@ export function Presets() {
 		navigate('/character/'+character.id);
 	};
 
-	return <>
+	return <RequireAuth>
 		<Header/>
 		<div className={styles['head-area']}>
 			<h1 className={styles['header']}>Выбери из пресетов или создай своего</h1>
@@ -122,5 +123,5 @@ export function Presets() {
 		</div>
 		<MenuMobile/>
 		<BanSmallScreens/>
-	</>;
+	</RequireAuth>;
 }

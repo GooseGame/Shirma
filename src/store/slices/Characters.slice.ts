@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { associativeCells, Character, Dice, Skill, Stat } from '../../interfaces/Character.interface';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { associativeCells, Character, CharactersResponse, CountResponse, Dice, Skill, Stat, TimestampResponse } from '../../interfaces/Character.interface';
 import {Text} from '../../interfaces/Text.interface';
 import { loadState } from '../storage';
 import { randomHash } from '../../helpers/random';
@@ -7,25 +7,116 @@ import { EquipmentItem, Weapon } from '../../interfaces/Equipment.interface';
 import { getGoldEquivalent, removeCoins } from '../../helpers/coins';
 import { nextLevelExpCap, thatLevelLowBorder } from '../../helpers/experience';
 import { Spell } from '../../interfaces/spells.interface';
+import axios, { AxiosError } from 'axios';
+import { server } from './User.slice';
+import { RootState } from '../store';
 
 export const CHAR_KEY = 'characters';
 
 export interface CharState {
-	characters: Character[]
+	characters: Character[],
+	errMessage?: string,
+	charactersLoaded: boolean,
+	needToUpdate: boolean,
+	lastUpdateTimestamp?: number
 }
 
 export interface CharPersistentState {
-    characters: Character[]|null
+    characters: Character[]|null,
+	charactersLoaded: boolean,
+	needToUpdate: boolean
 }
 
 const initialState: CharState = {
-	characters: loadState<CharPersistentState>(CHAR_KEY)?.characters ?? []
+	characters: loadState<CharPersistentState>(CHAR_KEY)?.characters ?? [],
+	charactersLoaded: loadState<CharPersistentState>(CHAR_KEY)?.characters ? true : false,
+	needToUpdate: true
 };
+
+export const load = createAsyncThunk<CharactersResponse, void, {state: RootState}>('characters/load', 
+	async (_, thunkApi) => {
+		const accessToken = thunkApi.getState().user.users.accessToken;
+		const { data } = await axios.get<CharactersResponse>(`${server}/characters/get`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`
+			}
+		});
+		return data;
+	}
+);
+
+export const count = createAsyncThunk<CountResponse, void, {state: RootState}>('characters/count', 
+	async (_, thunkApi) => {
+		const accessToken = thunkApi.getState().user.users.accessToken;
+		const { data } = await axios.get<CountResponse>(`${server}/characters/count`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`
+			}
+		});
+		return data;
+	}
+);
+
+export const timestamp = createAsyncThunk<TimestampResponse, void, {state: RootState}>('characters/timestamp', 
+	async (_, thunkApi) => {
+		const accessToken = thunkApi.getState().user.users.accessToken;
+		const { data } = await axios.get<TimestampResponse>(`${server}/characters/lastUpdated`, {
+			headers: {
+				Authorization: `Bearer ${accessToken}`
+			}
+		});
+		return data;
+	}
+);
+
+export const deleteChar = createAsyncThunk('characters/deleteChar', 
+	async (params: {charId: string, accessToken: string}) => {
+		try {
+			const { data } = await axios.post<{success: boolean}>(`${server}/characters/delete`, {
+				id: params.charId
+			}, {
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${params.accessToken}`
+				}
+			});
+			return data;
+		} catch(e) {
+			if (e instanceof AxiosError) {
+				throw new Error(e.response?.data.message);
+			}
+		}
+	}
+);
+
+export const save = createAsyncThunk('characters/save', 
+	async (params: {character: Character, accessToken: string, timestamp: number}) => {
+		try {
+			const { data } = await axios.post<{success: boolean}>(`${server}/characters/save`, {
+				character: params.character,
+				timestamp: params.timestamp
+			}, {
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${params.accessToken}`
+				}
+			});
+			return data;
+		} catch(e) {
+			if (e instanceof AxiosError) {
+				throw new Error(e.response?.data.message);
+			}
+		}
+	}
+);
 
 export const charsSlice = createSlice({
 	name: 'characters',
 	initialState,
 	reducers: {
+		clearErr: (state) => {
+			state.errMessage = undefined;
+		},
 		add: (state, action: PayloadAction<Character>) => {
 			const idInCharList = state.characters.find(i => i.id === action.payload.id);
 			if (!idInCharList) {
@@ -786,6 +877,46 @@ export const charsSlice = createSlice({
 				};
 			});
 		}
+	},
+	extraReducers: (builder) => {
+		builder.addCase(load.fulfilled, (state, action) => {
+			state.characters = action.payload.characters;
+			state.charactersLoaded = true;
+			state.needToUpdate = false;
+			state.lastUpdateTimestamp = action.payload.lastUpdateTimestamp;
+		});
+		builder.addCase(load.rejected, (state, action) => {
+			state.characters = [];
+			state.errMessage = action.error.message;
+		});
+		builder.addCase(save.rejected, (state, action) => {
+			state.errMessage = action.error.message;
+		});
+		builder.addCase(save.fulfilled, (state, action) => {
+			state.lastUpdateTimestamp = action.meta.arg.timestamp;
+		});
+		builder.addCase(count.fulfilled, (state, action) => {
+			if (state.characters.length === action.payload.count) {
+				state.needToUpdate = false;
+			} else {
+				state.needToUpdate = true;
+			}
+		});
+		builder.addCase(count.rejected, (state)=> {
+			state.needToUpdate = true;
+		});
+		builder.addCase(timestamp.fulfilled, (state, action) => {
+			if (state.lastUpdateTimestamp !== action.payload.lastUpdated || 
+				!(!state.lastUpdateTimestamp && action.payload.lastUpdated == 0)) {
+				state.needToUpdate = true;
+			} else {
+				state.needToUpdate = false;
+			}
+			state.lastUpdateTimestamp = action.payload.lastUpdated;
+		});
+		builder.addCase(deleteChar.fulfilled, (state, action) => {
+			state.characters = state.characters.filter(char => char.id !== action.meta.arg.charId);
+		});
 	}
 });
 
