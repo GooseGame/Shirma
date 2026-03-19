@@ -5,14 +5,12 @@ import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, profile, userActions } from '../../store/slices/User.slice';
 import { AppDispatch, RootState } from '../../store/store';
-import { PopupProps } from '../../components/Popup/Popup.props';
-import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
-import { randomHash } from '../../helpers/random';
 import { useNavigate } from 'react-router-dom';
+import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
+import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
 
 export function Auth() {
 	const dispatch = useDispatch<AppDispatch>();
-	const [popups, setPopups] = useState<PopupProps[]>([]);
 	const navigate = useNavigate();
 	const isNew = useSelector((s: RootState) => s.user.users.isNew);
 	const loginErrMSG = useSelector((s: RootState) => s.user.users.loginErrorMessage);
@@ -33,26 +31,10 @@ export function Auth() {
 	useEffect(()=>{
 		if (loginErrMSG !== undefined) {
 			setIsLoading(false);
-			addPopup({
-				popupid: randomHash(),
-				header: 'Что-то пошло не так',
-				text: loginErrMSG,
-				isShow: true
-			});
-			console.log(loginErrMSG);
-		}}, [loginErrMSG]);
+			errorToastCall({ header: 'Что-то пошло не так', text: loginErrMSG });
+			dispatch(userActions.clearErrors());
+		}}, [loginErrMSG, dispatch]);
 
-	const addPopup = (popup: PopupProps) => {
-		setPopups([...popups, popup]);
-	};
-	const removePopup = (id: string) => {
-		setPopups(popups.filter(el => el.popupid !== id));
-	};
-	const clearPopups = () => {
-		setPopups([]);
-		dispatch(userActions.clearErrors());
-	};
-	
 	const onSuccessGoogleCallback = (credentialResponse: CredentialResponse) => {
 		console.log(credentialResponse);
 		if (!credentialResponse.credential) {
@@ -64,17 +46,12 @@ export function Auth() {
 			setIsLoading(true);
 		} catch (e) {
 			console.log(e);
-			addPopup({
-				popupid: randomHash(),
-				header: 'Что-то пошло не так',
-				text: 'Попробуй снова',
-				isShow: true
-			});		
+			errorToastCall({ header: 'Что-то пошло не так', text: 'Попробуй снова' });
 		}
 	};
 	const containerRef = useRef<HTMLDivElement>(null);
 	return <div className={styles['container']}>
-		<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
+		<NotificationCenter />
 		<div className={styles['content']} ref={containerRef}>
 			<div className={styles['info']}>
 				<h1 className={styles['shirma']}>Ширма</h1>

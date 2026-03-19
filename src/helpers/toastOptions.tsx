@@ -2,7 +2,6 @@ import { Slide, ToastIcon, ToastOptions } from 'react-toastify';
 
 export const defaultToast: ToastOptions = {
 	type: 'default',
-	position: 'top-right',
 	autoClose: 5000,
 	draggable: true,
 	transition: Slide,
@@ -17,27 +16,26 @@ export const pendingIcon: ToastIcon = <img src='/loader.gif'/>;
 
 export const warningToast: ToastOptions = {
 	type: 'warning',
-	position: 'top-right',
-	autoClose: false,
+	autoClose: 5000,
 	draggable: true,
 	transition: Slide,
 	icon: warningIcon,
-	closeOnClick: false
+	closeOnClick: true,
+	closeButton: true
 };
 
 export const errorToast: ToastOptions = {
 	type: 'error',
-	position: 'top-right',
-	autoClose: false,
+	autoClose: 5000,
 	draggable: true,
 	transition: Slide,
 	icon: errorIcon,
-	closeOnClick: false
+	closeOnClick: true,
+	closeButton: true
 };
 
 export const successToast: ToastOptions = {
-	type: 'error',
-	position: 'top-right',
+	type: 'success',
 	draggable: true,
 	transition: Slide,
 	icon: successIcon,
@@ -49,7 +47,6 @@ export const successToast: ToastOptions = {
 
 export const pendingToast: ToastOptions = {
 	type: 'default',
-	position: 'top-right',
 	draggable: false,
 	transition: Slide,
 	autoClose: false,

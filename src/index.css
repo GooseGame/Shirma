@@ -48,7 +48,7 @@ body {
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
 }
 
-.Toastify__toast--default {
+#root .Toastify__toast--default {
   background-color: var(--background-color);
   color: var(--text-color);
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
@@ -56,7 +56,16 @@ body {
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
 }
 
-.Toastify__toast--warning {
+#root .Toastify__toast--success {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid var(--primary-green);
+}
+
+#root .Toastify__toast--warning {
   background-color: var(--background-color);
   color: var(--text-color);
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
@@ -65,7 +74,7 @@ body {
   border-bottom: 5px solid var(--primary-yellow);
 }
 
-.Toastify__toast--error {
+#root .Toastify__toast--error {
   background-color: var(--background-color);
   color: var(--text-color);
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
@@ -77,6 +86,7 @@ body {
 .Toastify__toast-icon {
   width: 30px;
   height: 30px;
+  margin-right: 14px;
 }
 
 .Toastify__toast-icon img {

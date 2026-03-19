@@ -94,6 +94,7 @@ export const save = createAsyncThunk('characters/save',
 		try {
 			const { data } = await axios.post<{success: boolean}>(`${server}/characters/save`, {
 				character: params.character,
+				charId: params.character.id,
 				timestamp: params.timestamp
 			}, {
 				headers: {

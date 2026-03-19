@@ -502,6 +502,32 @@
     align-items: flex-end;
 }
 
+.actions {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	padding-bottom: 5px;
+}
+
+.saveBtn {
+	background-color: var(--primary-green);
+	color: var(--text-light-color);
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-family: 'Beryozki';
+	font-size: 24px;
+}
+
+.saveBtn:disabled {
+	background-color: var(--text-unable-color);
+	text-decoration: line-through;
+	cursor: default;
+}
+
+.saveBtn:not(:disabled):hover {
+	background-color: var(--darker-green);
+}
+
 .avatar-wrapper {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -652,7 +678,7 @@
 
 .content {
     width: 100%;
-    height: calc(100vh - 220px);
+    height: calc(100vh - 240px);
     padding: 5px;
     box-sizing: border-box;
     display: flex;

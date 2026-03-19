@@ -2,6 +2,8 @@ import { toast } from 'react-toastify';
 import { ErrorToast } from '../../components/ToastNotificationItem/ErrorToast/ErrorToast';
 import { SuccessToast } from '../../components/ToastNotificationItem/SuccessToast/SuccessToast';
 import { pendingToast, successToast, errorToast } from '../toastOptions';
+import { randomHash } from '../../helpers/random';
+import { reportMissedToast } from '../../helpers/toastMissedTracker';
 
 export const useAsyncToast = () => {
 	const showAsyncToast = async <T,>(
@@ -12,7 +14,7 @@ export const useAsyncToast = () => {
       error?: string;
     },
 		options?: {
-      onErrorButtonClick?: React.MouseEventHandler;
+      onErrorButton?: React.ReactNode;
     }
 	): Promise<T> => {
 		const toastId = toast.loading(messages.pending, pendingToast);
@@ -30,21 +32,46 @@ export const useAsyncToast = () => {
 
 			toast.update(toastId, {
 				...successToast,
-				render: <SuccessToast 
-					header="Успешно" 
-					text={messages.success || 'Операция выполнена успешно'} 
-				/>
+				render: (
+					<SuccessToast
+						header="Успешно"
+						text={messages.success || 'Операция выполнена успешно'}
+					/>
+				),
+				onClose: (reason) => {
+					if (reason === true) return;
+					const missedId = randomHash();
+					reportMissedToast({
+						id: missedId,
+						variant: 'success',
+						header: 'Успешно',
+						text: messages.success || 'Операция выполнена успешно'
+					});
+				}
 			});
       
 			return result;
 		} catch (error) {
 			toast.update(toastId, {
 				...errorToast,
-				render: <ErrorToast 
-					header="Ошибка" 
-					text={messages.error || 'Произошла ошибка'} 
-					onClickButton={options?.onErrorButtonClick}
-				/>
+				render: (
+					<ErrorToast
+						header="Ошибка"
+						text={messages.error || 'Произошла ошибка'}
+						onClickButton={options?.onErrorButton}
+					/>
+				),
+				onClose: (reason) => {
+					if (reason === true) return;
+					const missedId = randomHash();
+					reportMissedToast({
+						id: missedId,
+						variant: 'error',
+						header: 'Ошибка',
+						text: messages.error || 'Произошла ошибка',
+						onClickButton: options?.onErrorButton
+					});
+				}
 			});
 			throw error;
 		}

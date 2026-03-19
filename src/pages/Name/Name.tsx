@@ -4,15 +4,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authStyles from './../Auth/Auth.module.css';
 import { name, profile, userActions } from '../../store/slices/User.slice';
-import { PopupProps } from '../../components/Popup/Popup.props';
-import { randomHash } from '../../helpers/random';
 import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
+import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
 import cn from 'classnames';
 import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
 
 export function Name() {
 	const isNew = useSelector((s: RootState) => s.user.users.isNew);
-	const [popups, setPopups] = useState<PopupProps[]>([]);
 	const oldName = useSelector((s: RootState) => s.user.users.name);
 	const [newName, setNewName] = useState(oldName);
 	const profileErr = useSelector((s: RootState) => s.user.users.profileErrorMessage);
@@ -23,7 +21,7 @@ export function Name() {
 
 	useEffect(()=>{
 		dispatch(profile());
-	}, []);
+	}, [dispatch]);
 	useEffect(()=>{
 		setNewName(oldName);
 	}, [oldName]);
@@ -31,36 +29,20 @@ export function Name() {
 	useEffect(()=>{
 		dispatch(userActions.clearErrors());
 		if (!isNew) navigate('/characters');
-	}, [isNew]);
+	}, [dispatch, isNew, navigate]);
 
 	useEffect(()=>{
 		if (profileErr !== undefined) {
-			addPopup({
-				popupid: randomHash(),
-				header: 'Что-то пошло не так',
-				text: profileErr,
-				isShow: true
-			});
-			console.log(profileErr);
+			errorToastCall({ header: 'Что-то пошло не так', text: profileErr });
+			dispatch(userActions.clearErrors());
 		}
-	}, [profileErr]);
+	}, [profileErr, dispatch]);
 
 	useEffect(()=>{
 		if (buttonClicked) {
 			setTimeout(()=>{setButtonClicked(false);}, 500);
 		}
 	}, [buttonClicked]);
-
-	const addPopup = (popup: PopupProps) => {
-		setPopups([...popups, popup]);
-	};
-	const removePopup = (id: string) => {
-		setPopups(popups.filter(el => el.popupid !== id));
-	};
-	const clearPopups = () => {
-		setPopups([]);
-		dispatch(userActions.clearErrors());
-	};
 
 	const validateName = (val: string) => {
 		if (val.length < 32) {
@@ -89,17 +71,12 @@ export function Name() {
 			dispatch(userActions.setOld());
 			navigate('/characters');
 		} catch (error) {
-			addPopup({
-				popupid: randomHash(),
-				header: 'Что-то пошло не так',
-				text: 'не удалось сохранить никнейм',
-				isShow: true
-			});
+			errorToastCall({ header: 'Что-то пошло не так', text: 'не удалось сохранить никнейм' });
 		}
 	};
 
 	return <RequireAuth><div className={authStyles['container']}>
-		<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
+		<NotificationCenter />
 		<div className={authStyles['content']}>
 			<div className={authStyles['info']}>
 				<h1 className={authStyles['shirma']}>Твой никнейм</h1>

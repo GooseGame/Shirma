@@ -1,0 +1,36 @@
+.container {
+	width: 100%;
+	min-height: 100vh;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.actions {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+.saveBtn {
+	background-color: var(--primary-green);
+	color: var(--text-light-color);
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-family: 'Beryozki';
+	font-size: 24px;
+}
+
+.saveBtn:disabled {
+	background-color: var(--text-unable-color);
+	text-decoration: line-through;
+	cursor: default;
+}
+
+.saveBtn:not(:disabled):hover {
+	background-color: var(--darker-green);
+}

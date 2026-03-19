@@ -70,6 +70,29 @@
 	justify-content: center;
 }
 
+.toastify-shell {
+	max-height: calc(100vh - 90px);
+	overflow-y: auto;
+}
+
+.missedToastItem {
+	max-width: 100%;
+	margin-bottom: 0 !important;
+    max-height: 100px;
+}
+
+.toastify-open {
+	top: auto !important;
+	bottom: 5px !important;
+	left: 60px !important;
+}
+
+@media screen and (max-width: 1000px) {
+	.toastify-open {
+		bottom: 70px !important;
+	}
+}
+
 .popups-count {
 	position: absolute;
     right: 0;

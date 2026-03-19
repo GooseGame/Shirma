@@ -10,9 +10,9 @@ import { Attacks } from '../../components/Playcard/Tabs/Attacks/Attacks';
 import { Notes } from '../../components/Playcard/Tabs/Notes/Notes';
 import { Spells } from '../../components/Playcard/Tabs/Spells/Spells';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
-import { charActions } from '../../store/slices/Characters.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { charActions, save } from '../../store/slices/Characters.slice';
 import React from 'react';
 import { getSegmentName, getSegments } from './CharacterCard.segments';
 import { EditAlignment } from './CharacterCard.alignment';
@@ -20,10 +20,17 @@ import { randomDiceValue, randomHash } from '../../helpers/random';
 import { DiceCheck } from '../../interfaces/Equipment.interface';
 import { isValidHttpUrl } from '../../helpers/parser';
 import { HeadSegmentProps } from '../../components/Playcard/HeadSegment/HeadSegment.props';
+import { SquareButton } from '../../components/Button/Button';
+import { pendingToastCall } from '../../components/ToastNotificationItem/PendingToast/PendingToastCall';
+import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
 
 export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: CharacterCardProps) {
 	const defaultChosenSegmentName = 'info';
 	const dispatch = useDispatch<AppDispatch>();
+	const accessToken = useSelector((s: RootState) => s.user.users.accessToken);
+	const characterFromStore = useSelector((s: RootState) =>
+		s.characters.characters.find(ch => ch.id === character.id)
+	);
 	const locationHook = useLocation();
 	const searchParams = new URLSearchParams(locationHook.search);
 	let paramValue = searchParams.get('tab');
@@ -366,6 +373,25 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 			avaHandler
 		});
 
+	const onClickSave = async () => {
+		if (!accessToken) {
+			errorToastCall({ header: 'Ошибка', text: 'Нужно войти в аккаунт, чтобы сохранять персонажей.' });
+			return;
+		}
+		const charToSave = characterFromStore ?? character;
+		const timestamp = Date.now();
+		const pendingPromise = dispatch(save({ character: charToSave, accessToken, timestamp })).unwrap();
+		pendingToastCall({
+			pendingPromise,
+			headerPending: 'Сохранение...',
+			headerSuccess: 'Сохранено',
+			headerError: 'Ошибка',
+			textSuccess: 'Персонаж сохранён.',
+			textError: 'Не удалось сохранить персонажа.'
+		});
+		await pendingPromise;
+	};
+
 	return <div className={styles['card']}>
 		<div className={styles['char-card']}>
 			<div className={cn(styles['header-area'], styles[chosenSegmentName+'-header'])}>
@@ -386,6 +412,16 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 							classNames={styles['groupable']}
 							{...groupable}/>
 					))}
+				</div>
+				<div className={styles['actions']}>
+					<SquareButton
+						isBigShadow={true}
+						classNames={styles['saveBtn']}
+						disabled={!accessToken}
+						onClick={onClickSave}
+					>
+						Сохранить
+					</SquareButton>
 				</div>
 			</div>
 			<div className={cn(styles['content'], styles[chosenSegmentName], styles['scrollable'])}>

@@ -1,8 +1,14 @@
 import { HTMLAttributes } from 'react';
-import { PopupProps } from '../Popup/Popup.props';
 
 export interface NotificationCenterProps extends HTMLAttributes<HTMLDivElement> {
-	popups: PopupProps[],
-	remove: (id: string)=>void,
-	clear: ()=>void
+	/**
+	 * Toastify containerId для управления toasts (dismiss/события).
+	 * По умолчанию совпадает с дефолтным контейнером Toastify.
+	 */
+	containerId?: number | string;
+	/**
+	 * Показывать кнопку "Очистить" (dismiss всех toasts внутри контейнера).
+	 * По умолчанию true.
+	 */
+	showClearButton?: boolean;
 }
