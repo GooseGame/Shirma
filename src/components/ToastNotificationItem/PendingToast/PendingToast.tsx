@@ -48,12 +48,14 @@ export function PendingToast({pendingPromise, headerError, textError, headerPend
 		case 'fulfilled':
 			toast.update(toastId.current, {
 				...successToast,
+				isLoading: false,
 				render: <SuccessToast header={hSuccess} text={tSuccess}/>
 			});
 			break;
 		case 'rejected':
 			toast.update(toastId.current, {
 				...errorToast,
+				isLoading: false,
 				render: <ErrorToast header={hError} text={tError} onClickButton={onClickErrButton}/>
 			});
 			break;

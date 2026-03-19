@@ -32,6 +32,7 @@ export const useAsyncToast = () => {
 
 			toast.update(toastId, {
 				...successToast,
+				isLoading: false,
 				render: (
 					<SuccessToast
 						header="Успешно"
@@ -54,6 +55,7 @@ export const useAsyncToast = () => {
 		} catch (error) {
 			toast.update(toastId, {
 				...errorToast,
+				isLoading: false,
 				render: (
 					<ErrorToast
 						header="Ошибка"

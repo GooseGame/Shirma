@@ -28,6 +28,7 @@ export function pendingToastCall({pendingPromise, headerPending, headerSuccess, 
 			const missedId = randomHash();
 			toast.update(toastId, {
 				...successToast,
+				isLoading: false,
 				render: <SuccessToast header={hSuccess} text={tSuccess} />,
 				onClose: (reason) => {
 					if (reason === true) return;
@@ -43,6 +44,7 @@ export function pendingToastCall({pendingPromise, headerPending, headerSuccess, 
 					: tErrorDefault;
 			toast.update(toastId, {
 				...errorToast,
+				isLoading: false,
 				render: <ErrorToast header={hError} text={errText || tErrorDefault} onClickButton={onClickErrButton} />,
 				onClose: (reason) => {
 					if (reason === true) return;
