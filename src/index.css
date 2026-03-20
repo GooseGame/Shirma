@@ -62,7 +62,6 @@ body {
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
-  border-bottom: 5px solid var(--primary-green);
 }
 
 #root .Toastify__toast--warning {
@@ -71,7 +70,6 @@ body {
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
-  border-bottom: 5px solid var(--primary-yellow);
 }
 
 #root .Toastify__toast--error {
@@ -80,7 +78,6 @@ body {
   -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
-  border-bottom: 5px solid var(--primary-red);
 }
 
 .Toastify__toast-icon {
@@ -99,4 +96,20 @@ body {
 
 .Toastify__toast--default .Toastify__progress-bar--bg {
     background: var(--darker-brown);
+}
+
+.Toastify__toast--success .Toastify__progress-bar {
+  background: var(--darker-green);
+}
+
+.Toastify__toast--success .Toastify__progress-bar--bg {
+  background: var(--darker-green);
+}
+
+.Toastify__toast--error .Toastify__progress-bar {
+  background: var(--darker-red);
+}
+
+.Toastify__toast--error .Toastify__progress-bar--bg {
+  background: var(--darker-red);
 }

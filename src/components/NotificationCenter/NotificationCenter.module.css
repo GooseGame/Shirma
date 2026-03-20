@@ -81,6 +81,22 @@
     max-height: 100px;
 }
 
+:global(.Toastify__toast--success).missedToastItem {
+    border-bottom: 5px solid var(--primary-green);
+}
+
+:global(.Toastify__toast--default).missedToastItem {
+    border-bottom: 5px solid var(--primary-brown);
+}
+
+:global(.Toastify__toast--error).missedToastItem {
+    border-bottom: 5px solid var(--primary-red);
+}
+
+:global(.Toastify__toast--warning).missedToastItem {
+    border-bottom: 5px solid var(--primary-yellow);
+}
+
 .toastify-open {
 	top: auto !important;
 	bottom: 5px !important;

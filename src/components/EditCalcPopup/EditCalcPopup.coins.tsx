@@ -102,7 +102,7 @@ export function EditCalcPopupCoins({header, onCancel, color, onSaveCoins}: EditC
 					/>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-add']}
+					buttonCN={inputValue !== '' ? styles['button-add'] : ''}
 					onClickAction={()=>onClickAddCoins(inputValue, coinType, onSuccessValidator, onSaveCoins)} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>
@@ -110,7 +110,7 @@ export function EditCalcPopupCoins({header, onCancel, color, onSaveCoins}: EditC
 					</div>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-remove']}
+					buttonCN={inputValue !== '' ? styles['button-remove'] : ''}
 					onClickAction={()=>onClickRemoveCoins(inputValue, coinType, onSuccessValidator, onSaveCoins)} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>
