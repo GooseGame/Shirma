@@ -8,6 +8,61 @@
     cursor: pointer;
 }
 
+.armor-speed-row {
+    width: calc(50% - 20px);
+    display: flex;
+    gap: 10px;
+}
+
+@media screen and (min-width: 1701px) {
+    .armor-speed-row {
+        display: none;
+    }
+}
+
+.armor-speed-item {
+    flex: 1;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.armor-speed-title {
+    font-size: 26px;
+    color: var(--text-color);
+}
+
+.armor-speed-value {
+    font-size: 32px;
+}
+
+.armor-speed-popup-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.armor-speed-popup-label {
+    font-size: 32px;
+    color: var(--text-light-color);
+}
+
+.armor-speed-popup-input {
+    width: 90px;
+    height: 32px;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Beryozki';
+}
+
 .stat-checks {
     display: flex;
     flex-direction: row;
@@ -47,6 +102,9 @@
 }
 
 @media screen and (max-width: 550px) {
+    .armor-speed-row {
+        width: 100%;
+    }
     .stat-column {
         width: 100%;
         overflow-y: unset;
@@ -342,3 +400,8 @@
     padding-left: 5px;
 }
 
+@media screen and (min-width: 1701px) {
+    .stat-text {
+        font-size: 2.5rem;
+    }
+}

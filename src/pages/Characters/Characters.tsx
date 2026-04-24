@@ -31,15 +31,24 @@ export function Characters() {
 		}
 	};
 
-	useEffect(()=>{
-		if (!characters || characters.characters.length === 0) {
-			dispatch(load()).then(() => {
+	useEffect(() => {
+		const snapshot = loadState<CharState>(CHAR_KEY);
+		const localList = snapshot?.characters ?? [];
+		const localTs = snapshot?.lastUpdateTimestamp ?? 0;
+
+		dispatch(timestamp())
+			.unwrap()
+			.then(({ lastUpdated }) => {
+				const needsFullLoad =
+					localList.length === 0 || lastUpdated > localTs;
+				if (needsFullLoad) {
+					return dispatch(load()).unwrap();
+				}
+			})
+			.finally(() => {
 				setCharacters(loadState<CharState>(CHAR_KEY));
 			});
-		} else {
-			dispatch(timestamp());
-		}
-	}, []);
+	}, [dispatch]);
 
 	const getCharacters = () => {
 		return characters !== undefined ? characters.characters : [];

@@ -10,6 +10,7 @@ import { SuccessToast } from '../ToastNotificationItem/SuccessToast/SuccessToast
 import { WarningToast } from '../ToastNotificationItem/WarningToast/WarningToast';
 import type { MissedToastItem } from '../../helpers/toastMissedTracker';
 import { ignoreMissedReportsForMs, setMissedToastHandler } from '../../helpers/toastMissedTracker';
+import { createPortal } from 'react-dom';
 
 export function NotificationCenter({
 	containerId,
@@ -72,7 +73,7 @@ export function NotificationCenter({
 
 	const buttonIconSrc = (missedToasts.length === 0 || isOpen) ? '/notifications-unable.svg' : '/notifications.svg';
 
-	return (
+	return createPortal((
 		<div className={cn(styles['box-wrapper'], className)} {...rest}>
 			{/* ToastContainer не должен быть внутри .right с display:none — иначе закрытый вид "прячет" уведомления. */}
 			<ToastContainer
@@ -134,5 +135,5 @@ export function NotificationCenter({
 				</div>
 			</div>
 		</div>
-	);
+	), document.body);
 }

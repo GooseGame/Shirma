@@ -9,6 +9,7 @@ import { RoundButton } from '../Button/Button';
 import { randomDiceValue, randomHash, splitDiceValueToDices } from '../../helpers/random';
 import { associativeDamage, damageTypes, getDamageById } from '../../helpers/attributes';
 import useScreenWidth from '../../helpers/hooks/useScreenWidth';
+import { createPortal } from 'react-dom';
 
 interface DicesInABox {
     id: number,
@@ -189,7 +190,7 @@ export function RollBox({dicesSent = [], setPopup}: RollBoxProps) {
 		}		
 	};
     
-	return <div className={cn(styles['box-wrapper'], animate ? styles['open'] : '')}>
+	return createPortal(<div className={cn(styles['box-wrapper'], animate ? styles['open'] : '')}>
 		{!isAutoMode && <div className={cn(styles['left-buttons'], styles[hideRight])}>
 			<RoundButton onClick={handleRollButton} classNames={cn(styles['open-button'], styles['brown'])}>
 				{!isOpen && <img className={styles['open-close']} src='/d20.svg'/>}
@@ -219,5 +220,5 @@ export function RollBox({dicesSent = [], setPopup}: RollBoxProps) {
 			</div>
 			}
 		</div>
-	</div>;
+	</div>, document.body);
 }

@@ -6,6 +6,56 @@
 	justify-content: start;
 }
 
+.prof-btn {
+	background-color: var(--background-color);
+	border-radius: 10px;
+	padding: 8px 12px;
+	width: fit-content !important;
+	font-family: 'Beryozki';
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.prof-btn-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 8px;
+}
+
+.prof-value {
+	font-size: 34px;
+	color: var(--text-color);
+}
+
+.prof-label {
+	font-size: 24px;
+	color: var(--text-color);
+}
+
+.prof-popup-content {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+
+.prof-popup-label {
+	font-size: 32px;
+	color: var(--text-light-color);
+}
+
+.prof-popup-input {
+	width: 90px;
+	height: 32px;
+	border: none;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 24px;
+	font-family: 'Beryozki';
+}
+
 .add-new {
 	width: calc(50% - 10px);
 	min-height: 190px;

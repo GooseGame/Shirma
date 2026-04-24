@@ -7,12 +7,12 @@
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
 }
 
-@media screen and (min-width: 1001px) and (max-width: 1200px) {
+@media screen and (min-width: 1001px) and (max-width: 1260px) {
     .header-area {
         margin-inline: 10px;
         margin-top: 5px;

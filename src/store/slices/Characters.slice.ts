@@ -27,10 +27,13 @@ export interface CharPersistentState {
 	needToUpdate: boolean
 }
 
+const charactersPersisted = loadState<CharState>(CHAR_KEY);
+
 const initialState: CharState = {
-	characters: loadState<CharPersistentState>(CHAR_KEY)?.characters ?? [],
-	charactersLoaded: loadState<CharPersistentState>(CHAR_KEY)?.characters ? true : false,
-	needToUpdate: true
+	characters: charactersPersisted?.characters ?? [],
+	charactersLoaded: charactersPersisted?.characters ? true : false,
+	needToUpdate: true,
+	lastUpdateTimestamp: charactersPersisted?.lastUpdateTimestamp
 };
 
 export const load = createAsyncThunk<CharactersResponse, void, {state: RootState}>('characters/load', 
@@ -907,13 +910,17 @@ export const charsSlice = createSlice({
 			state.needToUpdate = true;
 		});
 		builder.addCase(timestamp.fulfilled, (state, action) => {
-			if (state.lastUpdateTimestamp !== action.payload.lastUpdated || 
-				!(!state.lastUpdateTimestamp && action.payload.lastUpdated == 0)) {
+			const serverTs = action.payload.lastUpdated;
+			const localTs = state.lastUpdateTimestamp ?? 0;
+			if (serverTs > localTs) {
+				// Data on device may be stale; keep localTs until load.fulfilled applies server payload.
 				state.needToUpdate = true;
 			} else {
 				state.needToUpdate = false;
+				if (serverTs > 0) {
+					state.lastUpdateTimestamp = serverTs;
+				}
 			}
-			state.lastUpdateTimestamp = action.payload.lastUpdated;
 		});
 		builder.addCase(deleteChar.fulfilled, (state, action) => {
 			state.characters = state.characters.filter(char => char.id !== action.meta.arg.charId);

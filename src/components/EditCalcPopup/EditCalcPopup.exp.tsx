@@ -32,7 +32,7 @@ export function EditCalcPopupExp({header, onCancel, setPopup, color, currExpInfo
 
 	const onLVLUpAction = (isLVLUp: boolean) => {
 		if (isLVLUp && currExpInfo.level+1 > 20) return;
-		if (!isLVLUp && currExpInfo.level-1 > 0) return;
+		if (!isLVLUp && currExpInfo.level-1 <= 0) return;
 		setPopup(currExpInfo.level + ' -> ' + (isLVLUp ? currExpInfo.level+1 : currExpInfo.level - 1), isLVLUp ? 'Повышение уровня:' : 'Понижение уровня:');
 		onLVLUp(isLVLUp);
 	};
