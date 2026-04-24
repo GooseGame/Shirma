@@ -3,7 +3,7 @@ import { MiniCard } from '../../components/MiniCard/MiniCard';
 import styles from './Characters.module.css';
 import { loadState } from '../../store/storage';
 import { useNavigate } from 'react-router-dom';
-import { CHAR_KEY, charActions, CharState, deleteChar, load, timestamp } from '../../store/slices/Characters.slice';
+import { CHAR_KEY, charActions, CharState, deleteChar, load, save, timestamp } from '../../store/slices/Characters.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { useEffect, useState } from 'react';
@@ -14,6 +14,8 @@ import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
 import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
+import { pendingToastCall } from '../../components/ToastNotificationItem/PendingToast/PendingToastCall';
+import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
 
 export function Characters() {
 
@@ -36,13 +38,31 @@ export function Characters() {
 		const localList = snapshot?.characters ?? [];
 		const localTs = snapshot?.lastUpdateTimestamp ?? 0;
 
-		dispatch(timestamp())
-			.unwrap()
+		const tsPromise = dispatch(timestamp()).unwrap();
+		pendingToastCall({
+			pendingPromise: tsPromise,
+			headerPending: 'Проверка обновлений...',
+			headerSuccess: 'Готово',
+			headerError: 'Ошибка',
+			textSuccess: 'Время последнего обновления на сервере получено.',
+			textError: 'Не удалось получить время обновления списка персонажей.'
+		});
+
+		tsPromise
 			.then(({ lastUpdated }) => {
 				const needsFullLoad =
 					localList.length === 0 || lastUpdated > localTs;
 				if (needsFullLoad) {
-					return dispatch(load()).unwrap();
+					const loadPromise = dispatch(load()).unwrap();
+					pendingToastCall({
+						pendingPromise: loadPromise,
+						headerPending: 'Загрузка персонажей...',
+						headerSuccess: 'Готово',
+						headerError: 'Ошибка',
+						textSuccess: 'Персонажи загружены с сервера.',
+						textError: 'Не удалось загрузить персонажей с сервера.'
+					});
+					return loadPromise;
 				}
 			})
 			.finally(() => {
@@ -56,23 +76,50 @@ export function Characters() {
 
 	const handleDeleteAction = (charId: string) => {
 		if (!accessToken) {
+			errorToastCall({ header: 'Ошибка', text: 'Нужно войти в аккаунт, чтобы удалять персонажей.' });
 			return;
 		}
-		dispatch(deleteChar({charId, accessToken})).then(()=>{
-			if (unsavedCharacters && unsavedCharacters.find((unsavedId) => unsavedId === charId)) {
-				unsavedCharacters.filter(unsavedId => unsavedId !== charId);
-			}
-			setCharacters(loadState<CharState>(CHAR_KEY));
-		});		
+		const deletePromise = dispatch(deleteChar({ charId, accessToken }))
+			.unwrap()
+			.then(() => {
+				setUnsavedCharacters((prev) => prev?.filter((unsavedId) => unsavedId !== charId));
+				setCharacters(loadState<CharState>(CHAR_KEY));
+			});
+		pendingToastCall({
+			pendingPromise: deletePromise,
+			headerPending: 'Удаление...',
+			headerSuccess: 'Удалено',
+			headerError: 'Ошибка',
+			textSuccess: 'Персонаж удалён.',
+			textError: 'Не удалось удалить персонажа.'
+		});
 	};
 
 	const handleCloneAction = (char: Character) => {
-		const newCharId = randomHash();
-		dispatch(charActions.add({...char, id: newCharId}));
-		if (unsavedCharacters && unsavedCharacters.find((unsavedId) => unsavedId === char.id)) {
-			setUnsavedCharacters([...unsavedCharacters, newCharId]);
+		if (!accessToken) {
+			errorToastCall({ header: 'Ошибка', text: 'Нужно войти в аккаунт, чтобы клонировать персонажей.' });
+			return;
 		}
-		setCharacters(loadState<CharState>(CHAR_KEY));
+		const newCharId = randomHash();
+		const clonePromise = dispatch(
+			save({ character: { ...char, id: newCharId }, accessToken, timestamp: Date.now() })
+		)
+			.unwrap()
+			.then(() => {
+				dispatch(charActions.add({ ...char, id: newCharId }));
+				if (unsavedCharacters?.includes(char.id)) {
+					setUnsavedCharacters((prev) => [...(prev ?? []), newCharId]);
+				}
+				setCharacters(loadState<CharState>(CHAR_KEY));
+			});
+		pendingToastCall({
+			pendingPromise: clonePromise,
+			headerPending: 'Клонирование...',
+			headerSuccess: 'Сохранено',
+			headerError: 'Ошибка',
+			textSuccess: 'Клон персонажа сохранён на сервере.',
+			textError: 'Не удалось сохранить клон персонажа.'
+		});
 	};
 
 	return <RequireAuth>
