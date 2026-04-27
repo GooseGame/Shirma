@@ -188,6 +188,11 @@ export interface PresetsResponse {
     presets: PresetCharacter[]
 }
 
-export interface TimestampResponse {
-    lastUpdated: number;
+/** One row from GET /characters/lastUpdated — server truth per character. */
+export interface CharacterServerTimestamp {
+    charId: string;
+    lastUpdatedTimestamp: number;
 }
+
+/** Response body: array of per-character server timestamps. */
+export type CharactersLastUpdatedResponse = CharacterServerTimestamp[];

@@ -38,16 +38,22 @@ export const DefaultDesktopPanel: FC<{ data: DesktopSideData }> = ({ data }) => 
 						{info.avatar}
 					</div>
 				)}
-				<div className={cn(styles['desktop-panel-row'], styles['bottom-content'])}>
+				<div className={styles['desktop-panel-row']}>
 					{characteristics.raceClass}
-					{info.levelExp}
+				</div>
+				<div className={styles['desktop-panel-row']}>
+					{info.alignment}
 				</div>
 			</div>
-			<div className={styles['desktop-panel-row']}>
-				{info.alignment}
-			</div>
-			
 			<div className={styles['desktop-panel-bottom-row']}>
+				<div className={styles['desktop-row-item']}>
+					<div className={styles['desktop-row-item-icon-wrapper']}>
+						<img src={'/hp-brown.svg'} alt='health' className={styles['desktop-row-item-icon']} />
+					</div>
+					<div className={styles['desktop-row-right-wrapper']}>
+						{info.levelExp}
+					</div>
+				</div>
 				<div className={styles['desktop-row-item']}>
 					<div className={styles['desktop-row-item-icon-wrapper']}>
 						<img src={'/hp-brown.svg'} alt='health' className={styles['desktop-row-item-icon']} />

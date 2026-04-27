@@ -1020,14 +1020,51 @@
     opacity: .75;
 }
 
-.bottom-controls {
+.bottom-controls:not(.bottom-controls-save) {
     opacity: 50%;
+}
+.bottom-controls {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 10px;
     z-index: 2;
     position: relative;
+}
+
+.bottom-controls-save {
+    justify-content: center;
+}
+
+.bottom-save {
+    width: 100%;
+    min-height: 40px;
+    height: auto;
+    background-color: var(--darker-brown);
+    color: var(--text-light-color);
+    font-size: 14px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 5px;
+    display: flex;
+    cursor: pointer;
+}
+
+.bottom-save:hover {
+    background-color: var(--primary-brown);
+}
+
+.bottom-save-text {
+    padding: 4px 6px;
+    white-space: normal;
+}
+
+.bottom-save-text:hover {
+    text-decoration: underline;
 }
 
 .mini-card-wrapper:hover .bottom-controls {

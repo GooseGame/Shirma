@@ -122,6 +122,10 @@
         margin-bottom: 10px;
     }
 
+    .desktop-panel-avatar div {
+        border: none;
+    }
+
     .desktop-panel-avatar-wrapper .bottom-content {
         position: absolute;
         bottom: 0;

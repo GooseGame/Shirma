@@ -1,4 +1,4 @@
-import { MiniCardProps } from './MiniCard.props';
+import { MiniCardProps, MiniCardSyncSave } from './MiniCard.props';
 import styles from './MiniCard.module.css';
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
@@ -6,8 +6,25 @@ import { useMouse } from '@uidotdev/usehooks';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getClassByClassname } from '../../helpers/createCharacter';
+import { toUnixMillis } from '../../helpers/toUnixMillis';
 
-export function MiniCard({creature, deleteAction, cloneAction, onClickAction}: MiniCardProps) {
+function formatServerSavedAt(ts: number) {
+	return new Date(toUnixMillis(ts)).toLocaleString('ru-RU', {
+		day: '2-digit',
+		month: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit'
+	});
+}
+
+function getSyncSaveButtonLabel(sync: MiniCardSyncSave) {
+	if (sync.kind === 'notOnServer') {
+		return 'Сохранить нового персонажа';
+	}
+	return `Сохранить (на сервере: ${formatServerSavedAt(sync.serverSavedAt)})`;
+}
+
+export function MiniCard({ creature, deleteAction, cloneAction, onClickAction, syncSave, onSyncSave }: MiniCardProps) {
 	const getRarity = () => {
 		if (creature.info.level < 5) return 'common';
 		if (creature.info.level < 10) return 'uncommon';
@@ -105,7 +122,11 @@ export function MiniCard({creature, deleteAction, cloneAction, onClickAction}: M
 		return clientCoordinate > centerCoordinate ? angle : 360 - angle;
 	};
 
-	return <div className={cn(styles['mini-card-wrapper'], (!deleteAction && !cloneAction)?styles['small-wrapper']:'')}>
+	const showSaveOnly = syncSave != null && onSyncSave != null;
+	const showCloneDelete = Boolean(cloneAction && deleteAction && !showSaveOnly);
+	const hasBottomControls = showSaveOnly || Boolean(cloneAction && deleteAction);
+
+	return <div className={cn(styles['mini-card-wrapper'], !hasBottomControls ? styles['small-wrapper'] : '')}>
 		<div onClick={handleClickMiniCard} className={cn(styles['playcard-wrapper'], styles[rarity], styles[creatureClass])} onMouseLeave={resetBalatro}>
 			<div className={styles['playcard-mini']} onMouseEnter={handleBalatro}>
 				{rarity === 'uncommon' && <div className={cn(styles['unc-wrap'], styles[`unc-${creatureClass}`])}></div>}
@@ -159,7 +180,28 @@ export function MiniCard({creature, deleteAction, cloneAction, onClickAction}: M
 				</div>}
 			</div>
 		</div>
-		{cloneAction && deleteAction &&
+		{showSaveOnly && syncSave && onSyncSave &&
+			<div className={cn(styles['bottom-controls'], styles['bottom-controls-save'])}>
+				<div
+					role='button'
+					tabIndex={0}
+					onClick={(e) => {
+						e.stopPropagation();
+						onSyncSave(creature);
+					}}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							e.preventDefault();
+							onSyncSave(creature);
+						}
+					}}
+					className={cn(styles['bottom-save'], 'small-shadow')}
+				>
+					<span className={styles['bottom-save-text']}>{getSyncSaveButtonLabel(syncSave)}</span>
+				</div>
+			</div>
+		}
+		{showCloneDelete &&
 			<div className={styles['bottom-controls']} onMouseLeave={onMouseLeaveDelete}>
 				<div onClick={()=>{if (cloneAction)cloneAction(creature);}} className={cn(styles['bottom-btn'], styles['bottom-clone'], 'small-shadow')}>
 					Клонировать

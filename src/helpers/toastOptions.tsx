@@ -2,7 +2,7 @@ import { Slide, ToastIcon, ToastOptions } from 'react-toastify';
 
 export const defaultToast: ToastOptions = {
 	type: 'default',
-	autoClose: 5000,
+	autoClose: 3000,
 	draggable: true,
 	transition: Slide,
 	pauseOnHover: true,
@@ -39,7 +39,7 @@ export const successToast: ToastOptions = {
 	draggable: true,
 	transition: Slide,
 	icon: successIcon,
-	autoClose: 5000,
+	autoClose: 3000,
 	pauseOnHover: true,
 	pauseOnFocusLoss: true,
 	closeOnClick: true
