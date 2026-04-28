@@ -3,10 +3,24 @@ import styles from './Header.module.css';
 import { RoundButton } from '../Button/Button';
 import { Icon } from '../Icons/Icon';
 import cn from 'classnames';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { getClassByClassname } from '../../helpers/createCharacter';
 
 export const Header: FC = ({...props }) => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const showProfileLink = location.pathname === '/characters' || /^\/character\/[^/]+$/.test(location.pathname);
+	const nickName = useSelector((s: RootState) => s.user.users.name);
+	const characters = useSelector((s: RootState) => s.characters.characters);
+	const characterId = /^\/character\/([^/]+)$/.exec(location.pathname)?.[1];
+	const currentCharacterClass = characterId
+		? characters.find((ch) => ch.id === characterId)?.info.class.name
+		: undefined;
+	const userIconName = currentCharacterClass ? getClassByClassname(currentCharacterClass) : 'default';
+	const userIconSrc = `/${userIconName}-user.svg`;
+
 	const onClickNewCharacter = () => {
 		navigate('/character/new');
 	};
@@ -65,5 +79,13 @@ export const Header: FC = ({...props }) => {
 				</RoundButton>
 			</div>
 		</div>
+		{showProfileLink && (
+			<div className={styles['profile-link-wrapper']}>
+				<Link to='/user/edit' className={styles['profile-link']}>
+					<span className={styles['profile-name']}>{nickName}</span>
+					<img src={userIconSrc} alt='user icon' className={styles['profile-icon']} />
+				</Link>
+			</div>
+		)}
 	</div>;
 };

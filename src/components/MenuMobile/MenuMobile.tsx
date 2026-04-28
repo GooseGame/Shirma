@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import styles from './MenuMobile.module.css';
 import cn from 'classnames';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { RoundButton } from '../Button/Button';
 import { Icon } from '../Icons/Icon';
 import { SLIDE_ANIMATION_TIME } from '../RollBox/RollBox';
@@ -9,6 +9,8 @@ import { SLIDE_ANIMATION_TIME } from '../RollBox/RollBox';
 export const MenuMobile: FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const navigate = useNavigate();
+	const location = useLocation();
+	const showProfileLink = location.pathname === '/characters' || /^\/character\/[^/]+$/.test(location.pathname);
 	const onClickNewCharacter = () => {
 		navigate('/character/new');
 	};
@@ -87,6 +89,11 @@ export const MenuMobile: FC = () => {
 						</RoundButton>
 					</div>
 				</div>
+				{showProfileLink && (
+					<div className={styles['list-item-wrapper']}>
+						<Link to='/user/edit' className={styles['page-header']}>Профиль</Link>
+					</div>
+				)}
 			</div>
 		</div>
 	</div>;

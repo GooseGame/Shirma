@@ -53,92 +53,92 @@
 }
 
 .common .top-container {
-    background-color: #57a963;
+    background-color: var(--default-color);
 }
 
 .common .bottom {
-    background-color: #57a963;
+    background-color: var(--default-color);
 }
 .common.default .bottom, .common.default .playcard-mini {
-    background-color: #57a963;
+    background-color: var(--default-color);
 }
 .common.monk .bottom, .common.monk .top-container {
-    background: rgba(78, 157, 188, 0.8);
+    background: var(--monk-color);
 }
 .common.monk .playcard-mini {
-    background-color: rgba(78, 157, 188, 0.8);
+    background-color: var(--monk-color);
 }
 .common.barbarian .bottom, .common.barbarian .top-container {
-    background: rgba(199, 89, 59, 0.8);
+    background: var(--barbarian-color);
 }
 .common.barbarian .playcard-mini {
-    background-color: rgba(199, 89, 59, 0.8);
+    background-color: var(--barbarian-color);
 }
 .common.bard .bottom, .common.bard .top-container {
-    background: rgba(171, 109, 172, 0.8);
+    background: var(--bard-color);
 }
 .common.bard .playcard-mini {
-    background-color: rgba(171, 109, 172, 0.8);
+    background-color: var(--bard-color);
 }
 .common.cleric .bottom, .common.cleric .top-container {
-    background: rgba(145, 161, 178, 0.8);
+    background: var(--cleric-color);
 }
 .common.cleric .playcard-mini {
-    background-color: rgba(145, 161, 178, 0.8);
+    background-color: var(--cleric-color);
 }
 .common.paladin .bottom, .common.paladin .top-container {
-    background: rgba(181, 158, 84, 0.8);
+    background: var(--paladin-color);
 }
 .common.paladin .playcard-mini {
-    background-color: rgba(181, 158, 84, 0.8);
+    background-color: var(--paladin-color);
 }
 .common.druid .bottom, .common.druid .top-container {
-    background: rgba(122, 133, 59, 0.8);
+    background: var(--druid-color);
 }
 .common.druid .playcard-mini {
-    background-color: rgba(122, 133, 59, 0.8);
+    background-color: var(--druid-color);
 }
 .common.fighter .bottom, .common.fighter .top-container {
-    background: rgba(127, 81, 62, 0.8);
+    background: var(--fighter-color);
 }
 .common.fighter .playcard-mini {
-    background-color: rgba(127, 81, 62, 0.8);
+    background-color: var(--fighter-color);
 }
 .common.ranger .bottom, .common.ranger .top-container {
-    background: rgba(80, 127, 98, 0.8);
+    background: var(--ranger-color);
 }
 .common.ranger .playcard-mini {
-    background-color: rgba(80, 127, 98, 0.8);
+    background-color: var(--ranger-color);
 }
 .common.rogue .bottom, .common.rogue .top-container {
-    background: rgba(85, 87, 82, 0.8);
+    background: var(--rogue-color);
 }
 .common.rogue .playcard-mini {
-    background-color: rgba(85, 87, 82, 0.8);
+    background-color: var(--rogue-color);
 }
 .common.sorcerer .bottom, .common.sorcerer .top-container {
-    background: rgba(153, 46, 46, 0.8);
+    background: var(--sorcerer-color);
 }
 .common.sorcerer .playcard-mini {
-    background-color: rgba(153, 46, 46, 0.8);
+    background-color: var(--sorcerer-color);
 }
 .common.warlock .bottom, .common.warlock .top-container {
-    background: rgba(123, 70, 155, 0.8);
+    background: var(--warlock-color);
 }
 .common.warlock .playcard-mini {
-    background-color: rgba(123, 70, 155, 0.8);
+    background-color: var(--warlock-color);
 }
 .common.artificer .bottom, .common.artificer .top-container {
-    background: #4d766e;
+    background: var(--artificer-color);
 }
 .common.artificer .playcard-mini {
-    background-color: #4d766e;
+    background-color: var(--artificer-color);
 }
 .common.wisard .bottom, .common.wisard .top-container {
-    background: rgba(45, 80, 154, 0.8);
+    background: var(--wisard-color);
 }
 .common.wisard .playcard-mini {
-    background-color: rgba(45, 80, 154, 0.8);
+    background-color: var(--wisard-color);
 }
 
 .rare .playcard-mini {

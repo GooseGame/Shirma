@@ -303,6 +303,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	const onClickStabilize = (stabilisationValue?: number, mode?: 'success'|'fail') => {
 		if ((stabilisationValue || stabilisationValue === 0) && mode) {
 			dispatch(charActions.stabilize({id: character.id, mode, value: stabilisationValue}));
+			if (onChangeChar) onChangeChar();
 		} else {
 			const d20 = {typeId: 0, modifiers: 0, value: {edge: 20, count: 1}} as DiceCheck;
 			const diceResult = randomDiceValue(d20.value);
@@ -310,6 +311,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 			const resultOfThrow = diceResult >= 10 ? 'success' : 'fail';
 			const result = (diceResult === 1 || diceResult === 20) ? 2 : 1;
 			dispatch(charActions.stabilize({id: character.id, mode: resultOfThrow, value: result + character.condition.health.stabilization[resultOfThrow]}));
+			if (onChangeChar) onChangeChar();
 		}
 	};
 	const changeMaxHP = (newValue: number) => {

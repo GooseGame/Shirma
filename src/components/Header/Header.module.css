@@ -79,3 +79,26 @@
 .page-header.unable {
     color: rgb(0,0,0,0.5);
 }
+
+.profile-link-wrapper {
+    margin-left: auto;
+    padding-right: 5px;
+}
+
+.profile-link {
+    color: var(--text-light-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-name {
+    font-size: 28px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}

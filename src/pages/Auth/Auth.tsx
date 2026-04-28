@@ -25,7 +25,7 @@ export function Auth() {
 
 	useEffect(()=>{if (isNew) { 
 		dispatch(userActions.clearErrors());
-		navigate('/name');
+		navigate('/user/edit');
 	}}, [dispatch, isNew, navigate]);
 
 	useEffect(()=>{

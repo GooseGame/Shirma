@@ -12,6 +12,7 @@ import { Presets } from './pages/Presets/Presets.tsx';
 import { Auth } from './pages/Auth/Auth.tsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Name } from './pages/Name/Name.tsx';
+import { Edit } from './pages/Edit/Edit.tsx';
 
 const googleClientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
 
@@ -38,12 +39,12 @@ const router = createBrowserRouter([
 		element: <Auth/>
 	},
 	{
-		path: '/name',
-		element: <Name/>
-	},
-	{
 		path: '/characters',
 		element: <Characters/>
+	},
+	{
+		path: '/user/edit',
+		element: <Edit/>
 	},
 	{
 		path: '*',

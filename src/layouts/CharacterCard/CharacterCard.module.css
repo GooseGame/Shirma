@@ -318,6 +318,7 @@
         border-radius: 15px;
         padding: 10px;
         box-sizing: border-box;
+        align-items: center;
     }
     .desktop-row-item {
         width: 100%;

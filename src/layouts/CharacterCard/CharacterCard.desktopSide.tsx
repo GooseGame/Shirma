@@ -48,7 +48,7 @@ export const DefaultDesktopPanel: FC<{ data: DesktopSideData }> = ({ data }) => 
 			<div className={styles['desktop-panel-bottom-row']}>
 				<div className={styles['desktop-row-item']}>
 					<div className={styles['desktop-row-item-icon-wrapper']}>
-						<img src={'/hp-brown.svg'} alt='health' className={styles['desktop-row-item-icon']} />
+						<img src={'/xp.svg'} alt='experience' className={styles['desktop-row-item-icon']} />
 					</div>
 					<div className={styles['desktop-row-right-wrapper']}>
 						{info.levelExp}
@@ -64,7 +64,7 @@ export const DefaultDesktopPanel: FC<{ data: DesktopSideData }> = ({ data }) => 
 				</div>
 				<div className={styles['desktop-row-item']}>
 					<div className={styles['desktop-row-item-icon-wrapper']}>
-						<img src={'/money.svg'} alt='coins' className={styles['desktop-row-item-icon']} />
+						<img src={'/coins-new.svg'} alt='coins' className={styles['desktop-row-item-icon']} />
 					</div>
 					<div className={styles['desktop-row-right-wrapper']}>
 						{arsenal.coins}
