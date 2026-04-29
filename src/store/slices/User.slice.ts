@@ -18,6 +18,7 @@ interface User {
 	otherErrorMessage?: string;
 	profileLoaded: boolean;
 	isNew:	boolean;
+	role: number;
 }
 
 export interface UserState {
@@ -88,7 +89,8 @@ const initialState: UserState = {
 		name: 'Пока неизвестно',
 		email: 'Пока непонятно',
 		profileLoaded: false,
-		isNew: false
+		isNew: false,
+		role: 0
 	}
 };
 
@@ -100,6 +102,7 @@ export const userSlice = createSlice({
 			state.users.accessToken = null;
 			state.users.refreshToken = null;
 			state.users.isNew = false;
+			state.users.role = 0;
 		},
 		clearErrors: (state) => {
 			state.users.loginErrorMessage = undefined;
@@ -130,6 +133,7 @@ export const userSlice = createSlice({
 			state.users.email = action.payload.email;
 			state.users.id = action.payload.id;
 			state.users.profileLoaded = true;
+			state.users.role = action.payload.role;
 		});
 		builder.addCase(profile.rejected, (state, action) => {
 			state.users.profileErrorMessage = action.error.message;
@@ -138,6 +142,7 @@ export const userSlice = createSlice({
 		builder.addCase(profile.pending, (state) => {
 			state.users.name = 'Загружаем имя...';
 			state.users.email = 'Загружаем почту...';
+			state.users.role = 0;
 		});
 		builder.addCase(name.rejected, (state, action) => {
 			state.users.otherErrorMessage = action.error.message;

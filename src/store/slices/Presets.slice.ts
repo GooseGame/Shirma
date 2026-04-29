@@ -47,10 +47,11 @@ export const count = createAsyncThunk<PresetsResponse, void, {state: RootState}>
 );
 
 export const save = createAsyncThunk('presets/save', 
-	async (params: {character: PresetCharacter, accessToken: string}) => {
+	async (params: {character: PresetCharacter, accessToken: string, presetId: string}) => {
 		try {
 			const { data } = await axios.post<{success: boolean}>(`${server}/presets/save`, {
-				character: params.character
+				character: params.character,
+				presetId: params.presetId
 			}, {
 				headers: {
 					'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store/store';
 import { name, profile, userActions } from '../../store/slices/User.slice';
 import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
@@ -15,6 +15,7 @@ export function Edit() {
 	const oldName = useSelector((s: RootState) => s.user.users.name);
 	const email = useSelector((s: RootState) => s.user.users.email);
 	const accessToken = useSelector((s: RootState) => s.user.users.accessToken);
+	const role = useSelector((s: RootState) => s.user.users.role);
 	const profileErr = useSelector((s: RootState) => s.user.users.profileErrorMessage);
 	const [newName, setNewName] = useState(oldName);
 
@@ -80,6 +81,14 @@ export function Edit() {
 						<p className={styles['label']}>Почта</p>
 						<p className={styles['email']}>{email}</p>
 					</div>
+					{role == 1 && (
+						<div className={styles['field-group']}>
+							<p className={styles['label']}>Админ-панель</p>
+							<Link to='/admin' className={styles['admin-link']}>
+								Админка
+							</Link>
+						</div>
+					)}
 					<div className={styles['actions']}>
 						<button type='button' className={styles['logout-btn']} onClick={onLogout}>
 							Выйти из аккаунта

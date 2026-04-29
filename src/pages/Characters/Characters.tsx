@@ -48,7 +48,6 @@ function getPendingServerSync(
 	}
 	const serverTs = toUnixMillis(serverTsRaw);
 	const localTs = char.lastUpdatedTimestamp ? Math.floor(char.lastUpdatedTimestamp / 1000) * 1000 : undefined;
-	console.log(localTs, serverTs);
 	if (localTs !== undefined && localTs > serverTs) {
 		return { kind: 'newerThanServer', serverSavedAt: serverTs };
 	}

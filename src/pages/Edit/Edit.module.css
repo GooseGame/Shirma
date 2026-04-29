@@ -85,6 +85,14 @@
 	font-family: sans-serif;
 }
 
+.admin-link {
+	font-family: sans-serif;
+	color: var(--text-light-color);
+	font-size: 24px;
+	text-decoration: underline;
+	width: fit-content;
+}
+
 .actions {
 	display: flex;
 	gap: 10px;

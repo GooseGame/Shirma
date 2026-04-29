@@ -97,5 +97,8 @@ export interface Monster {
         damageRoll?: Damage[]
     }[],
     spells: Spell[],
-    cells: CellsByLevel[]
+    cells: CellsByLevel[],
+    livingAreas: {
+        land: 'forest'|'grassland'|'hill'|'mountain'|'swamp'|'underdark'|'underwater'|'urban'|'wasteland'|'wilderness'
+    }[]
 }
