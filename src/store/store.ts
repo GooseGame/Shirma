@@ -15,7 +15,7 @@ export const store = configureStore({
 store.subscribe(()=>{
 	saveState(
 		{
-			characters: store.getState().characters.characters, 
+			characters: store.getState().characters.characters.filter((character) => !character.isPresetDraft), 
 			errMessage: store.getState().characters.errMessage,
 			needToUpdate: store.getState().characters.needToUpdate,
 			lastUpdateTimestamp: store.getState().characters.lastUpdateTimestamp
@@ -24,7 +24,8 @@ store.subscribe(()=>{
 		{
 			presets: store.getState().presets.presets,
 			errMessage: store.getState().presets.errMessage,
-			presetsCount: store.getState().presets.presetsCount
+			presetsCount: store.getState().presets.presetsCount,
+			lastUpdateTimestamp: store.getState().presets.lastUpdateTimestamp
 		}, PRESETS_KEY);
 	saveState({users: store.getState().user.users}, USER_KEY);
 });

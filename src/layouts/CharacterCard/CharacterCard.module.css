@@ -199,6 +199,20 @@
 
     .desktop-actions {
         display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
+    }
+
+    .desktop-actions-main {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .desktop-actions-bottom {
+        width: 100%;
+        display: flex;
         justify-content: flex-end;
     }
 
@@ -697,8 +711,21 @@
 .actions {
 	margin-left: auto;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 8px;
 	padding-bottom: 5px;
+}
+
+.actions-main {
+	display: flex;
+	align-items: center;
+}
+
+.actions-bottom {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
 }
 
 .saveBtn {
@@ -718,6 +745,20 @@
 
 .saveBtn:not(:disabled):hover {
 	background-color: var(--darker-green);
+}
+
+.deleteBtn {
+	background-color: var(--primary-red);
+	color: var(--text-light-color);
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-family: 'Beryozki';
+	font-size: 24px;
+	margin-right: 10px;
+}
+
+.deleteBtn:hover {
+	background-color: var(--darker-red);
 }
 
 .avatar-wrapper {

@@ -70,6 +70,12 @@
 	font-size: 14px;
 
 }
+
+.keyword.clicked.meta-kw {
+	font-size: 13px;
+	padding: 4px 6px;
+	background-color: var(--primary-blue);
+}
 .keyword.clicked {
 	background-color: var(--text-color);
 	color: var(--text-light-color);

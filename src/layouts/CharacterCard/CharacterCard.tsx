@@ -25,7 +25,16 @@ import { pendingToastCall } from '../../components/ToastNotificationItem/Pending
 import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
 import { CharacterCardDesktopSide } from './CharacterCard.desktopSide';
 
-export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: CharacterCardProps) {
+export function CharacterCard({
+	character,
+	setDiceRoll,
+	onChangeChar,
+	setPopup,
+	onSaveCharacter,
+	onDeleteCharacter,
+	saveButtonLabel,
+	actionsBottomContent
+}: CharacterCardProps) {
 	const defaultChosenSegmentName = 'info';
 	const dispatch = useDispatch<AppDispatch>();
 	const accessToken = useSelector((s: RootState) => s.user.users.accessToken);
@@ -363,11 +372,15 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	const desktopData = getDesktopSideData(segmentProps);
 
 	const onClickSave = async () => {
+		const charToSave = characterFromStore ?? character;
+		if (onSaveCharacter) {
+			await onSaveCharacter(charToSave);
+			return;
+		}
 		if (!accessToken) {
 			errorToastCall({ header: 'Ошибка', text: 'Нужно войти в аккаунт, чтобы сохранять персонажей.' });
 			return;
 		}
-		const charToSave = characterFromStore ?? character;
 		const timestamp = Date.now();
 		const pendingPromise = dispatch(save({ character: charToSave, accessToken, timestamp })).unwrap();
 		pendingToastCall({
@@ -379,6 +392,14 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 			textError: 'Не удалось сохранить персонажа.'
 		});
 		await pendingPromise;
+	};
+
+	const onClickDelete = async () => {
+		const charToDelete = characterFromStore ?? character;
+		if (!onDeleteCharacter) {
+			return;
+		}
+		await onDeleteCharacter(charToDelete);
 	};
 
 	return <div className={styles['card']}>
@@ -403,14 +424,30 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 					))}
 				</div>
 				<div className={styles['actions']}>
-					<SquareButton
-						isBigShadow={true}
-						classNames={styles['saveBtn']}
-						disabled={!accessToken}
-						onClick={onClickSave}
-					>
-						Сохранить
-					</SquareButton>
+					<div className={styles['actions-main']}>
+						{onDeleteCharacter && (
+							<SquareButton
+								isBigShadow={true}
+								classNames={styles['deleteBtn']}
+								onClick={onClickDelete}
+							>
+								Удалить
+							</SquareButton>
+						)}
+						<SquareButton
+							isBigShadow={true}
+							classNames={styles['saveBtn']}
+							disabled={!accessToken && !onSaveCharacter}
+							onClick={onClickSave}
+						>
+							{saveButtonLabel ?? 'Сохранить'}
+						</SquareButton>
+					</div>
+					{actionsBottomContent && (
+						<div className={styles['actions-bottom']}>
+							{actionsBottomContent}
+						</div>
+					)}
 				</div>
 			</div>
 			<div className={styles['desktop-main']}>
@@ -450,6 +487,9 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 				desktopData={desktopData}
 				accessToken={accessToken}
 				onClickSave={onClickSave}
+				onClickDelete={onDeleteCharacter ? onClickDelete : undefined}
+				saveButtonLabel={saveButtonLabel}
+				actionsBottomContent={actionsBottomContent}
 			/>
 		</div>
 	</div>;

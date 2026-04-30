@@ -8,6 +8,7 @@ export type MiniCardSyncSave =
 
 export interface MiniCardProps extends HTMLAttributes<HTMLDivElement> {
     creature: Character;
+    navigatePathBase?: string;
     deleteAction?: (id: string)=>void;
     cloneAction?: (char: Character) => void;
     onClickAction?: (char: Character) => void;

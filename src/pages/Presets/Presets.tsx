@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
-import { presetAction, PRESETS_KEY, PresetState } from '../../store/slices/Presets.slice';
-import { loadState } from '../../store/storage';
-import { getAllPresets } from '../../helpers/firebase';
+import { loadIfNeeded as loadPresetsIfNeeded } from '../../store/slices/Presets.slice';
 import { Character, Keyword, PresetCharacter } from '../../interfaces/Character.interface';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
 import { MiniCard } from '../../components/MiniCard/MiniCard';
 import { randomHash } from '../../helpers/random';
 import { charActions } from '../../store/slices/Characters.slice';
@@ -21,9 +19,9 @@ import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreen
 import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
 
 export function Presets() {
-	const [presets, setPresets] = useState(loadState<PresetState>(PRESETS_KEY));
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
+	const presets = useSelector((s: RootState) => s.presets.presets);
 
 	const [kwClicked, setKWClicked] = useState<Keyword[]>([]);
 
@@ -50,17 +48,11 @@ export function Presets() {
 	};
 
 	useEffect(() => {
-		if (!presets || presets.presets.length === 0) {
-			getAllPresets().then((data: PresetCharacter[]) => {
-				console.log('Подгрузили пресеты:', data);
-				dispatch(presetAction.addAll(data));
-				setPresets(loadState<PresetState>(PRESETS_KEY));
-			}).catch(e=>console.log(e));
-		}
-	});
+		dispatch(loadPresetsIfNeeded());
+	}, [dispatch]);
 
 	const getPresets = () => {
-		return presets !== undefined ? presets.presets : [];
+		return presets ?? [];
 	};
 
 	const onClickPreset = (char: Character) => {
@@ -117,6 +109,30 @@ export function Presets() {
 								}
 							/>;
 						})}
+						{preset.shortDesc && (
+							<Eye
+								offsetHint={30}
+								key={`${preset.presetId}-short-desc`}
+								text={preset.shortDesc}
+								ElementIstead={
+									<div className={cn(styles['keyword'], styles['clicked'], styles['kw-card'], styles['meta-kw'])}>
+										Описание
+									</div>
+								}
+							/>
+						)}
+						{preset.bestFor && (
+							<Eye
+								offsetHint={30}
+								key={`${preset.presetId}-best-for`}
+								text={preset.bestFor}
+								ElementIstead={
+									<div className={cn(styles['keyword'], styles['clicked'], styles['kw-card'], styles['meta-kw'])}>
+										Кому подходит
+									</div>
+								}
+							/>
+						)}
 					</div>
 				</div>;}
 			)}

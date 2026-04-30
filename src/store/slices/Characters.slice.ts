@@ -29,10 +29,11 @@ export interface CharPersistentState {
 }
 
 const charactersPersisted = loadState<CharState>(CHAR_KEY);
+const persistedPlayableCharacters = (charactersPersisted?.characters ?? []).filter((character) => !character.isPresetDraft);
 
 const initialState: CharState = {
-	characters: charactersPersisted?.characters ?? [],
-	charactersLoaded: charactersPersisted?.characters ? true : false,
+	characters: persistedPlayableCharacters,
+	charactersLoaded: persistedPlayableCharacters.length > 0,
 	needToUpdate: true,
 	lastUpdateTimestamp: charactersPersisted?.lastUpdateTimestamp
 };
@@ -942,7 +943,8 @@ export const charsSlice = createSlice({
 			}
 		});
 		builder.addCase(count.fulfilled, (state, action) => {
-			if (state.characters.length === action.payload.count) {
+			const playableCharactersCount = state.characters.filter((character) => !character.isPresetDraft).length;
+			if (playableCharactersCount === action.payload.count) {
 				state.needToUpdate = false;
 			} else {
 				state.needToUpdate = true;

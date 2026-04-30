@@ -8,7 +8,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { getClassByClassname } from '../../helpers/createCharacter';
 
-export const Header: FC = ({...props }) => {
+interface HeaderProps {
+	mainLinkLabel?: string;
+	mainLinkPath?: string;
+}
+
+export const Header: FC<HeaderProps> = ({ mainLinkLabel = 'Персонажи', mainLinkPath = '/characters', ...props }) => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const showProfileLink = location.pathname === '/characters' || /^\/character\/[^/]+$/.test(location.pathname);
@@ -29,7 +34,7 @@ export const Header: FC = ({...props }) => {
 	return <div className={styles['header-area']}>
 		<h1 className={styles['header-logo']} {...props}>Ширма</h1>
 		<div className={styles['page-container']}>
-			<a href='/characters' className={styles['page-header']}>Персонажи</a>
+			<a href={mainLinkPath} className={styles['page-header']}>{mainLinkLabel}</a>
 			<div className={styles['add-icon-wrapper']}>
 				<RoundButton isRed={true} onClick={onClickNewCharacter}>
 					<Icon src="/plus.svg" alt='add' classNames={'plus-icon'}/>

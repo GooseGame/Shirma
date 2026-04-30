@@ -24,7 +24,15 @@ function getSyncSaveButtonLabel(sync: MiniCardSyncSave) {
 	return `Сохранить (на сервере: ${formatServerSavedAt(sync.serverSavedAt)})`;
 }
 
-export function MiniCard({ creature, deleteAction, cloneAction, onClickAction, syncSave, onSyncSave }: MiniCardProps) {
+export function MiniCard({
+	creature,
+	navigatePathBase = '/character',
+	deleteAction,
+	cloneAction,
+	onClickAction,
+	syncSave,
+	onSyncSave
+}: MiniCardProps) {
 	const getRarity = () => {
 		if (creature.info.level < 5) return 'common';
 		if (creature.info.level < 10) return 'uncommon';
@@ -49,7 +57,7 @@ export function MiniCard({ creature, deleteAction, cloneAction, onClickAction, s
 		if (onClickAction) {
 			onClickAction(creature);
 		}
-		navigate(`/character/${creature.id}`);
+		navigate(`${navigatePathBase}/${creature.id}`);
 	};
 
 	const handleClickDelete = () => {

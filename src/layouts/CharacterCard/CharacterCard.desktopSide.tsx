@@ -2,14 +2,16 @@ import { FC, ReactNode } from 'react';
 import { TextInput } from '../../components/TextInput/TextInput';
 import { SquareButton } from '../../components/Button/Button';
 import styles from './CharacterCard.module.css';
-import cn from 'classnames';
 import type { DesktopSideData } from './CharacterCard.segments';
 
 interface CharacterCardDesktopSideProps {
 	desktopData: DesktopSideData;
 	accessToken: string | null | undefined;
 	onClickSave: () => Promise<void>;
+	onClickDelete?: () => Promise<void>;
+	saveButtonLabel?: string;
 	renderDesktopPanel?: (data: DesktopSideData) => ReactNode;
+	actionsBottomContent?: ReactNode;
 }
 
 /** Дефолтная расстановка; можно обернуть или частично повторить в `renderDesktopPanel`. */
@@ -87,7 +89,10 @@ export const CharacterCardDesktopSide: FC<CharacterCardDesktopSideProps> = ({
 	desktopData,
 	accessToken,
 	onClickSave,
-	renderDesktopPanel
+	onClickDelete,
+	saveButtonLabel,
+	renderDesktopPanel,
+	actionsBottomContent
 }) => {
 	return (
 		<div className={styles['desktop-side']}>
@@ -95,14 +100,30 @@ export const CharacterCardDesktopSide: FC<CharacterCardDesktopSideProps> = ({
 				? renderDesktopPanel(desktopData)
 				: <DefaultDesktopPanel data={desktopData} />}
 			<div className={styles['desktop-actions']}>
-				<SquareButton
-					isBigShadow={true}
-					classNames={styles['saveBtn']}
-					disabled={!accessToken}
-					onClick={onClickSave}
-				>
-					Сохранить
-				</SquareButton>
+				<div className={styles['desktop-actions-main']}>
+					{onClickDelete && (
+						<SquareButton
+							isBigShadow={true}
+							classNames={styles['deleteBtn']}
+							onClick={onClickDelete}
+						>
+							Удалить
+						</SquareButton>
+					)}
+					<SquareButton
+						isBigShadow={true}
+						classNames={styles['saveBtn']}
+						disabled={!accessToken}
+						onClick={onClickSave}
+					>
+						{saveButtonLabel ?? 'Сохранить'}
+					</SquareButton>
+				</div>
+				{actionsBottomContent && (
+					<div className={styles['desktop-actions-bottom']}>
+						{actionsBottomContent}
+					</div>
+				)}
 			</div>
 		</div>
 	);

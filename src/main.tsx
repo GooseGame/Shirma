@@ -13,6 +13,8 @@ import { Auth } from './pages/Auth/Auth.tsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Edit } from './pages/Edit/Edit.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
+import { AdminPresets } from './pages/Admin/AdminPresets.tsx';
+import { AdminPresetPage } from './pages/Admin/AdminPresetPage.tsx';
 
 const googleClientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
 
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
 	{
 		path: '/admin',
 		element: <Admin/>
+	},
+	{
+		path: '/presets',
+		element: <AdminPresets />
+	},
+	{
+		path: '/preset/:id',
+		element: <AdminPresetPage />
 	},
 	{
 		path: '*',

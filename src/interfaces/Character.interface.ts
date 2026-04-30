@@ -141,6 +141,7 @@ export interface CellsByLevel {
 export interface Character {
     id:                     string,
     lastUpdatedTimestamp?:  number;
+    isPresetDraft?:         boolean;
     avatar:                 string,
     info:                   Info,
     stats:                  Stat[],

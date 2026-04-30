@@ -9,4 +9,8 @@ export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
     setEditText?: React.Dispatch<React.SetStateAction<Text|undefined>>;
     onChangeChar?: (popupText?: string, popupHeader?: string)=>void;
     setPopup?: ((popup: PopupProps) => void) | undefined;
+    onSaveCharacter?: (character: Character) => Promise<void> | void;
+    onDeleteCharacter?: (character: Character) => Promise<void> | void;
+    saveButtonLabel?: string;
+    actionsBottomContent?: React.ReactNode;
 }
