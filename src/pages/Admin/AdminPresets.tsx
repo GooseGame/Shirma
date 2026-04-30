@@ -57,7 +57,7 @@ export function AdminPresets() {
 	};
 
 	return <RequireAdmin>
-		<Header mainLinkLabel='Пресеты' mainLinkPath='/presets' />
+		<Header />
 		<div className={styles['head-area']}>
 			<h1 className={styles['header']}>Пресеты</h1>
 			<div className={styles['keywords-wrap']}>

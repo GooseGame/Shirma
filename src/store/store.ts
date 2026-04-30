@@ -3,12 +3,14 @@ import charsSlice, { CHAR_KEY } from './slices/Characters.slice';
 import { saveState } from './storage';
 import presetSlice, { PRESETS_KEY } from './slices/Presets.slice';
 import userSlice, { USER_KEY} from './slices/User.slice';
+import monstersSlice, { MONSTERS_KEY } from './slices/Monsters.slice';
 
 export const store = configureStore({
 	reducer: {
 		characters: charsSlice,
 		presets: presetSlice,
-		user: userSlice
+		user: userSlice,
+		monsters: monstersSlice
 	}
 });
 
@@ -28,6 +30,7 @@ store.subscribe(()=>{
 			lastUpdateTimestamp: store.getState().presets.lastUpdateTimestamp
 		}, PRESETS_KEY);
 	saveState({users: store.getState().user.users}, USER_KEY);
+	saveState({ drafts: store.getState().monsters.drafts }, MONSTERS_KEY);
 });
 
 export type RootState = ReturnType<typeof store.getState>;

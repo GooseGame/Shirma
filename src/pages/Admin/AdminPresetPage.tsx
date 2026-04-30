@@ -145,7 +145,7 @@ export function AdminPresetPage() {
 	);
 
 	return <RequireAdmin>
-		<Header mainLinkLabel='Пресеты' mainLinkPath='/presets' />
+		<Header />
 		<div className={styles['container']}>
 			<NotificationCenter />
 			{character && activeSegment === 'card' && <CharacterCard

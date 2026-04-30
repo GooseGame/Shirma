@@ -15,6 +15,17 @@ export interface Type {
     extra?: string
 }
 
+export interface MonsterSimplyfied {
+    id: string,
+    name: string,
+    avatar: string,
+    challengeRating: number,
+    typeName: string,
+    livingAreas: string[],
+    sizeNames: string[],
+    alignmentShort: string
+}
+
 export interface Monster {
     id: string,
     name: string,

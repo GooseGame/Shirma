@@ -15,6 +15,8 @@ import { Edit } from './pages/Edit/Edit.tsx';
 import { Admin } from './pages/Admin/Admin.tsx';
 import { AdminPresets } from './pages/Admin/AdminPresets.tsx';
 import { AdminPresetPage } from './pages/Admin/AdminPresetPage.tsx';
+import { Bestiary } from './pages/Bestiary/Bestiary.tsx';
+import { BestiaryPage } from './pages/Bestiary/BestiaryPage.tsx';
 
 const googleClientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
 
@@ -55,6 +57,14 @@ const router = createBrowserRouter([
 	{
 		path: '/presets',
 		element: <AdminPresets />
+	},
+	{
+		path: '/bestiary',
+		element: <Bestiary />
+	},
+	{
+		path: '/bestiary/:id',
+		element: <BestiaryPage />
 	},
 	{
 		path: '/preset/:id',

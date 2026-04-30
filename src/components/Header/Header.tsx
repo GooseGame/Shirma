@@ -8,17 +8,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { getClassByClassname } from '../../helpers/createCharacter';
 
-interface HeaderProps {
-	mainLinkLabel?: string;
-	mainLinkPath?: string;
-}
-
-export const Header: FC<HeaderProps> = ({ mainLinkLabel = 'Персонажи', mainLinkPath = '/characters', ...props }) => {
+export const Header: FC = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const showProfileLink = location.pathname === '/characters' || /^\/character\/[^/]+$/.test(location.pathname);
 	const nickName = useSelector((s: RootState) => s.user.users.name);
+	const role = useSelector((s: RootState) => s.user.users.role);
 	const characters = useSelector((s: RootState) => s.characters.characters);
+	const isAdmin = role == 1;
 	const characterId = /^\/character\/([^/]+)$/.exec(location.pathname)?.[1];
 	const currentCharacterClass = characterId
 		? characters.find((ch) => ch.id === characterId)?.info.class.name
@@ -32,15 +29,20 @@ export const Header: FC<HeaderProps> = ({ mainLinkLabel = 'Персонажи', 
 	
 
 	return <div className={styles['header-area']}>
-		<h1 className={styles['header-logo']} {...props}>Ширма</h1>
+		<h1 className={styles['header-logo']}>Ширма</h1>
 		<div className={styles['page-container']}>
-			<a href={mainLinkPath} className={styles['page-header']}>{mainLinkLabel}</a>
+			<a href='/characters' className={styles['page-header']}>Персонажи</a>
 			<div className={styles['add-icon-wrapper']}>
 				<RoundButton isRed={true} onClick={onClickNewCharacter}>
 					<Icon src="/plus.svg" alt='add' classNames={'plus-icon'}/>
 				</RoundButton>
 			</div>
 		</div>
+		{isAdmin && (
+			<div className={styles['page-container']}>
+				<a href='/presets' className={styles['page-header']}>Пресеты</a>
+			</div>
+		)}
 		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Справочник</h2>
 			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
@@ -49,13 +51,8 @@ export const Header: FC<HeaderProps> = ({ mainLinkLabel = 'Персонажи', 
 				</RoundButton>
 			</div>
 		</div>
-		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
-			<h2 className={cn(styles['page-header'], styles['unable'])}>Монстры</h2>
-			<div className={cn(styles['add-icon-wrapper'], styles['unable'])}>
-				<RoundButton isRed={true} classNames={styles['unable-btn']}>
-					<Icon src="/plus.svg" alt='add' classNames={'plus-icon'}/>
-				</RoundButton>
-			</div>
+		<div className={styles['page-container']}>
+			<a href='/bestiary' className={styles['page-header']}>Монстры</a>
 		</div>
 		<div className={cn(styles['page-container'], styles['unable-wrapper'])} title={'когда-нибудь'}>
 			<h2 className={cn(styles['page-header'], styles['unable'])}>Сгенерируй имя</h2>
