@@ -9,6 +9,14 @@
 	gap: 10px;
 }
 
+.content.warning {
+	background-color: var(--primary-yellow);
+}
+
+.content.error {
+	background-color: var(--primary-red);
+}
+
 .exit {
 	background-color: var(--darker-red);
 	border: none;

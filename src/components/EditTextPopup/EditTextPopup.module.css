@@ -1,6 +1,6 @@
 .wrapper {
 	position: relative;
-    z-index: 1000;
+    z-index: 3001;
     width: 602px;
     gap: 10px;
     padding: 10px;
@@ -18,7 +18,7 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        z-index: 1005;
+        z-index: 3001;
         position: absolute;
         top: 0;
         left: 0;
@@ -27,7 +27,7 @@
         padding: 5px;
     }
     .background {
-        z-index: 1004 !important;
+        z-index: 3000 !important;
     }
 
     .wrapper .textarea {
@@ -220,14 +220,14 @@
 .background {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 3000;
     background-color: rgba(0,0,0,0.5);
 }
 

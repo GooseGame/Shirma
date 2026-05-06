@@ -22,6 +22,18 @@
 	border: 2px dashed rgba(0, 0, 0, 0.25);
 }
 
+.button-add {
+	box-shadow: 0 0 4px 3px var(--darker-green);
+}
+
+.button-remove {
+	box-shadow: 0 0 4px 3px var(--darker-red);
+}
+
+.button-extra-special {
+	box-shadow: 0 0 4px 3px var(--darker-yellow);
+}
+
 .special-coins {
 	display: flex;
 	flex-direction: row;

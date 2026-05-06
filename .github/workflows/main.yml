@@ -15,6 +15,8 @@ jobs:
       VITE_FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
       VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
       VITE_FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+      VITE_OAUTH_CLIENT_ID: ${{secrets.OAUTH_CLIENT_ID}}
+      VITE_SHIRMA_BACKEND: ${{secrets.SHIRMA_BACKEND}}
 
     steps:
     - name: Checkout code

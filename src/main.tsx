@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import './api/setupAxiosAuth';
 import './index.css';
 import '../fonts/styles.css';
 import { Characters } from './pages/Characters/Characters.tsx';
@@ -8,6 +9,16 @@ import { CharacterPage } from './pages/CharacterPage/CharacterPage.tsx';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
 import { Presets } from './pages/Presets/Presets.tsx';
+import { Auth } from './pages/Auth/Auth.tsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Edit } from './pages/Edit/Edit.tsx';
+import { Admin } from './pages/Admin/Admin.tsx';
+import { AdminPresets } from './pages/Admin/AdminPresets.tsx';
+import { AdminPresetPage } from './pages/Admin/AdminPresetPage.tsx';
+import { Bestiary } from './pages/Bestiary/Bestiary.tsx';
+import { BestiaryPage } from './pages/Bestiary/BestiaryPage.tsx';
+
+const googleClientId = import.meta.env.VITE_OAUTH_CLIENT_ID;
 
 const router = createBrowserRouter([
 	{
@@ -28,8 +39,36 @@ const router = createBrowserRouter([
 		]
 	},
 	{
+		path: '/auth',
+		element: <Auth/>
+	},
+	{
 		path: '/characters',
 		element: <Characters/>
+	},
+	{
+		path: '/user/edit',
+		element: <Edit/>
+	},
+	{
+		path: '/admin',
+		element: <Admin/>
+	},
+	{
+		path: '/presets',
+		element: <AdminPresets />
+	},
+	{
+		path: '/bestiary',
+		element: <Bestiary />
+	},
+	{
+		path: '/bestiary/:id',
+		element: <BestiaryPage />
+	},
+	{
+		path: '/preset/:id',
+		element: <AdminPresetPage />
 	},
 	{
 		path: '*',
@@ -40,7 +79,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<RouterProvider router={router} />	
+			<GoogleOAuthProvider clientId={googleClientId}>
+				<RouterProvider router={router} />	
+			</GoogleOAuthProvider>
 		</Provider>
 	</React.StrictMode>
 );

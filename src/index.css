@@ -20,6 +20,36 @@
   --spells-blue: #254370;
   --spells-darker-blue: #1c3254;
   --darker-blue: #1E3D4C;
+  --toastify-toast-width: 400px;
+
+  --default-color: #57a963;
+  --default-darker-color: rgb(58 113 66);
+  --monk-color: rgba(78, 157, 188, 0.8);
+  --monk-darker-color: rgb(53 106 128);
+  --barbarian-color: rgba(199, 89, 59, 0.8);
+  --barbarian-darker-color: rgb(135 60 39);
+  --bard-color: rgba(171, 109, 172, 0.8);
+  --bard-darker-color: rgb(116 74 117);
+  --cleric-color: rgba(145, 161, 178, 0.8);
+  --cleric-darker-color: rgb(98 109 120);
+  --paladin-color: rgba(181, 158, 84, 0.8);
+  --paladin-darker-color: rgb(122 107 57);
+  --druid-color: rgba(122, 133, 59, 0.8);
+  --druid-darker-color: rgb(83 90 40);
+  --fighter-color: rgba(127, 81, 62, 0.8);
+  --fighter-darker-color: rgb(86 55 42);
+  --ranger-color: rgba(80, 127, 98, 0.8);
+  --ranger-darker-color: rgb(54 86 66);
+  --rogue-color: rgba(85, 87, 82, 0.8);
+  --rogue-darker-color: rgb(58 59 56);
+  --sorcerer-color: rgba(153, 46, 46, 0.8);
+  --sorcerer-darker-color: rgb(104 31 31);
+  --warlock-color: rgba(123, 70, 155, 0.8);
+  --warlock-darker-color: rgb(83 47 105);
+  --artificer-color: #4d766e;
+  --artificer-darker-color: rgb(52 79 74);
+  --wisard-color: rgba(45, 80, 154, 0.8);
+  --wisard-darker-color: rgb(31 55 105);
 }
 
 body {
@@ -29,7 +59,7 @@ body {
   background-color: var(--background-color);
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1260px) {
   body {
     background-color: var(--dark-background);
   }
@@ -45,4 +75,70 @@ body {
   -webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--default {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--success {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--warning {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast--error {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  -webkit-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.Toastify__toast-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 14px;
+}
+
+.Toastify__toast-icon img {
+  width: 100%;
+}
+
+.Toastify__toast--default .Toastify__progress-bar {
+  background: var(--darker-brown);
+}
+
+.Toastify__toast--default .Toastify__progress-bar--bg {
+    background: var(--darker-brown);
+}
+
+.Toastify__toast--success .Toastify__progress-bar {
+  background: var(--darker-green);
+}
+
+.Toastify__toast--success .Toastify__progress-bar--bg {
+  background: var(--darker-green);
+}
+
+.Toastify__toast--error .Toastify__progress-bar {
+  background: var(--darker-red);
+}
+
+.Toastify__toast--error .Toastify__progress-bar--bg {
+  background: var(--darker-red);
 }

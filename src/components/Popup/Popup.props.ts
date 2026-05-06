@@ -7,4 +7,5 @@ export interface PopupProps extends HTMLAttributes<HTMLDivElement> {
 	isShow?:		boolean;
 	closePopup?:	(id: string) => void;
 	classNames?:	string;
+	severity?:		'notice' | 'warning' | 'error'
 }

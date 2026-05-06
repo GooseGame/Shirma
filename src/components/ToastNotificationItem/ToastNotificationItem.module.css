@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.left {
+	width: 100%;
+}
+
+.right {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	word-break: keep-all;
+}
+
+.right button {
+	padding: 10px 5px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.right-warning button {
+	color: var(--text-light-color);
+	background-color: var(--primary-brown);
+}
+
+.right-warning button:hover {
+	background-color: var(--darker-brown);
+}
+
+.right-error button {
+	color: var(--text-light-color);
+	background-color: var(--primary-red);
+}
+
+.right-error button:hover {
+	background-color: var(--darker-red);
+}
+
+.header {
+	margin-top: 0;
+}

@@ -5,7 +5,6 @@ import { Damage, DiceCheck } from '../../interfaces/Equipment.interface';
 import { IDLE_TIME, ROLL_ANIMATION_TIME, RollBox, SLIDE_ANIMATION_TIME } from '../../components/RollBox/RollBox';
 import { Header } from '../../components/Header/Header';
 import { CharacterCard } from '../../layouts/CharacterCard/CharacterCard';
-import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store/store';
@@ -15,13 +14,15 @@ import { MenuMobile } from '../../components/MenuMobile/MenuMobile';
 import { BanSmallScreens } from '../../components/BanSmallScreens/BanSmallScreens';
 import styles from './CharacterPage.module.css';
 import { randomHash } from '../../helpers/random';
+import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
+import { NotificationCenter } from '../../components/NotificationCenter/NotificationCenter';
+import { defaultToastCall } from '../../components/ToastNotificationItem/DefaultToast/DefaultToastCall';
 
 export function CharacterPage() {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const isNewCharacter = id === undefined;
 	const character = isNewCharacter ? createCharacter() : getCharacterFromLocalStorage(id);
-	const [popups, setPopups] = useState<PopupProps[]>([]);
 	const [changedCharacterCounter, setChangedCharacterCounter] = useState(0);
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -33,15 +34,9 @@ export function CharacterPage() {
 			dispatch(charActions.add(character));
 		}
 	});
-	
+
 	const addPopup = (popup: PopupProps) => {
-		setPopups([...popups, popup]);
-	};
-	const removePopup = (id: string) => {
-		setPopups(popups.filter(el => el.popupid !== id));
-	};
-	const clearPopups = () => {
-		setPopups([]);
+		defaultToastCall({ header: popup.header, text: popup.text });
 	};
 
 	const onChangeChar = ((popupText?: string, popupHeader?: string)=>{
@@ -66,15 +61,15 @@ export function CharacterPage() {
 	},[rollBoxProps]);
 
 	return (
-		<>
+		<RequireAuth>
 			<Header/>
 			<div className={styles['container']}>
-				<NotificationCenter popups={popups} remove={removePopup} clear={clearPopups}/>
+				<NotificationCenter />
 				{character && <CharacterCard setPopup={addPopup} character={character} setDiceRoll={setRollboxProps} onChangeChar={onChangeChar}/>}
 			</div>
 			<MenuMobile/>
 			<RollBox dicesSent={rollBoxProps} setPopup={addPopup}/>
 			<BanSmallScreens/>
-		</>
+		</RequireAuth>
 	);
 }

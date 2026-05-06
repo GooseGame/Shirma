@@ -1,0 +1,110 @@
+.page {
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: 30px 16px;
+	box-sizing: border-box;
+}
+
+.card {
+	width: 100%;
+	max-width: 700px;
+	background: var(--light-bg);
+	border-radius: 20px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	background-color: var(--darker-blue);
+}
+
+.title {
+	margin: 0;
+	font-weight: normal;
+	font-size: 40px;
+	color: var(--text-light-color);
+	align-self: center;
+}
+
+.field-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.label {
+	margin: 0;
+	font-size: 24px;
+	color: var(--text-light-color);
+}
+
+.line {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.input {
+	flex: 1;
+	height: 46px;
+	border: 0;
+	border-radius: 8px;
+	padding: 0 12px;
+	box-sizing: border-box;
+	font-family: inherit;
+	font-size: 24px;
+}
+
+.save-btn,
+.logout-btn,
+.back-btn {
+	height: 46px;
+	border: 0;
+	border-radius: 8px;
+	font-family: inherit;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 0 14px;
+}
+
+.save-btn {
+	background: var(--primary-blue);
+	color: var(--text-light-color);
+}
+
+.save-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.email {
+	margin: 0;
+	font-size: 24px;
+	color: var(--text-light-color);
+	font-family: sans-serif;
+}
+
+.admin-link {
+	font-family: sans-serif;
+	color: var(--text-light-color);
+	font-size: 24px;
+	text-decoration: underline;
+	width: fit-content;
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+	margin-top: auto;
+}
+
+.logout-btn {
+	background: #9d3434;
+	color: var(--text-light-color);
+}
+
+.back-btn {
+	background: var(--gray);
+}

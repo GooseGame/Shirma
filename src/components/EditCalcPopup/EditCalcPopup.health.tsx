@@ -318,19 +318,19 @@ export function EditCalcPopupHealth({header, onCancel, setPopup, color, changeHe
 					/>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-add']}
+					buttonCN={inputValue !== '' ? styles['button-add'] : ''}
 					onClickAction={()=>{onClickAddHealth(inputValue, changeHealth, onSuccessValidator, 'default');}} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>Прибавить</div>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-remove']}
+					buttonCN={inputValue !== '' ? styles['button-remove'] : ''}
 					onClickAction={()=>{onClickRemoveHealth(inputValue, changeHealth, onSuccessValidator);}} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>Отнять</div>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-extra']}
+					buttonCN={cn(styles['button-extra'], (inputValue !== '') ? styles['button-extra-special'] : '')}
 					onClickAction={()=>{onClickAddHealth(inputValue, changeHealth, onSuccessValidator, 'extra');}} 
 					width={3}>
 					<div className={cn(styles['button-content'], (inputValue === '' || tempResult <= 0) ? styles['invisible'] : '')}>+{tempResult} Временных ОЗ</div>

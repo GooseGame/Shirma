@@ -10,20 +10,37 @@ import { Attacks } from '../../components/Playcard/Tabs/Attacks/Attacks';
 import { Notes } from '../../components/Playcard/Tabs/Notes/Notes';
 import { Spells } from '../../components/Playcard/Tabs/Spells/Spells';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store/store';
-import { charActions } from '../../store/slices/Characters.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { charActions, save } from '../../store/slices/Characters.slice';
 import React from 'react';
-import { getSegmentName, getSegments } from './CharacterCard.segments';
+import { getDesktopSideData, getSegmentName, getSegments } from './CharacterCard.segments';
 import { EditAlignment } from './CharacterCard.alignment';
 import { randomDiceValue, randomHash } from '../../helpers/random';
 import { DiceCheck } from '../../interfaces/Equipment.interface';
 import { isValidHttpUrl } from '../../helpers/parser';
 import { HeadSegmentProps } from '../../components/Playcard/HeadSegment/HeadSegment.props';
+import { SquareButton } from '../../components/Button/Button';
+import { pendingToastCall } from '../../components/ToastNotificationItem/PendingToast/PendingToastCall';
+import { defaultToastCall as errorToastCall } from '../../components/ToastNotificationItem/ErrorToast/ErrorToastCall';
+import { CharacterCardDesktopSide } from './CharacterCard.desktopSide';
 
-export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: CharacterCardProps) {
+export function CharacterCard({
+	character,
+	setDiceRoll,
+	onChangeChar,
+	setPopup,
+	onSaveCharacter,
+	onDeleteCharacter,
+	saveButtonLabel,
+	actionsBottomContent
+}: CharacterCardProps) {
 	const defaultChosenSegmentName = 'info';
 	const dispatch = useDispatch<AppDispatch>();
+	const accessToken = useSelector((s: RootState) => s.user.users.accessToken);
+	const characterFromStore = useSelector((s: RootState) =>
+		s.characters.characters.find(ch => ch.id === character.id)
+	);
 	const locationHook = useLocation();
 	const searchParams = new URLSearchParams(locationHook.search);
 	let paramValue = searchParams.get('tab');
@@ -74,14 +91,8 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		if (character.info.race !== race) changes.push(`Раса: ${character.info.race} - ${race}`);
 		if (character.info.class.name !== className) changes.push(`Класс: ${character.info.class.name} - ${className}`);
 		if (character.info.class.subclass !== subclass) changes.push(`Подкласс: ${character.info.class.subclass ? character.info.class.subclass : 'добавлен новый'} - ${subclass ? subclass : 'удалён'}`);
-		if (setPopup) setPopup({
-			popupid: randomHash(),
-			header: 'Изменены характеристики',
-			text: changes.join('/n'),
-			isShow: true
-		});
 		dispatch(charActions.editClassSubclassRace({id: character.id, value: {race, className, subclass}}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(changes.join('/n'), 'Изменены характеристики');
 	};
 	const handleSaveRaceClassForm = () => {
 		if (savedRace !== '' && savedClassName !== '') {
@@ -105,44 +116,31 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		setAlignmentClicked(true);
 	};
 
-	const [isFocusingArmor, setIsFocusingArmor] = useState(false);
-	const [isFocusingSpeed, setIsFocusingSpeed] = useState(false);
-
-	const onSaveArmor = (value: number) => {
-		if (value >= 0) {
-			if (setPopup) setPopup({
-				popupid: randomHash(),
-				header: 'Изменены характеристики',
-				text: `Защита: ${character.condition.armor} - ${value}`,
-				isShow: true
-			});
-			dispatch(charActions.editArmor({id: character.id, value}));
+	const [savedArmor, setSavedArmor] = useState(character.condition.armor);
+	const [isShowArmorPopup, setIsShowArmorPopup] = useState(false);
+	const onCancelArmorPopup = () => {
+		setIsShowArmorPopup(false);
+		setSavedArmor(character.condition.armor);
+	};
+	const handleSaveArmorPopup = () => {
+		if (savedArmor >= 0) {
+			dispatch(charActions.editArmor({id: character.id, value: savedArmor}));
+			if (onChangeChar) onChangeChar(`Защита: ${character.condition.armor} - ${savedArmor}`,'Изменены характеристики');
+			setIsShowArmorPopup(false);
 		}
 	};
-	const onSaveSpeed = (value: number) => {
-		if (value >= 0) {
-			if (setPopup) setPopup({
-				popupid: randomHash(),
-				header: 'Изменены характеристики',
-				text: `Скорость: ${character.condition.speed} - ${value}`,
-				isShow: true
-			});
-			dispatch(charActions.editSpeed({id: character.id, value}));
+	const [savedSpeed, setSavedSpeed] = useState(character.condition.speed);
+	const [isShowSpeedPopup, setIsShowSpeedPopup] = useState(false);
+	const onCancelSpeedPopup = () => {
+		setIsShowSpeedPopup(false);
+		setSavedSpeed(character.condition.speed);
+	};
+	const handleSaveSpeedPopup = () => {
+		if (savedSpeed >= 0) {
+			dispatch(charActions.editSpeed({id: character.id, value: savedSpeed}));
+			if (onChangeChar) onChangeChar(`Скорость: ${character.condition.speed} - ${savedSpeed}`,'Изменены характеристики');
+			setIsShowSpeedPopup(false);
 		}
-	};
-
-	const onClickArmor = () => {
-		setIsFocusingArmor(true);
-	};
-	const onMouseLeaveArmor = () => {
-		setIsFocusingArmor(false);
-	};
-
-	const onClickSpeed = () => {
-		setIsFocusingSpeed(true);
-	};
-	const onMouseLeaveSpeed = () => {
-		setIsFocusingSpeed(false);
 	};
 	
 	const handleClickSegment = (e: React.MouseEvent) => {
@@ -154,33 +152,29 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 	};
 
 	const onClickInspiration = () => {
-		if (setPopup) setPopup({
-			popupid: randomHash(),
-			header: 'Вдохновление',
-			text: !character.condition.inspiration ? 'Вдохновлён!' : 'Потерял вдохновение(',
-			isShow: true
-		});
 		dispatch(charActions.addRemoveInspiration({id: character.id}));
-		if (onChangeChar) onChangeChar();
+		if (onChangeChar) onChangeChar(!character.condition.inspiration ? 'Вдохновлён!' : 'Потерял вдохновение(', 'Вдохновление');
 	};
 
-	const [isShowProfInput, setIsShowProfInput] = useState(false);
-	const handleSaveProf = (value: number) => {
-		if (value >= 0 && value < 99) {
-			if (setPopup) setPopup({
-				popupid: randomHash(),
-				header: 'Изменены характеристики',
-				text: `Владение: ${character.proficiency} - ${value}`,
-				isShow: true
-			});
-			dispatch(charActions.changeProf({id: character.id, value}));
-			if (onChangeChar) onChangeChar();
-			setIsShowProfInput(false);
+	const [savedProf, setSavedProf] = useState(character.proficiency);
+	const [isShowProfPopup, setIsShowProfPopup] = useState(false);
+	const onCancelProfPopup = () => {
+		setIsShowProfPopup(false);
+		setSavedProf(character.proficiency);
+	};
+	const handleSaveProf = () => {
+		if (savedProf >= 0 && savedProf < 99) {
+				dispatch(charActions.changeProf({id: character.id, value: savedProf}));
+			if (onChangeChar) onChangeChar(`Владение: ${character.proficiency} - ${savedProf}`,'Изменены характеристики');
+			setIsShowProfPopup(false);
 		}
 	};
 	const profHandler = {
-		isShowProfInput,
-		setIsShowProfInput,
+		savedProf,
+		setSavedProf,
+		isShowProfPopup,
+		setIsShowProfPopup,
+		onCancelProfPopup,
 		handleSaveProf
 	};
 
@@ -205,16 +199,20 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		handleSaveRaceClassForm
 	};
 	const armorHandlers = {
-		onClickArmor,
-		onMouseLeaveArmor,
-		isFocusingArmor,
-		onSaveArmor
+		savedArmor,
+		setSavedArmor,
+		isShowArmorPopup,
+		setIsShowArmorPopup,
+		onCancelArmorPopup,
+		handleSaveArmorPopup
 	};
 	const speedHandler = {
-		onClickSpeed,
-		onMouseLeaveSpeed,
-		isFocusingSpeed,
-		onSaveSpeed
+		savedSpeed,
+		setSavedSpeed,
+		isShowSpeedPopup,
+		setIsShowSpeedPopup,
+		onCancelSpeedPopup,
+		handleSaveSpeedPopup
 	};
 
 	const [savedIni, setSavedIni] = useState(character.condition.initiative);
@@ -268,6 +266,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		} else {
 			dispatch(charActions.addExp({id: character.id, value}));
 		}
+		if (onChangeChar) onChangeChar(`Опыт: ${character.info.exp} - ${value}`,'Опыт');
 	};
 	const handleSaveLvl = (isLVLUp: boolean) => {
 		if (isLVLUp) {
@@ -275,6 +274,7 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		} else {
 			dispatch(charActions.lvlDown({id: character.id}));
 		}
+		if (onChangeChar) onChangeChar();
 	};
 	const setLvl = (level: number) => {
 		if (level > 0 && level <= 20) {
@@ -307,10 +307,12 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 				dispatch(charActions.addExtraHealth({id: character.id, value}));
 			}
 		}
+		if (onChangeChar) onChangeChar();
 	};
 	const onClickStabilize = (stabilisationValue?: number, mode?: 'success'|'fail') => {
 		if ((stabilisationValue || stabilisationValue === 0) && mode) {
 			dispatch(charActions.stabilize({id: character.id, mode, value: stabilisationValue}));
+			if (onChangeChar) onChangeChar();
 		} else {
 			const d20 = {typeId: 0, modifiers: 0, value: {edge: 20, count: 1}} as DiceCheck;
 			const diceResult = randomDiceValue(d20.value);
@@ -318,11 +320,13 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 			const resultOfThrow = diceResult >= 10 ? 'success' : 'fail';
 			const result = (diceResult === 1 || diceResult === 20) ? 2 : 1;
 			dispatch(charActions.stabilize({id: character.id, mode: resultOfThrow, value: result + character.condition.health.stabilization[resultOfThrow]}));
+			if (onChangeChar) onChangeChar();
 		}
 	};
 	const changeMaxHP = (newValue: number) => {
 		if (newValue > 0 && newValue < 999) {
 			dispatch(charActions.changeMaxHP({id: character.id, value: newValue}));
+			if (onChangeChar) onChangeChar(`Максимальное здоровье: ${character.condition.health.max} - ${newValue}`,'Изменены характеристики');
 		}
 	};
 	const changeHPDice = (value: number) => {
@@ -346,29 +350,61 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 		changeHPDice
 	};
 
+	const segmentProps = {
+		character,
+		setPopupByStrings,
+		savedRaceClassObj,
+		onSaveCharName,
+		handleClickAlignment,
+		armorHandlers,
+		speedHandler,
+		onClickInspiration,
+		iniciativeHandler,
+		setDiceRoll,
+		profHandler,
+		coinsHandler,
+		expHandler,
+		healthHandler,
+		avaHandler
+	};
 
-	const segmentsData = getSegments(
-		{
-			character, 
-			setPopupByStrings,
-			savedRaceClassObj, 
-			onSaveCharName, 
-			handleClickAlignment, 
-			armorHandlers, 
-			speedHandler, 
-			onClickInspiration, 
-			iniciativeHandler, 
-			setDiceRoll, 
-			profHandler, 
-			coinsHandler, 
-			expHandler,
-			healthHandler,
-			avaHandler
+	const segmentsData = getSegments(segmentProps);
+	const desktopData = getDesktopSideData(segmentProps);
+
+	const onClickSave = async () => {
+		const charToSave = characterFromStore ?? character;
+		if (onSaveCharacter) {
+			await onSaveCharacter(charToSave);
+			return;
+		}
+		if (!accessToken) {
+			errorToastCall({ header: 'Ошибка', text: 'Нужно войти в аккаунт, чтобы сохранять персонажей.' });
+			return;
+		}
+		const timestamp = Date.now();
+		const pendingPromise = dispatch(save({ character: charToSave, accessToken, timestamp })).unwrap();
+		pendingToastCall({
+			pendingPromise,
+			headerPending: 'Сохранение...',
+			headerSuccess: 'Сохранено',
+			headerError: 'Ошибка',
+			textSuccess: 'Персонаж сохранён.',
+			textError: 'Не удалось сохранить персонажа.'
 		});
+		await pendingPromise;
+	};
+
+	const onClickDelete = async () => {
+		const charToDelete = characterFromStore ?? character;
+		if (!onDeleteCharacter) {
+			return;
+		}
+		await onDeleteCharacter(charToDelete);
+	};
 
 	return <div className={styles['card']}>
 		<div className={styles['char-card']}>
-			<div className={cn(styles['header-area'], styles[chosenSegmentName+'-header'])}>
+			<div className={cn(styles['header-area'], styles['header-area-default'], styles[chosenSegmentName+'-header'])}>
 				{segmentsData.map(segment =>{
 					if (segment.groupable) return;
 					return <HeadSegment 
@@ -387,22 +423,74 @@ export function CharacterCard({character, setDiceRoll, onChangeChar, setPopup}: 
 							{...groupable}/>
 					))}
 				</div>
+				<div className={styles['actions']}>
+					<div className={styles['actions-main']}>
+						{onDeleteCharacter && (
+							<SquareButton
+								isBigShadow={true}
+								classNames={styles['deleteBtn']}
+								onClick={onClickDelete}
+							>
+								Удалить
+							</SquareButton>
+						)}
+						<SquareButton
+							isBigShadow={true}
+							classNames={styles['saveBtn']}
+							disabled={!accessToken && !onSaveCharacter}
+							onClick={onClickSave}
+						>
+							{saveButtonLabel ?? 'Сохранить'}
+						</SquareButton>
+					</div>
+					{actionsBottomContent && (
+						<div className={styles['actions-bottom']}>
+							{actionsBottomContent}
+						</div>
+					)}
+				</div>
 			</div>
+			<div className={styles['desktop-main']}>
+				<div className={cn(styles['header-area'], styles['header-area-desktop'])}>
+					{segmentsData.map(segment => (
+						<div
+							key={segment.segmentId}
+							id={segment.segmentId}
+							className={cn(
+								styles['desktop-tab'],
+								styles[segment.segmentName],
+								segment.segmentId === chosenSegment ? styles['desktop-tab-active'] : ''
+							)}
+							onClick={handleClickSegment}
+						>
+							{segment.header}
+						</div>
+					))}
+				</div>
 			<div className={cn(styles['content'], styles[chosenSegmentName], styles['scrollable'])}>
 				{chosenSegment === '0' && 
 				<>
 					<Info player={character} onChangeChar={onChangeChar}/>
-					{alignmentClicked && 
-						<EditAlignment character={character} onChangeChar={onChangeChar} setAlignmentClicked={setAlignmentClicked}/>
-					}
-				</>
+  				</>
 				}
 				{chosenSegment === '1' && <Characteristics player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
 				{chosenSegment === '2' && <Loot player={character} onChangeChar={onChangeChar}/>}
 				{chosenSegment === '3' && <Attacks player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
 				{chosenSegment === '4' && <Notes player={character} onChangeChar={onChangeChar}/>}
 				{chosenSegment === '5' && <Spells player={character} setDiceRoll={setDiceRoll} onChangeChar={onChangeChar}/>}
+				{alignmentClicked && 
+					<EditAlignment character={character} onChangeChar={onChangeChar} setAlignmentClicked={setAlignmentClicked}/>
+				}
 			</div>
+			</div>
+			<CharacterCardDesktopSide
+				desktopData={desktopData}
+				accessToken={accessToken}
+				onClickSave={onClickSave}
+				onClickDelete={onDeleteCharacter ? onClickDelete : undefined}
+				saveButtonLabel={saveButtonLabel}
+				actionsBottomContent={actionsBottomContent}
+			/>
 		</div>
 	</div>;
 }

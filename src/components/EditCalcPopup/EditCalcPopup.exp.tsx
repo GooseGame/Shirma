@@ -32,7 +32,7 @@ export function EditCalcPopupExp({header, onCancel, setPopup, color, currExpInfo
 
 	const onLVLUpAction = (isLVLUp: boolean) => {
 		if (isLVLUp && currExpInfo.level+1 > 20) return;
-		if (!isLVLUp && currExpInfo.level-1 > 0) return;
+		if (!isLVLUp && currExpInfo.level-1 <= 0) return;
 		setPopup(currExpInfo.level + ' -> ' + (isLVLUp ? currExpInfo.level+1 : currExpInfo.level - 1), isLVLUp ? 'Повышение уровня:' : 'Понижение уровня:');
 		onLVLUp(isLVLUp);
 	};
@@ -54,6 +54,7 @@ export function EditCalcPopupExp({header, onCancel, setPopup, color, currExpInfo
 	return <EditCustomPopup 
 		header={header} 
 		onCancel={onCancel} 
+		fakeSaveBtn={true}
 		color={color} 
 		wrapperCN={styles['exp-wrapper']}>
 		<div className={styles['calculator-wrapper']}>
@@ -143,13 +144,13 @@ export function EditCalcPopupExp({header, onCancel, setPopup, color, currExpInfo
 					/>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-add']}
+					buttonCN={inputValue !== '' ? styles['button-add'] : ''}
 					onClickAction={()=>onClickAdd(inputValue, onSuccessValidator, onSave)} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>Прибавить</div>
 				</CalcButton>
 				<CalcButton 
-					buttonCN={styles['button-remove']}
+					buttonCN={inputValue !== '' ? styles['button-remove'] : ''}
 					onClickAction={()=>onClickRemove(inputValue, onSuccessValidator, onSave)} 
 					width={2}>
 					<div className={cn(styles['button-content'], inputValue === '' ? styles['disabled'] : '')}>Отнять</div>

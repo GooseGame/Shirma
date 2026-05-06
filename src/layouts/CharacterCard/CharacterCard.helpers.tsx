@@ -215,3 +215,47 @@ export const getIniciativeBody = ({savedIni, setSavedIni, handleSave}: Iniciativ
 		</div>
 	</div>;
 };
+
+interface ProficiencyProps {
+	savedProf: number,
+	setSavedProf: React.Dispatch<React.SetStateAction<number>>,
+	handleSave: ()=>void
+}
+
+export const getProficiencyBody = ({ savedProf, setSavedProf, handleSave }: ProficiencyProps) => {
+	return <div className={styles['ini-content']}>
+		<label htmlFor='proficiency' className={styles['input-label']}>Значение</label>
+		<input
+			type='number'
+			value={savedProf}
+			onChange={(e)=> e.target.value !== '' ? setSavedProf(parseInt(e.target.value)) : setSavedProf(0)}
+			id='proficiency'
+			className={styles['text-input']}
+		/>
+		<div className={cn(styles['save-btn'])} onClick={handleSave}>
+			<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
+		</div>
+	</div>;
+};
+
+interface EditableValueBodyProps {
+	value: number,
+	setValue: React.Dispatch<React.SetStateAction<number>>,
+	handleSave: ()=>void
+}
+
+export const getEditableValueBody = ({ value, setValue, handleSave }: EditableValueBodyProps) => {
+	return <div className={styles['ini-content']}>
+		<label htmlFor='editable-value' className={styles['input-label']}>Значение</label>
+		<input
+			type='number'
+			value={value}
+			onChange={(e)=> e.target.value !== '' ? setValue(parseInt(e.target.value)) : setValue(0)}
+			id='editable-value'
+			className={styles['text-input']}
+		/>
+		<div className={cn(styles['save-btn'])} onClick={handleSave}>
+			<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
+		</div>
+	</div>;
+};

@@ -7,12 +7,12 @@
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 20px;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
     }
 }
 
-@media screen and (min-width: 1001px) and (max-width: 1200px) {
+@media screen and (min-width: 1001px) and (max-width: 1260px) {
     .header-area {
         margin-inline: 10px;
         margin-top: 5px;
@@ -78,4 +78,27 @@
 
 .page-header.unable {
     color: rgb(0,0,0,0.5);
+}
+
+.profile-link-wrapper {
+    margin-left: auto;
+    padding-right: 5px;
+}
+
+.profile-link {
+    color: var(--text-light-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.profile-name {
+    font-size: 28px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
 }

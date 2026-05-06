@@ -12,6 +12,7 @@ import { EditTextPopup } from '../../../EditTextPopup/EditTextPopup';
 import { MAX_EXHAUSTION_LVL, NO_EXHAUSTION_LVL, Skill, Stat } from '../../../../interfaces/Character.interface';
 import { EditStat } from './Characteristics.editStat';
 import { EditSkill } from './Characteristics.editSkill';
+import { EditCustomPopup } from '../../../EditCustomPopup/EditCustomPopup';
 
 export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) {
 	const [editHeader, setEditHeader] = useState('');
@@ -20,6 +21,10 @@ export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) 
 	const [statClicked, setStatClicked] = useState<Stat>();
 	const [skillClicked, setSkillClicked] = useState<Skill>();
 	const [statOfSkill, setStatOfSkill] = useState<Stat>();
+	const [isShowArmorPopup, setIsShowArmorPopup] = useState(false);
+	const [isShowSpeedPopup, setIsShowSpeedPopup] = useState(false);
+	const [savedArmor, setSavedArmor] = useState(player.condition.armor);
+	const [savedSpeed, setSavedSpeed] = useState(player.condition.speed);
 
 	const onClickStat = (stat: Stat) => {
 		setStatClicked(stat);
@@ -99,7 +104,78 @@ export function Characteristics({player, setDiceRoll, onChangeChar}: TabsProps) 
 		}
 	};
 
+	const onCancelArmorPopup = () => {
+		setSavedArmor(player.condition.armor);
+		setIsShowArmorPopup(false);
+	};
+	const onCancelSpeedPopup = () => {
+		setSavedSpeed(player.condition.speed);
+		setIsShowSpeedPopup(false);
+	};
+	const onSaveArmor = () => {
+		if (savedArmor < 0) return;
+		dispatch(charActions.editArmor({ id: player.id, value: savedArmor }));
+		if (onChangeChar) onChangeChar(`Защита: ${player.condition.armor} - ${savedArmor}`, 'Изменены характеристики');
+		setIsShowArmorPopup(false);
+	};
+	const onSaveSpeed = () => {
+		if (savedSpeed < 0) return;
+		dispatch(charActions.editSpeed({ id: player.id, value: savedSpeed }));
+		if (onChangeChar) onChangeChar(`Скорость: ${player.condition.speed} - ${savedSpeed}`, 'Изменены характеристики');
+		setIsShowSpeedPopup(false);
+	};
+
 	return <>
+		{isShowArmorPopup && <EditCustomPopup
+			onCancel={onCancelArmorPopup}
+			color='darker-red'
+			header='Защита'
+			wrapperCN={styles['armor-speed-popup']}
+		>
+			<div className={styles['armor-speed-popup-content']}>
+				<label htmlFor='armor-input' className={styles['armor-speed-popup-label']}>Значение</label>
+				<input
+					id='armor-input'
+					type='number'
+					value={savedArmor}
+					onChange={(e)=> e.target.value !== '' ? setSavedArmor(parseInt(e.target.value)) : setSavedArmor(0)}
+					className={styles['armor-speed-popup-input']}
+				/>
+				<div className={styles['save-btn']} onClick={onSaveArmor}>
+					<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
+				</div>
+			</div>
+		</EditCustomPopup>}
+		{isShowSpeedPopup && <EditCustomPopup
+			onCancel={onCancelSpeedPopup}
+			color='darker-red'
+			header='Скорость'
+			wrapperCN={styles['armor-speed-popup']}
+		>
+			<div className={styles['armor-speed-popup-content']}>
+				<label htmlFor='speed-input' className={styles['armor-speed-popup-label']}>Значение</label>
+				<input
+					id='speed-input'
+					type='number'
+					value={savedSpeed}
+					onChange={(e)=> e.target.value !== '' ? setSavedSpeed(parseInt(e.target.value)) : setSavedSpeed(0)}
+					className={styles['armor-speed-popup-input']}
+				/>
+				<div className={styles['save-btn']} onClick={onSaveSpeed}>
+					<img src='/more-white.svg' alt='confirm' className={styles['save-img']}/>
+				</div>
+			</div>
+		</EditCustomPopup>}
+		<div className={styles['armor-speed-row']}>
+			<div className={styles['armor-speed-item']} onClick={()=>setIsShowArmorPopup(true)}>
+				<div className={styles['armor-speed-title']}>Защита</div>
+				<div className={styles['armor-speed-value']}>{player.condition.armor}</div>
+			</div>
+			<div className={styles['armor-speed-item']} onClick={()=>setIsShowSpeedPopup(true)}>
+				<div className={styles['armor-speed-title']}>Скорость</div>
+				<div className={styles['armor-speed-value']}>{player.condition.speed}</div>
+			</div>
+		</div>
 		<Sticker width={0.5} fullHeight bodyContent={
 			{
 				type: 'list',
